@@ -117,9 +117,12 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Infrastructure\ErrorText.cs" />
+    <Compile Include="Infrastructure\HandleAndLogErrorAttribute.cs" />
+    <Compile Include="Infrastructure\Tracing.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\Images\feature.jpg" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />

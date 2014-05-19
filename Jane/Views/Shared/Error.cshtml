@@ -1,17 +1,23 @@
-﻿@{
-    Layout = null;
+﻿@using Jane.Infrastructure
+@model HandleErrorInfo
+@{ Layout = "~/Views/Error/_ErrorLayout.cshtml"; }
+
+@section title
+{
+    <title>Oops, something went wrong.</title>
 }
 
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta name="viewport" content="width=device-width" />
-        <title>Error</title>
-    </head>
-    <body>
-        <hgroup>
-            <h1>Error.</h1>
-            <h2>An error occurred while processing your request.</h2>
-        </hgroup>
-    </body>
-</html>
+<h3>@ErrorText.GetExclamation()</h3>
+<h4>Something went wrong.</h4>
+<p>@ErrorText.GetErrorMessage()</p>
+
+<img src="~/Content/Images/feature.jpg" />
+
+<p style="visibility: hidden;">CorrelationId: @TempData["CorrelationId"]</p>
+@if (Context.IsDebuggingEnabled && Model != null)
+{
+<p>Controller: @Model.ControllerName</p>
+<p>ActionName: @Model.ActionName</p>
+<p>ExceptionMessage: @Model.Exception.Message</p>
+<p>StackTrace: @Model.Exception.StackTrace</p>
+}
