@@ -19,6 +19,17 @@ namespace Jane.Infrastructure
          var correlationId = Guid.NewGuid();
          filterContext.Controller.TempData["CorrelationId"] = correlationId.ToString();
 
+         var controllerName = (string)filterContext.RouteData.Values["controller"];
+         var action = (string)filterContext.RouteData.Values["action"];
+         var exception = filterContext.Exception;
+
+         Tracing.Log.ServerError(
+            correlationId.ToString(),
+            controllerName,
+            action,
+            exception.Message,
+            exception.ToString());
+
          base.OnException(filterContext);
       }
    }
