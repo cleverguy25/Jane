@@ -1,7 +1,12 @@
+@using Jane.Infrastructure
 @{ Layout = "~/Views/Error/_ErrorLayout.cshtml"; }
+@{ var quote = ErrorText.GetQuote(); }
 @section head
 {
     <title>Page not found.</title>
 }
 <h1>Page not found</h1>
-<p>We cannot find the page you were looking for.</p>
+<h4>@quote.Text</h4>
+<p><em>-- @quote.Source</em></p>
+<p>We cannot find the page you were looking for.  But how about a joke instead? No? Well too bad.</p>
+<blockquote>@ErrorText.GetJoke()</blockquote>
