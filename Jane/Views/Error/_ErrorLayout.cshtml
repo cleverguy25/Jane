@@ -1,0 +1,22 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+    <head>
+
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+        @RenderSection("head", false)
+
+        @*Styles*@
+        @Styles.Render("~/Content/css")
+
+        <meta name="description" content="Error page" />
+    </head>
+    <body class="error">
+        <div class="row">
+            <div class="large-12 medium-12 columns end">
+                @RenderBody()
+            </div>
+        </div>
+    </body>
+</html>
