@@ -9,20 +9,15 @@
 namespace Jane.Test
 {
    using System;
-   using System.Collections.Generic;
-   using System.Diagnostics.Tracing;
-   using System.Security.Policy;
+   using System.Linq;
    using System.Web;
    using System.Web.Mvc;
    using System.Web.Routing;
 
    using FluentAssertions;
 
-   using Jane.Controllers;
    using Jane.Infrastructure;
 
-   using Microsoft.Practices.EnterpriseLibrary.SemanticLogging;
-   using Microsoft.Practices.EnterpriseLibrary.SemanticLogging.Utility;
    using Microsoft.VisualStudio.TestTools.UnitTesting;
 
    using Moq;
@@ -50,6 +45,15 @@ namespace Jane.Test
 
          var correlationId = filterContext.Controller.TempData["CorrelationId"];
          SemanticLoggingHelper.TestServerErrorEntry(entries, correlationId, Controller, Action, exception);
+      }
+
+      [TestMethod]
+      public void RegisteredAsGlobalFilter()
+      {
+         var filters = new GlobalFilterCollection();
+         FilterConfig.RegisterGlobalFilters(filters);
+
+         filters.Any(filter => typeof(HandleAndLogErrorAttribute) == filter.Instance.GetType()).Should().BeTrue();
       }
 
       private class TestController : Controller
