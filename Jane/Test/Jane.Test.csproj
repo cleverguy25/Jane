@@ -94,6 +94,9 @@
     </Reference>
     <Reference Include="System.Xml" />
     <Reference Include="System.Xml.Linq" />
+    <Reference Include="TestStack.FluentMVCTesting">
+      <HintPath>..\..\packages\TestStack.FluentMVCTesting.1.0.16\lib\NET40\TestStack.FluentMVCTesting.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <Choose>
     <When Condition="('$(VisualStudioVersion)' == '10.0' or '$(VisualStudioVersion)' == '') and '$(TargetFrameworkVersion)' == 'v3.5'">
@@ -108,12 +111,14 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="ControllerHelper.cs" />
     <Compile Include="HandleErrorAndLogAttributeTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RouteHelper.cs" />
     <Compile Include="SemanticLoggingHelper.cs" />
     <Compile Include="TracingTest.cs" />
     <Compile Include="RouteTest.cs" />
+    <Compile Include="ErrorControllerTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

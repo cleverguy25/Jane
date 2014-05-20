@@ -15,14 +15,14 @@ namespace Jane.Controllers
    {
       public ActionResult NotFound()
       {
-         this.Response.StatusCode = (int)HttpStatusCode.NotFound;
+         Response.StatusCode = (int)HttpStatusCode.NotFound;
 
          return this.View();
       }
 
       public ActionResult ServerError()
       {
-         this.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
+         Response.StatusCode = (int)HttpStatusCode.InternalServerError;
 
          return this.View("Error");
       }
