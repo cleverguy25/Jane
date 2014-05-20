@@ -6,7 +6,7 @@
 //   Defines the ErrorController type.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
-namespace JaneBlog.Controllers
+namespace Jane.Controllers
 {
    using System.Net;
    using System.Web.Mvc;
