@@ -110,8 +110,10 @@
   <ItemGroup>
     <Compile Include="HandleErrorAndLogAttributeTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RouteHelper.cs" />
     <Compile Include="SemanticLoggingHelper.cs" />
     <Compile Include="TracingTest.cs" />
+    <Compile Include="RouteTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

@@ -19,6 +19,8 @@ namespace Jane
 
          routes.MapRoute("NotFound", "NotFound", new { controller = "Error", action = "NotFound" });
 
+         routes.MapRoute("ServerError", "ServerError", new { controller = "Error", action = "ServerError" });
+
          routes.MapRoute("404", "{*url}", new { controller = "Error", action = "NotFound" });
       }
    }
