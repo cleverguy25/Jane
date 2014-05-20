@@ -21,7 +21,7 @@ namespace Jane.Test
          var routes = new RouteCollection();
          RouteConfig.RegisterRoutes(routes);
 
-         RouteHelper.AssertRoute(routes, "~/notfound", new { controller = "Error", action = "NotFound" });
+         routes.AssertRoute("~/notfound", new { controller = "Error", action = "NotFound" });
       }
 
       [TestMethod]
@@ -30,7 +30,7 @@ namespace Jane.Test
          var routes = new RouteCollection();
          RouteConfig.RegisterRoutes(routes);
 
-         RouteHelper.AssertRoute(routes, "~/asdf", new { controller = "Error", action = "NotFound" });
+         routes.AssertRoute("~/asdf", new { controller = "Error", action = "NotFound" });
       }
 
       [TestMethod]
@@ -39,7 +39,7 @@ namespace Jane.Test
          var routes = new RouteCollection();
          RouteConfig.RegisterRoutes(routes);
 
-         RouteHelper.AssertRoute(routes, "~/servererror", new { controller = "Error", action = "ServerError" });
+         routes.AssertRoute("~/servererror", new { controller = "Error", action = "ServerError" });
       }
    }
 }

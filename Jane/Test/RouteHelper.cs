@@ -18,7 +18,7 @@ namespace Jane.Test
 
    public static class RouteHelper
    {
-      public static void AssertRoute(RouteCollection routes, string url, object expectations)
+      public static void AssertRoute(this RouteCollection routes, string url, object expectations)
       {
          var httpContextMock = new Mock<HttpContextBase>();
          httpContextMock.Setup(c => c.Request.AppRelativeCurrentExecutionFilePath).Returns(url);
