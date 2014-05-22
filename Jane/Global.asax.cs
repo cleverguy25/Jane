@@ -8,10 +8,14 @@
 // --------------------------------------------------------------------------------------------------------------------
 namespace Jane
 {
+   using System.IO;
    using System.Web;
    using System.Web.Mvc;
    using System.Web.Optimization;
    using System.Web.Routing;
+
+   using Jane.Infrastructure.Interfaces;
+   using Jane.LightInject;
 
    public class MvcApplication : HttpApplication
    {
@@ -21,6 +25,17 @@ namespace Jane
          FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
          RouteConfig.RegisterRoutes(RouteTable.Routes);
          BundleConfig.RegisterBundles(BundleTable.Bundles);
+
+         this.SetUpContainer();
+      }
+
+      private void SetUpContainer()
+      {
+         var container = new ServiceContainer();
+
+         container.RegisterControllers();
+
+         container.EnableMvc();
       }
    }
 }

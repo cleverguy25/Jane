@@ -122,6 +122,9 @@
     <Compile Include="Infrastructure\PostQueries.cs" />
     <Compile Include="Infrastructure\PostQueriesJsonFactory.cs" />
     <Compile Include="Infrastructure\Tracing.cs" />
+    <Compile Include="LightInject\LightInject.cs" />
+    <Compile Include="LightInject\Mvc\LightInject.Mvc.cs" />
+    <Compile Include="LightInject\Web\LightInject.Web.cs" />
     <Compile Include="Models\Post.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -151,7 +154,9 @@
     <Content Include="Views\Error\NotFound.cshtml" />
     <Content Include="Views\Error\_ErrorLayout.cshtml" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Views\Blog\" />
+  </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
   </ItemGroup>
