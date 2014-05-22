@@ -1,0 +1,10 @@
+﻿[
+{
+    "Title" : "My First Blog Post",
+    "PublishedDate": "2014-05-12T18:51:45.53403Z",
+    "Summary":"This is a test"
+    "Link" : "blog-post.html",
+    "Author" : "cleve.littlefield",
+    "Tags" : ["stuff","foo"]
+    }
+]

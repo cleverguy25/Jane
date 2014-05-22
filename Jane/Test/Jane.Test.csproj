@@ -113,6 +113,7 @@
   <ItemGroup>
     <Compile Include="ControllerHelper.cs" />
     <Compile Include="HandleErrorAndLogAttributeTest.cs" />
+    <Compile Include="PostQueriesJsonFactoryTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RouteHelper.cs" />
     <Compile Include="SemanticLoggingHelper.cs" />
@@ -122,6 +123,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <Content Include="Data\posts.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <None Include="Data\postserror.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="packages.config" />
     <None Include="Settings.StyleCop" />
   </ItemGroup>

@@ -118,7 +118,11 @@
     </Compile>
     <Compile Include="Infrastructure\ErrorText.cs" />
     <Compile Include="Infrastructure\HandleAndLogErrorAttribute.cs" />
+    <Compile Include="Infrastructure\Interfaces\IPostQueries.cs" />
+    <Compile Include="Infrastructure\PostQueries.cs" />
+    <Compile Include="Infrastructure\PostQueriesJsonFactory.cs" />
     <Compile Include="Infrastructure\Tracing.cs" />
+    <Compile Include="Models\Post.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -126,6 +130,7 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="App_Data\posts.json" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -146,10 +151,7 @@
     <Content Include="Views\Error\NotFound.cshtml" />
     <Content Include="Views\Error\_ErrorLayout.cshtml" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="packages.config" />
   </ItemGroup>
