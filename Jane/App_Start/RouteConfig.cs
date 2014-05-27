@@ -11,6 +11,8 @@ namespace Jane
    using System.Web.Mvc;
    using System.Web.Routing;
 
+   using Microsoft.Ajax.Utilities;
+
    public class RouteConfig
    {
       public static void RegisterRoutes(RouteCollection routes)
@@ -21,7 +23,16 @@ namespace Jane
 
          routes.MapRoute("ServerError", "ServerError", new { controller = "Error", action = "ServerError" });
 
+         RegisterBlogRoutes(routes);
+
+         routes.MapRoute("Home", string.Empty, new { controller = "Blog", action = "List" });
+
          routes.MapRoute("404", "{*url}", new { controller = "Error", action = "NotFound" });
+      }
+
+      private static void RegisterBlogRoutes(RouteCollection routes)
+      {
+         routes.MapRoute("Blogs", "blog", new { controller = "Blog", action = "List" });
       }
    }
 }

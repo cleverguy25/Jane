@@ -41,5 +41,23 @@ namespace Jane.Test
 
          routes.AssertRoute("~/servererror", new { controller = "Error", action = "ServerError" });
       }
+
+      [TestMethod]
+      public void Home()
+      {
+         var routes = new RouteCollection();
+         RouteConfig.RegisterRoutes(routes);
+
+         routes.AssertRoute("~/", new { controller = "Blog", action = "List" });
+      }
+
+      [TestMethod]
+      public void BlogList()
+      {
+         var routes = new RouteCollection();
+         RouteConfig.RegisterRoutes(routes);
+
+         routes.AssertRoute("~/blog", new { controller = "Blog", action = "List" });
+      }
    }
 }

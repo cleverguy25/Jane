@@ -1,0 +1,9 @@
+﻿@model IEnumerable<Jane.Models.Post>
+
+<div>
+    @foreach (var post in Model)
+    {
+        @Html.Partial("Post", post)
+    }
+</div>
+

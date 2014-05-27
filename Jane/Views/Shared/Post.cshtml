@@ -1,0 +1,13 @@
+﻿@model Jane.Models.Post
+
+<article class="post" role="article" data-id="@Model.Guid" itemscope itemtype="http://schema.org/BlogPosting" itemprop="blogPost">
+    <header role="heading">
+        <h3 class="post-title" itemprop="headline name">
+            <a href="" itemprop="url">@Model.Title</a>
+        </h3>
+        <div class="post-metadata" role="contentinfo">
+            <time class="post-published" datetime="@Model.PublishedDate.ToString("o")" itemprop="datePublished">@Model.PublishedDate.ToString("yyyy MMMM dd")</time>
+            <span class="post-author" itemscope itemtype="http://schema.org/Person" itemprop="author">by <span itemprop="name">@Model.Author</span></span>
+        </div>
+    </header>
+</article>

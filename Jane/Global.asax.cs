@@ -14,6 +14,7 @@ namespace Jane
    using System.Web.Optimization;
    using System.Web.Routing;
 
+   using Jane.Infrastructure;
    using Jane.Infrastructure.Interfaces;
    using Jane.LightInject;
 
@@ -31,8 +32,12 @@ namespace Jane
 
       private void SetUpContainer()
       {
+         var rootPath = Server.MapPath("~");
+         var path = Path.Combine(rootPath, @"app_data\posts.json");
+
          var container = new ServiceContainer();
 
+         container.Register<IPostQueries>(factory => PostQueriesJsonFactory.Create(path), new PerContainerLifetime());
          container.RegisterControllers();
 
          container.EnableMvc();
