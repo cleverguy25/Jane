@@ -69,14 +69,16 @@ namespace Jane.Test
         }
         
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Blogs")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Blog List with Schema")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Blog List")]
-        public virtual void Blogs()
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Integration")]
+        public virtual void BlogListWithSchema()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Blogs", ((string[])(null)));
-#line 3
-this.ScenarioSetup(scenarioInfo);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Blog List with Schema", new string[] {
+                        "Integration"});
 #line 4
+this.ScenarioSetup(scenarioInfo);
+#line 5
  testRunner.When("I navigate to \'http://localhost:10973/\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
             TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
@@ -95,8 +97,8 @@ this.ScenarioSetup(scenarioInfo);
                         "Ha! Three.",
                         "cleve.littlefield",
                         "2014 May 14"});
-#line 5
- testRunner.Then("should have the following posts", ((string)(null)), table1, "Then ");
+#line 6
+ testRunner.Then("I should see the following posts", ((string)(null)), table1, "Then ");
 #line hidden
             this.ScenarioCleanup();
         }

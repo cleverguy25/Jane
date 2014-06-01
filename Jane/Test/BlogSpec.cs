@@ -43,7 +43,7 @@ namespace Jane.Test
          this.browser.Visit(url);
       }
 
-      [Then("should have the following posts")]
+      [Then("I should see the following posts")]
       public void ThenTheResultShouldBe(Table postsTable)
       {
          var posts = new Dictionary<string, Tuple<string, string>>();
