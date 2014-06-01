@@ -46,6 +46,38 @@ namespace Jane.Test
       [Then("I should see the following posts")]
       public void ThenTheResultShouldBe(Table postsTable)
       {
+         var expectedPosts = ExtractPosts(postsTable);
+
+         var posts = this.browser.FindAllXPath(".//article[@itemprop='blogPost']").ToList();
+         posts.Count.Should().Be(3);
+         foreach (var post in posts)
+         {
+            var heading = post.FindXPath(".//header[@role='heading']");
+            var title = heading.FindXPath(".//*[@itemprop='headline name']").Text;
+
+            Tuple<string, string> expectedPost;
+            if (expectedPosts.TryGetValue(title, out expectedPost))
+            {
+               var author = heading.FindXPath(".//*[@itemprop='author']");
+               var name = author.FindXPath(".//*[@itemprop='name']").Text;
+               name.Should().Be(expectedPost.Item1);
+               var pubDate = heading.FindXPath(".//*[@itemprop='datePublished']").Text;
+               pubDate.Should().Be(expectedPost.Item2);
+            }
+
+            var content = post.FindXPath(".//*[@itemprop='articleBody']");
+            content.InnerHTML.Should().NotBeEmpty();
+         }
+      }
+      
+      [AfterScenario]
+      public void AfterScenario()
+      {
+         this.browser.Dispose();
+      }
+
+      private static Dictionary<string, Tuple<string, string>> ExtractPosts(Table postsTable)
+      {
          var posts = new Dictionary<string, Tuple<string, string>>();
          foreach (var postRow in postsTable.Rows)
          {
@@ -53,28 +85,7 @@ namespace Jane.Test
             posts[title] = new Tuple<string, string>(postRow["Author"], postRow["PubDate"]);
          }
 
-         var headings = this.browser.FindAllXPath("//header[@role='heading']").ToList();
-         headings.Count.Should().Be(3);
-         foreach (var heading in headings)
-         {
-            var title = heading.FindXPath(".//*[@itemprop='headline name']").Text;
-
-            Tuple<string, string> post;
-            if (posts.TryGetValue(title, out post))
-            {
-               var author = heading.FindXPath(".//*[@itemprop='author']");
-               var name = author.FindXPath(".//*[@itemprop='name']").Text;
-               name.Should().Be(post.Item1);
-               var pubDate = heading.FindXPath(".//*[@itemprop='datePublished']").Text;
-               pubDate.Should().Be(post.Item2);
-            }
-         }
-      }
-
-      [AfterScenario]
-      public void AfterScenario()
-      {
-         this.browser.Dispose();
+         return posts;
       }
    }
 }

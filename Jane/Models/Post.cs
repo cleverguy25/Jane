@@ -27,5 +27,7 @@ namespace Jane.Models
       public List<string> Tags { get; set; }
 
       public string Summary { get; set; }
+
+      public IPostContent Content { get; set; }
    }
 }

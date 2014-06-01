@@ -134,6 +134,7 @@
     <Compile Include="BlogSpec.cs" />
     <Compile Include="ControllerHelper.cs" />
     <Compile Include="HandleErrorAndLogAttributeTest.cs" />
+    <Compile Include="LocalPostContentTest.cs" />
     <Compile Include="PostQueriesJsonFactoryTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RouteHelper.cs" />
@@ -150,6 +151,9 @@
   <ItemGroup>
     <Content Include="..\..\packages\phantomjs.exe.1.9.2\tools\phantomjs\phantomjs.exe">
       <Link>phantomjs.exe</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\test.html">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="phantomjs-license.txt">

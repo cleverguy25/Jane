@@ -11,12 +11,16 @@ namespace Jane.Test
    using System.IO;
    using System.Linq;
    using System.Reflection;
+   using System.Runtime.Remoting.Messaging;
 
    using FluentAssertions;
 
    using Jane.Infrastructure;
+   using Jane.Models;
 
    using Microsoft.VisualStudio.TestTools.UnitTesting;
+
+   using Moq;
 
    using Newtonsoft.Json;
 
@@ -34,8 +38,9 @@ namespace Jane.Test
       [TestMethod]
       public void LoadJsonFile()
       {
+         var postContent = new Mock<IPostContent>();
          var path = GetPath("posts.json");
-         var postQueries = PostQueriesJsonFactory.Create(path);
+         var postQueries = PostQueriesJsonFactory.Create(path, (post) => postContent.Object);
 
          var posts = postQueries.GetRecentPosts().ToList();
          posts.Should().HaveCount(3);
@@ -44,14 +49,14 @@ namespace Jane.Test
          posts[0].PublishedDate.ToShortDateString().Should().Be("5/14/2014");
          posts[1].Slug.Should().Be("second-post");
       }
-      
+
       [TestMethod]
       public void DisposesStreamReaderCorrectlyAfterException()
       {
          var path = GetPath("postserror.json");
          try
          {
-            PostQueriesJsonFactory.Create(path);
+            PostQueriesJsonFactory.Create(path, (post) => null);
          }
          catch (JsonReaderException)
          {

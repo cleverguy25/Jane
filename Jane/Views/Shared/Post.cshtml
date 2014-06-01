@@ -10,4 +10,7 @@
             <span class="post-author" itemscope itemtype="http://schema.org/Person" itemprop="author">by <span itemprop="name">@Model.Author</span></span>
         </div>
     </header>
+    <section class="post-content" itemprop="articleBody">
+        @Html.Raw(Model.Content.GetContent())
+    </section>
 </article>
