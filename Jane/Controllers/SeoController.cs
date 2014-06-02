@@ -26,6 +26,21 @@ namespace Jane.Controllers
          this.postQueries = postQueries;
       }
 
+      public ActionResult Robots()
+      {
+         Response.ContentType = "text/plain";
+
+         return this.Content(string.Concat(
+@"User-agent: *
+Disallow: /views/
+
+sitemap: ", 
+          Request.Url.Scheme, 
+          "://", 
+          Request.Url.Authority, 
+          "/sitemap.xml"));
+      }
+
       public ActionResult SiteMap()
       {
          var posts = this.postQueries.GetAllPosts();

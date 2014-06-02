@@ -23,6 +23,8 @@ namespace Jane
 
          routes.MapRoute("ServerError", "ServerError", new { controller = "Error", action = "ServerError" });
 
+         routes.MapRoute("Robots.txt", "robots.txt", new { controller = "Seo", action = "Robots" });
+
          routes.MapRoute("SiteMap.xml", "sitemap.xml", new { controller = "Seo", action = "SiteMap" });
 
          RegisterBlogRoutes(routes);

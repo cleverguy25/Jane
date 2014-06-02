@@ -11,6 +11,7 @@ namespace Jane.Test
    using System.IO;
    using System.Linq;
    using System.Text;
+   using System.Web.Mvc;
    using System.Xml.Linq;
 
    using FluentAssertions;
@@ -44,6 +45,19 @@ namespace Jane.Test
          var url = urls[4];
          url.Element(siteMap + "loc").Value.Should().Be("http://localhost/blog/post5");
          url.Element(siteMap + "lastmod").Value.Should().Be("2014-05-05T01:02:03.0000000Z");
+      }
+
+      [TestMethod]
+      public void Robots()
+      {
+         var postQueries = new PostQueries(FakePostData.Posts);
+         var controller = new SeoController(postQueries);
+         controller.SetupControllerContext("http://localhost/robots.txt");
+
+         var content = controller.Robots() as ContentResult;
+         content.Content.Should().Contain("sitemap: http://localhost/sitemap.xml");
+         content.Content.Should().Contain("User-agent: *");
+         content.Content.Should().Contain("Disallow: /views/");
       }
    }
 }

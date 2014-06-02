@@ -95,5 +95,14 @@ namespace Jane.Test
 
          routes.AssertRoute("~/sitemap.xml", new { controller = "Seo", action = "SiteMap" });
       }
+
+      [TestMethod]
+      public void RobotsRoute()
+      {
+         var routes = new RouteCollection();
+         RouteConfig.RegisterRoutes(routes);
+
+         routes.AssertRoute("~/robots.txt", new { controller = "Seo", action = "Robots" });
+      }
    }
 }
