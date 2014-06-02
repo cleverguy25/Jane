@@ -33,7 +33,6 @@ namespace Jane.Controllers
          return new ContentResult();
       }
 
-
       public ActionResult Atom()
       {
          var posts = this.postQueries.GetAllPosts();

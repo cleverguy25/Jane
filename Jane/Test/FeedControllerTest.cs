@@ -2,16 +2,16 @@
 // <copyright file="FeedControllerTest.cs" company="Jane OSS">
 //   Copyright (c) Jane Blog Contributors
 // </copyright>
+// <summary>
+//    Feed controller.
+// </summary>
 // --------------------------------------------------------------------------------------------------------------------
 namespace Jane.Test
 {
    using System;
    using System.IO;
    using System.Linq;
-   using System.Net.Mime;
    using System.Text;
-   using System.Web.Mvc;
-   using System.Windows.Forms.VisualStyles;
    using System.Xml.Linq;
 
    using FluentAssertions;
@@ -61,8 +61,8 @@ namespace Jane.Test
          controller.Response.ContentType.Should().Be("application/atom+xml");
          var document = XDocument.Parse(stringBuilder.ToString());
 
-         XNamespace A10 = "http://www.w3.org/2005/Atom";
-         var entries = document.Descendants(A10 + "entry").ToList();
+         XNamespace a10 = "http://www.w3.org/2005/Atom";
+         var entries = document.Descendants(a10 + "entry").ToList();
          entries.Count.Should().Be(6);
       }
 

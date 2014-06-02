@@ -86,5 +86,14 @@ namespace Jane.Test
 
          routes.AssertRoute("~/blog/atom", new { controller = "Feed", action = "Atom" });
       }
+
+      [TestMethod]
+      public void SiteMapRoute()
+      {
+         var routes = new RouteCollection();
+         RouteConfig.RegisterRoutes(routes);
+
+         routes.AssertRoute("~/sitemap.xml", new { controller = "Seo", action = "SiteMap" });
+      }
    }
 }
