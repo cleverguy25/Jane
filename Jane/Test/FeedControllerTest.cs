@@ -47,6 +47,25 @@ namespace Jane.Test
          items.Count.Should().Be(6);
       }
 
+      [TestMethod]
+      public void Atom()
+      {
+         var stringBuilder = new StringBuilder();
+         var writer = new StringWriter(stringBuilder);
+         var postQueries = new PostQueries(FakePostData.Posts);
+         var controller = new FeedController(postQueries);
+         controller.SetupControllerContext(writer, "http://localhost/blog/atom");
+
+         controller.Atom();
+
+         controller.Response.ContentType.Should().Be("application/atom+xml");
+         var document = XDocument.Parse(stringBuilder.ToString());
+
+         XNamespace A10 = "http://www.w3.org/2005/Atom";
+         var entries = document.Descendants(A10 + "entry").ToList();
+         entries.Count.Should().Be(6);
+      }
+
       private static void CheckItem(XElement item, Post post)
       {
          CheckItem(item, post.Title, post.Summary, "http://localhost/blog/" + post.Slug, post.UpdatedDate);

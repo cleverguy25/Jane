@@ -8,6 +8,7 @@
 // --------------------------------------------------------------------------------------------------------------------
 namespace Jane
 {
+   using System.Diagnostics.Contracts;
    using System.Web.Optimization;
 
    public class BundleConfig
@@ -15,6 +16,8 @@ namespace Jane
       // For more information on bundling, visit http://go.microsoft.com/fwlink/?LinkId=301862
       public static void RegisterBundles(BundleCollection bundles)
       {
+         Contract.Requires(bundles != null);
+
          bundles.Add(new ScriptBundle("~/bundles/jquery").Include("~/Scripts/jquery-{version}.js"));
 
          bundles.Add(new ScriptBundle("~/bundles/modernizr").Include("~/Scripts/modernizr-*"));

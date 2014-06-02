@@ -29,12 +29,26 @@ namespace Jane.Controllers
       {
          var posts = this.postQueries.GetAllPosts();
 
-         var feed = this.ConvertToSyndicationFeed(posts);
-         var formatter = new Rss20FeedFormatter(feed);
-         this.GenerateFeed(formatter);
-
-         this.Response.ContentType = "application/rss+xml";
+         this.GenerateFeed(posts, (feed) => new Rss20FeedFormatter(feed), "application/rss+xml");
          return new ContentResult();
+      }
+
+
+      public ActionResult Atom()
+      {
+         var posts = this.postQueries.GetAllPosts();
+
+         this.GenerateFeed(posts, (feed) => new Atom10FeedFormatter(feed), "application/atom+xml");
+         return new ContentResult();
+      }
+
+      private void GenerateFeed(IEnumerable<Post> posts, Func<SyndicationFeed, SyndicationFeedFormatter> getFormatter, string contentType)
+      {
+         var feed = this.ConvertToSyndicationFeed(posts);
+
+         this.WriteFeedToResponse(getFormatter(feed));
+
+         this.Response.ContentType = contentType;
       }
 
       private SyndicationFeed ConvertToSyndicationFeed(IEnumerable<Post> posts)
@@ -64,7 +78,7 @@ namespace Jane.Controllers
          }
       }
       
-      private void GenerateFeed(SyndicationFeedFormatter formatter)
+      private void WriteFeedToResponse(SyndicationFeedFormatter formatter)
       {
          using (var writer = new XmlTextWriter(this.Response.Output))
          {

@@ -77,5 +77,14 @@ namespace Jane.Test
 
          routes.AssertRoute("~/blog/rss", new { controller = "Feed", action = "Rss" });
       }
+
+      [TestMethod]
+      public void AtomRoute()
+      {
+         var routes = new RouteCollection();
+         RouteConfig.RegisterRoutes(routes);
+
+         routes.AssertRoute("~/blog/atom", new { controller = "Feed", action = "Atom" });
+      }
    }
 }

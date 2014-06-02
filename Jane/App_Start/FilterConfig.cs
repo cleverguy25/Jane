@@ -8,6 +8,7 @@
 // --------------------------------------------------------------------------------------------------------------------
 namespace Jane
 {
+   using System.Diagnostics.Contracts;
    using System.Web.Mvc;
 
    using Jane.Infrastructure;
@@ -16,6 +17,8 @@ namespace Jane
    {
       public static void RegisterGlobalFilters(GlobalFilterCollection filters)
       {
+         Contract.Requires(filters != null);
+
          filters.Add(new HandleAndLogErrorAttribute());
       }
    }
