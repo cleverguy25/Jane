@@ -68,5 +68,14 @@ namespace Jane.Test
 
          routes.AssertRoute("~/blog/first-post", new { controller = "Blog", action = "GetBySlug", slug = "first-post" });
       }
+
+      [TestMethod]
+      public void RssRoute()
+      {
+         var routes = new RouteCollection();
+         RouteConfig.RegisterRoutes(routes);
+
+         routes.AssertRoute("~/blog/rss", new { controller = "Feed", action = "Rss" });
+      }
    }
 }

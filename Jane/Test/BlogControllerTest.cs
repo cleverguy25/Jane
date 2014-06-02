@@ -29,46 +29,6 @@ namespace Jane.Test
    [TestClass]
    public class BlogControllerTest
    {
-      private readonly Post[] posts =
-         {
-            new Post
-               {
-                  Slug = "post1", 
-                  Title = "Post 1", 
-                  PublishedDate = new DateTime(2014, 5, 12)
-               }, 
-            new Post
-               {
-                  Slug = "post2", 
-                  Title = "Post 2", 
-                  PublishedDate = new DateTime(2014, 5, 15)
-               }, 
-            new Post
-               {
-                  Slug = "post3", 
-                  Title = "Post 3", 
-                  PublishedDate = new DateTime(2014, 5, 16)
-               }, 
-            new Post
-               {
-                  Slug = "post4", 
-                  Title = "Post 4", 
-                  PublishedDate = new DateTime(2014, 5, 3)
-               }, 
-            new Post
-               {
-                  Slug = "post5", 
-                  Title = "Post 5", 
-                  PublishedDate = new DateTime(2014, 5, 5)
-               }, 
-            new Post
-               {
-                  Slug = "post6", 
-                  Title = "Post 6", 
-                  PublishedDate = new DateTime(2014, 5, 21)
-               }
-         };
-
       private IPostQueries postQuery;
 
       private BlogController blogController;
@@ -76,7 +36,7 @@ namespace Jane.Test
       [TestInitialize]
       public void Intialize()
       {
-         this.postQuery = new PostQueries(this.posts);
+         this.postQuery = new PostQueries(FakePostData.Posts);
          this.blogController = new BlogController(this.postQuery);
       }
 

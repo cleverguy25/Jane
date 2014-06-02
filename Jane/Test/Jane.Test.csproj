@@ -133,6 +133,7 @@
   <ItemGroup>
     <Compile Include="BlogSpec.cs" />
     <Compile Include="ControllerHelper.cs" />
+    <Compile Include="FakePostData.cs" />
     <Compile Include="HandleErrorAndLogAttributeTest.cs" />
     <Compile Include="LocalPostContentTest.cs" />
     <Compile Include="PostQueriesJsonFactoryTest.cs" />
@@ -148,6 +149,7 @@
     <Compile Include="TracingTest.cs" />
     <Compile Include="RouteTest.cs" />
     <Compile Include="ErrorControllerTest.cs" />
+    <Compile Include="FeedControllerTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="..\..\packages\phantomjs.exe.1.9.2\tools\phantomjs\phantomjs.exe">

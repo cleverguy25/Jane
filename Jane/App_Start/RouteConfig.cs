@@ -1,6 +1,6 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="RouteConfig.cs" company="Jane OSS">
-//   Copyright (c) Jane Blog Contributors
+// <copyright file="RouteConfig.cs" company="Jane">
+//   Copyright (c) Jane Contributors
 // </copyright>
 // <summary>
 //   Defines the RouteConfig type.
@@ -31,7 +31,9 @@ namespace Jane
       }
 
       private static void RegisterBlogRoutes(RouteCollection routes)
-      {
+     {
+         routes.MapRoute("BlogsRss", "blog/rss", new { controller = "Feed", action = "Rss" });
+
          routes.MapRoute("Blogs", "blog", new { controller = "Blog", action = "List" });
 
          routes.MapRoute("BlogBySlug", "blog/{slug}", new { controller = "Blog", action = "GetBySlug", slug = UrlParameter.Optional });

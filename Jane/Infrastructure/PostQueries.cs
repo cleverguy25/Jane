@@ -9,6 +9,7 @@
 namespace Jane.Infrastructure
 {
    using System.Collections.Generic;
+   using System.Diagnostics.Contracts;
    using System.Linq;
 
    using Jane.Infrastructure.Interfaces;
@@ -20,7 +21,14 @@ namespace Jane.Infrastructure
 
       public PostQueries(IEnumerable<Post> posts)
       {
+         Contract.Requires(posts != null);
+
          this.posts = posts.OrderByDescending(post => post.PublishedDate).ToList();
+      }
+
+      public IEnumerable<Post> GetAllPosts()
+      {
+         return this.posts;
       }
 
       public IEnumerable<Post> GetRecentPosts()

@@ -81,6 +81,7 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Data.Entity" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -151,6 +152,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\BlogController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
+    <Compile Include="Controllers\FeedController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -160,6 +162,7 @@
     <Compile Include="Infrastructure\LocalPostContent.cs" />
     <Compile Include="Infrastructure\PostQueries.cs" />
     <Compile Include="Infrastructure\PostQueriesJsonFactory.cs" />
+    <Compile Include="Infrastructure\SiteConfiguration.cs" />
     <Compile Include="Infrastructure\Tracing.cs" />
     <Compile Include="LightInject\LightInject.cs" />
     <Compile Include="LightInject\Mvc\LightInject.Mvc.cs" />
@@ -199,7 +202,9 @@
     <Content Include="Views\Shared\PostList.cshtml" />
     <Content Include="Views\Blog\GetBySlug.cshtml" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Views\Feed\" />
+  </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
   </ItemGroup>
