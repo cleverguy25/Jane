@@ -8,6 +8,8 @@
 // --------------------------------------------------------------------------------------------------------------------
 namespace Jane.Controllers
 {
+   using System.Net;
+   using System.Web;
    using System.Web.Mvc;
 
    using Jane.Infrastructure.Interfaces;
@@ -25,6 +27,18 @@ namespace Jane.Controllers
       {
          var posts = this.postQueries.GetRecentPosts();
          return this.View(posts);
+      }
+
+      public ActionResult GetBySlug(string slug)
+      {
+         var post = this.postQueries.GetPostBySlug(slug);
+         if (post == null)
+         {
+            throw new HttpException((int)HttpStatusCode.NotFound, "Slug not found.");
+         }
+
+         ViewBag.Title = post.Title;
+         return this.View(post);
       }
    }
 }

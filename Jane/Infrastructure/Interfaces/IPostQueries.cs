@@ -15,5 +15,7 @@ namespace Jane.Infrastructure.Interfaces
    public interface IPostQueries
    {
       IEnumerable<Post> GetRecentPosts();
+
+      Post GetPostBySlug(string slug);
    }
 }

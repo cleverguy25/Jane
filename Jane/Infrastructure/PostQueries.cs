@@ -27,5 +27,10 @@ namespace Jane.Infrastructure
       {
          return this.posts.Take(5);
       }
+
+      public Post GetPostBySlug(string slug)
+      {
+         return this.posts.FirstOrDefault(post => post.Slug.ToLowerInvariant() == slug.ToLowerInvariant());
+      }
    }
 }

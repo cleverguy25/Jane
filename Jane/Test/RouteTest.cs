@@ -16,7 +16,7 @@ namespace Jane.Test
    public class RouteTest
    {
       [TestMethod]
-      public void NotFoundRoute()
+      public void NotFoundRouteRoute()
       {
          var routes = new RouteCollection();
          RouteConfig.RegisterRoutes(routes);
@@ -34,7 +34,7 @@ namespace Jane.Test
       }
 
       [TestMethod]
-      public void ServerError()
+      public void ServerErrorRoute()
       {
          var routes = new RouteCollection();
          RouteConfig.RegisterRoutes(routes);
@@ -43,7 +43,7 @@ namespace Jane.Test
       }
 
       [TestMethod]
-      public void Home()
+      public void HomeRoute()
       {
          var routes = new RouteCollection();
          RouteConfig.RegisterRoutes(routes);
@@ -52,12 +52,21 @@ namespace Jane.Test
       }
 
       [TestMethod]
-      public void BlogList()
+      public void BlogListRoute()
       {
          var routes = new RouteCollection();
          RouteConfig.RegisterRoutes(routes);
 
          routes.AssertRoute("~/blog", new { controller = "Blog", action = "List" });
+      }
+
+      [TestMethod]
+      public void GetPostBySlugRoute()
+      {
+         var routes = new RouteCollection();
+         RouteConfig.RegisterRoutes(routes);
+
+         routes.AssertRoute("~/blog/first-post", new { controller = "Blog", action = "GetBySlug", slug = "first-post" });
       }
    }
 }

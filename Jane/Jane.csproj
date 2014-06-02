@@ -197,6 +197,7 @@
     <Content Include="Views\Blog\List.cshtml" />
     <Content Include="Views\Shared\Post.cshtml" />
     <Content Include="Views\Shared\PostList.cshtml" />
+    <Content Include="Views\Blog\GetBySlug.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

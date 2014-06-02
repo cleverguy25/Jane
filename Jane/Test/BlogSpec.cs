@@ -49,7 +49,7 @@ namespace Jane.Test
          var expectedPosts = ExtractPosts(postsTable);
 
          var posts = this.browser.FindAllXPath(".//article[@itemprop='blogPost']").ToList();
-         posts.Count.Should().Be(3);
+         posts.Count.Should().Be(expectedPosts.Count);
          foreach (var post in posts)
          {
             var heading = post.FindXPath(".//header[@role='heading']");

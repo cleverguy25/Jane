@@ -33,6 +33,8 @@ namespace Jane
       private static void RegisterBlogRoutes(RouteCollection routes)
       {
          routes.MapRoute("Blogs", "blog", new { controller = "Blog", action = "List" });
+
+         routes.MapRoute("BlogBySlug", "blog/{slug}", new { controller = "Blog", action = "GetBySlug", slug = UrlParameter.Optional });
       }
    }
 }

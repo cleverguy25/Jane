@@ -102,6 +102,33 @@ this.ScenarioSetup(scenarioInfo);
 #line hidden
             this.ScenarioCleanup();
         }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Single Post with Schema")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Blog List")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Integration")]
+        public virtual void SinglePostWithSchema()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Single Post with Schema", new string[] {
+                        "Integration"});
+#line 13
+this.ScenarioSetup(scenarioInfo);
+#line 14
+ testRunner.When("I navigate to \'http://localhost:10973/blog/first-post\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+            TechTalk.SpecFlow.Table table2 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Title",
+                        "Author",
+                        "PubDate"});
+            table2.AddRow(new string[] {
+                        "My First Blog Post",
+                        "cleve.littlefield",
+                        "2014 May 12"});
+#line 15
+ testRunner.Then("I should see the following posts", ((string)(null)), table2, "Then ");
+#line hidden
+            this.ScenarioCleanup();
+        }
     }
 }
 #pragma warning restore
