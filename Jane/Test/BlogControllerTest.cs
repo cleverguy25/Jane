@@ -40,7 +40,7 @@ namespace Jane.Test
          this.blogController = new BlogController(this.postQuery);
       }
 
-      [TestMethod]
+      [TestMethod, TestCategory("UnitTest")]
       public void GetPostBySlug()
       {
          var result = this.blogController.GetBySlug("post2") as ViewResult;
@@ -48,7 +48,7 @@ namespace Jane.Test
          post.Title.Should().Be("Post 2");
       }
 
-      [TestMethod]
+      [TestMethod, TestCategory("UnitTest")]
       public void GetPostBySlugNotFound()
       {
          try
@@ -61,7 +61,17 @@ namespace Jane.Test
          }
       }
 
-      [TestMethod]
+      [TestMethod, TestCategory("UnitTest")]
+      public void GetPostByTag()
+      {
+         var result = this.blogController.GetByTag("foo") as ViewResult;
+         var posts = ((IEnumerable<Post>)result.Model).ToList();
+         posts.Count.Should().Be(2);
+         posts[0].Slug.Should().Be("post2");
+         posts[1].Slug.Should().Be("post1");
+      }
+
+      [TestMethod, TestCategory("UnitTest")]
       public void List()
       {
          var viewResult = this.blogController.List() as ViewResult;

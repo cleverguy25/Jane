@@ -8,6 +8,7 @@
 // --------------------------------------------------------------------------------------------------------------------
 namespace Jane.Controllers
 {
+   using System.Linq;
    using System.Net;
    using System.Web;
    using System.Web.Mvc;
@@ -39,6 +40,20 @@ namespace Jane.Controllers
 
          ViewBag.Title = post.Title;
          return this.View(post);
+      }
+
+      public ActionResult GetByTag(string tag)
+      {
+         var posts = this.postQueries.GetPostsByTag(tag).ToList();
+
+         if (posts.Count == 0)
+         {
+            this.ViewBag.Message = "No results found.";
+         }
+
+         ViewBag.Title = "Tagged with " + tag;
+         this.ViewBag.Tag = tag;
+         return this.View(posts);
       }
    }
 }

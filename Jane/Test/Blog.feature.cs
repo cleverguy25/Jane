@@ -71,11 +71,11 @@ namespace Jane.Test
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
         [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Blog List with Schema")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Blog List")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Integration")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("IntegrationTests")]
         public virtual void BlogListWithSchema()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Blog List with Schema", new string[] {
-                        "Integration"});
+                        "IntegrationTests"});
 #line 4
 this.ScenarioSetup(scenarioInfo);
 #line 5
@@ -106,11 +106,11 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
         [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Single Post with Schema")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Blog List")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Integration")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("IntegrationTests")]
         public virtual void SinglePostWithSchema()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Single Post with Schema", new string[] {
-                        "Integration"});
+                        "IntegrationTests"});
 #line 13
 this.ScenarioSetup(scenarioInfo);
 #line 14
@@ -126,6 +126,37 @@ this.ScenarioSetup(scenarioInfo);
                         "2014 May 12"});
 #line 15
  testRunner.Then("I should see the following posts", ((string)(null)), table2, "Then ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Blog Tags")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Blog List")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("IntegrationTests")]
+        public virtual void BlogTags()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Blog Tags", new string[] {
+                        "IntegrationTests"});
+#line 20
+this.ScenarioSetup(scenarioInfo);
+#line 21
+ testRunner.When("I navigate to \'http://localhost:10973/blog/tagged/foo\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+            TechTalk.SpecFlow.Table table3 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Title",
+                        "Author",
+                        "PubDate"});
+            table3.AddRow(new string[] {
+                        "My First Blog Post",
+                        "cleve.littlefield",
+                        "2014 May 12"});
+            table3.AddRow(new string[] {
+                        "Ha! Another one.",
+                        "cleve.littlefield",
+                        "2014 May 13"});
+#line 22
+ testRunner.Then("I should see the following posts", ((string)(null)), table3, "Then ");
 #line hidden
             this.ScenarioCleanup();
         }

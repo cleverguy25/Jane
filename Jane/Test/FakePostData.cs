@@ -10,6 +10,7 @@
 namespace Jane.Test
 {
    using System;
+   using System.Collections.Generic;
 
    using Jane.Models;
 
@@ -25,7 +26,8 @@ namespace Jane.Test
                   UpdatedDate = new DateTime(2014, 5, 12, 1, 2, 3, DateTimeKind.Utc),
                   Author = "author",
                   Guid = Guid.NewGuid(),
-                  Summary = "Summary of Post 1"
+                  Summary = "Summary of Post 1",
+                  Tags = new List<string>() { "foo" }
                }, 
             new Post
                {
@@ -35,7 +37,8 @@ namespace Jane.Test
                   UpdatedDate = new DateTime(2014, 5, 15, 1, 2, 3, DateTimeKind.Utc),
                   Author = "author",
                   Guid = Guid.NewGuid(),
-                  Summary = "Summary of Post 2"
+                  Summary = "Summary of Post 2",
+                  Tags = new List<string>() { "bar", "foo" }
                }, 
             new Post
                {
@@ -45,7 +48,8 @@ namespace Jane.Test
                   UpdatedDate = new DateTime(2014, 5, 16, 1, 2, 3, DateTimeKind.Utc),
                   Author = "author",
                   Guid = Guid.NewGuid(),
-                  Summary = "Summary of Post 3"
+                  Summary = "Summary of Post 3",
+                  Tags = new List<string>() { "bar" }
                }, 
             new Post
                {
@@ -55,7 +59,8 @@ namespace Jane.Test
                   UpdatedDate = new DateTime(2014, 5, 3, 1, 2, 3, DateTimeKind.Utc),
                   Author = "author",
                   Guid = Guid.NewGuid(),
-                  Summary = "Summary of Post 4"
+                  Summary = "Summary of Post 4",
+                  Tags = new List<string>() { "fubar" }
                }, 
             new Post
                {
@@ -65,7 +70,8 @@ namespace Jane.Test
                   UpdatedDate = new DateTime(2014, 5, 5, 1, 2, 3, DateTimeKind.Utc),
                   Author = "author",
                   Guid = Guid.NewGuid(),
-                  Summary = "Summary of Post 5"
+                  Summary = "Summary of Post 5",
+                  Tags = new List<string>() { "bar" }
                }, 
             new Post
                {
@@ -75,7 +81,8 @@ namespace Jane.Test
                   UpdatedDate = new DateTime(2014, 5, 21, 1, 2, 3, DateTimeKind.Utc),
                   Author = "author",
                   Guid = Guid.NewGuid(),
-                  Summary = "Summary of Post 6"
+                  Summary = "Summary of Post 6",
+                  Tags = new List<string>() { }
                }
          };
    }

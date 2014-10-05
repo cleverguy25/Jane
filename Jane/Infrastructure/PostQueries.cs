@@ -40,5 +40,10 @@ namespace Jane.Infrastructure
       {
          return this.posts.FirstOrDefault(post => post.Slug.ToLowerInvariant() == slug.ToLowerInvariant());
       }
+
+      public IEnumerable<Post> GetPostsByTag(string tag)
+      {
+         return this.posts.Where(post => post.Tags.Contains(tag));
+      }
    }
 }

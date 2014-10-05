@@ -35,12 +35,14 @@ namespace Jane
       }
 
       private static void RegisterBlogRoutes(RouteCollection routes)
-     {
+      {
          routes.MapRoute("BlogsRss", "blog/rss", new { controller = "Feed", action = "Rss" });
 
          routes.MapRoute("BlogsAtom", "blog/atom", new { controller = "Feed", action = "Atom" });
 
          routes.MapRoute("Blogs", "blog", new { controller = "Blog", action = "List" });
+
+         routes.MapRoute("BlogsByTag", "blog/tagged/{tag}", new { controller = "Blog", action = "GetByTag", tag = UrlParameter.Optional });
 
          routes.MapRoute("BlogBySlug", "blog/{slug}", new { controller = "Blog", action = "GetBySlug", slug = UrlParameter.Optional });
       }

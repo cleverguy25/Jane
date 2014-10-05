@@ -1,0 +1,6 @@
+﻿@model IEnumerable<Jane.Models.Post>
+
+<h5>Results for <em>@ViewBag.Tag</em> tag:</h5>
+
+<span>@ViewBag.Message</span>
+@Html.Partial("PostList", Model)

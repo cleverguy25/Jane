@@ -19,5 +19,7 @@ namespace Jane.Infrastructure.Interfaces
       IEnumerable<Post> GetRecentPosts();
 
       Post GetPostBySlug(string slug);
+
+      IEnumerable<Post> GetPostsByTag(string tag);
    }
 }
