@@ -25,7 +25,7 @@ namespace Jane.Test
    [TestClass]
    public class ErrorControllerTest
    {
-      [TestMethod]
+      [TestMethod, TestCategory("UnitTest")]
       public void NotFoundAction()
       {
          var controller = new ErrorController();
@@ -34,7 +34,7 @@ namespace Jane.Test
          controller.Response.StatusCode.Should().Be(404);
       }
 
-      [TestMethod]
+      [TestMethod, TestCategory("UnitTest")]
       public void ServerErrorAction()
       {
          var controller = new ErrorController();

@@ -25,7 +25,7 @@ namespace Jane.Test
    [TestClass]
    public class FeedControllerTest
    {
-      [TestMethod]
+      [TestMethod, TestCategory("UnitTest")]
       public void Rss()
       {
          var stringBuilder = new StringBuilder();
@@ -47,7 +47,7 @@ namespace Jane.Test
          items.Count.Should().Be(6);
       }
 
-      [TestMethod]
+      [TestMethod, TestCategory("UnitTest")]
       public void Atom()
       {
          var stringBuilder = new StringBuilder();

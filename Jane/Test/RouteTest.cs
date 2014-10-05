@@ -15,7 +15,7 @@ namespace Jane.Test
    [TestClass]
    public class RouteTest
    {
-      [TestMethod]
+      [TestMethod, TestCategory("UnitTest")]
       public void NotFoundRouteRoute()
       {
          var routes = new RouteCollection();
@@ -24,7 +24,7 @@ namespace Jane.Test
          routes.AssertRoute("~/notfound", new { controller = "Error", action = "NotFound" });
       }
 
-      [TestMethod]
+      [TestMethod, TestCategory("UnitTest")]
       public void Page404Route()
       {
          var routes = new RouteCollection();
@@ -33,7 +33,7 @@ namespace Jane.Test
          routes.AssertRoute("~/asdf", new { controller = "Error", action = "NotFound" });
       }
 
-      [TestMethod]
+      [TestMethod, TestCategory("UnitTest")]
       public void ServerErrorRoute()
       {
          var routes = new RouteCollection();
@@ -42,7 +42,7 @@ namespace Jane.Test
          routes.AssertRoute("~/servererror", new { controller = "Error", action = "ServerError" });
       }
 
-      [TestMethod]
+      [TestMethod, TestCategory("UnitTest")]
       public void HomeRoute()
       {
          var routes = new RouteCollection();
@@ -51,7 +51,7 @@ namespace Jane.Test
          routes.AssertRoute("~/", new { controller = "Blog", action = "List" });
       }
 
-      [TestMethod]
+      [TestMethod, TestCategory("UnitTest")]
       public void BlogListRoute()
       {
          var routes = new RouteCollection();
@@ -60,7 +60,7 @@ namespace Jane.Test
          routes.AssertRoute("~/blog", new { controller = "Blog", action = "List" });
       }
 
-      [TestMethod]
+      [TestMethod, TestCategory("UnitTest")]
       public void GetPostBySlugRoute()
       {
          var routes = new RouteCollection();
@@ -69,7 +69,7 @@ namespace Jane.Test
          routes.AssertRoute("~/blog/first-post", new { controller = "Blog", action = "GetBySlug", slug = "first-post" });
       }
 
-      [TestMethod]
+      [TestMethod, TestCategory("UnitTest")]
       public void RssRoute()
       {
          var routes = new RouteCollection();
@@ -78,7 +78,7 @@ namespace Jane.Test
          routes.AssertRoute("~/blog/rss", new { controller = "Feed", action = "Rss" });
       }
 
-      [TestMethod]
+      [TestMethod, TestCategory("UnitTest")]
       public void AtomRoute()
       {
          var routes = new RouteCollection();
@@ -87,7 +87,7 @@ namespace Jane.Test
          routes.AssertRoute("~/blog/atom", new { controller = "Feed", action = "Atom" });
       }
 
-      [TestMethod]
+      [TestMethod, TestCategory("UnitTest")]
       public void SiteMapRoute()
       {
          var routes = new RouteCollection();
@@ -96,7 +96,7 @@ namespace Jane.Test
          routes.AssertRoute("~/sitemap.xml", new { controller = "Seo", action = "SiteMap" });
       }
 
-      [TestMethod]
+      [TestMethod, TestCategory("UnitTest")]
       public void RobotsRoute()
       {
          var routes = new RouteCollection();

@@ -24,7 +24,7 @@ namespace Jane.Test
    [TestClass]
    public class SeoControllerTest
    {
-      [TestMethod]
+      [TestMethod, TestCategory("UnitTest")]
       public void SiteMap()
       {
          var stringBuilder = new StringBuilder();
@@ -47,7 +47,7 @@ namespace Jane.Test
          url.Element(siteMap + "lastmod").Value.Should().Be("2014-05-05T01:02:03.0000000Z");
       }
 
-      [TestMethod]
+      [TestMethod, TestCategory("UnitTest")]
       public void Robots()
       {
          var postQueries = new PostQueries(FakePostData.Posts);

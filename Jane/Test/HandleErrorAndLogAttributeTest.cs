@@ -25,7 +25,7 @@ namespace Jane.Test
    [TestClass]
    public class HandleErrorAndLogAttributeTest
    {
-      [TestMethod]
+      [TestMethod, TestCategory("UnitTest")]
       public void AttributeLogs()
       {
          var httpContext = new Mock<HttpContextBase>();
@@ -47,7 +47,7 @@ namespace Jane.Test
          SemanticLoggingHelper.TestServerErrorEntry(entries, correlationId, Controller, Action, exception);
       }
 
-      [TestMethod]
+      [TestMethod, TestCategory("UnitTest")]
       public void RegisteredAsGlobalFilter()
       {
          var filters = new GlobalFilterCollection();

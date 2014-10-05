@@ -23,7 +23,7 @@ namespace Jane.Test
    [TestClass]
    public class TracingTest
    {
-      [TestMethod]
+      [TestMethod, TestCategory("UnitTest")]
       public void ServerErrorLogged()
       {
          var entries = SemanticLoggingHelper.SubscribeToEvents();
@@ -38,7 +38,7 @@ namespace Jane.Test
          SemanticLoggingHelper.TestServerErrorEntry(entries, correlationId, Controller, Action, exception);
       }
 
-      [TestMethod]
+      [TestMethod, TestCategory("UnitTest")]
       public void ShouldValidateEventSource()
       {
          EventSourceAnalyzer.InspectAll(SemanticLoggingEventSource.Log);

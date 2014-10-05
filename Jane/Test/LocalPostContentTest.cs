@@ -22,7 +22,7 @@ namespace Jane.Test
    [TestClass]
    public class LocalPostContentTest
    {
-      [TestMethod]
+      [TestMethod, TestCategory("UnitTest")]
       public void GetContent()
       {
          string basePath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);

@@ -35,7 +35,7 @@ namespace Jane.Test
          return path;
       }
 
-      [TestMethod]
+      [TestMethod, TestCategory("UnitTest")]
       public void LoadJsonFile()
       {
          var postContent = new Mock<IPostContent>();
@@ -50,7 +50,7 @@ namespace Jane.Test
          posts[1].Slug.Should().Be("second-post");
       }
 
-      [TestMethod]
+      [TestMethod, TestCategory("UnitTest")]
       public void DisposesStreamReaderCorrectlyAfterException()
       {
          var path = GetPath("postserror.json");
