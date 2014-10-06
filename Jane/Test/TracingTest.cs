@@ -11,6 +11,7 @@ namespace Jane.Test
    using System;
    using System.Collections.Generic;
    using System.Diagnostics.Tracing;
+   using System.Runtime.InteropServices;
 
    using FluentAssertions;
 
