@@ -83,5 +83,24 @@ namespace Jane.Test
          posts[3].Title.Should().Be("Post 1");
          posts[4].Title.Should().Be("Post 5");
       }
+
+      [TestMethod, TestCategory("UnitTest")]
+      public void GetRelatedBlogPostsOneMatchTag()
+      {
+         var viewResult = this.blogController.Related("post4") as PartialViewResult;
+         var posts = viewResult.Model as IEnumerable<Post>;
+
+         posts.Should().HaveCount(1);
+      }
+
+      [TestMethod, TestCategory("UnitTest")]
+      public void GetRelatedBlogPostsMoreThanOneMatchTag()
+      {
+         var viewResult = this.blogController.Related("post3") as PartialViewResult;
+         var posts = viewResult.Model as IEnumerable<Post>;
+
+         var groups = posts.GroupBy(p => p.Title).ToList();
+         groups.Should().HaveCount(3);
+      }
    }
 }

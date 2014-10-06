@@ -8,12 +8,14 @@
 // --------------------------------------------------------------------------------------------------------------------
 namespace Jane.Controllers
 {
+   using System.Collections.Generic;
    using System.Linq;
    using System.Net;
    using System.Web;
    using System.Web.Mvc;
 
    using Jane.Infrastructure.Interfaces;
+   using Jane.Models;
 
    public class BlogController : Controller
    {
@@ -61,6 +63,21 @@ namespace Jane.Controllers
          var posts = this.postQueries.GetRecentPosts().Take(3);
 
          this.ViewBag.Header = "Recent";
+         return this.PartialView("PostListShort", posts);
+      }
+
+      public ActionResult Related(string slug)
+      {
+         var post = this.postQueries.GetPostBySlug(slug);
+
+         var posts = post == null ? new List<Post>() : this.postQueries.GetRelatedPosts(post).ToList();
+
+         if (posts.Any() == false)
+         {
+            this.ViewBag.Message = "No related posts.";
+         }
+
+         this.ViewBag.Header = "Related";
          return this.PartialView("PostListShort", posts);
       }
    }

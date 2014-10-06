@@ -45,5 +45,16 @@ namespace Jane.Infrastructure
       {
          return this.posts.Where(post => post.Tags.Contains(tag));
       }
+
+      public IEnumerable<Post> GetRelatedPosts(Post post)
+      {
+         var postsQuery = from relatedPost in this.posts
+                          let count = post.Tags.Intersect(relatedPost.Tags).Count()
+                          where count > 0
+                          orderby count
+                          select relatedPost;
+
+         return postsQuery;
+      }
    }
 }

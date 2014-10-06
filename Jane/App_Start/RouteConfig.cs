@@ -53,6 +53,8 @@ namespace Jane
          routes.MapRoute("BlogsByTag", "blog/tagged/{tag}", new { controller = "Blog", action = "GetByTag", tag = UrlParameter.Optional });
 
          routes.MapRoute("BlogBySlug", "blog/{slug}", new { controller = "Blog", action = "GetBySlug", slug = UrlParameter.Optional });
+
+         routes.MapRoute("BlogRelated", "blog/{slug}/related", new { controller = "Blog", action = "Related", slug = UrlParameter.Optional });
       }
    }
 }

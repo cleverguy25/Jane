@@ -70,6 +70,15 @@ namespace Jane.Test
       }
 
       [TestMethod, TestCategory("UnitTest")]
+      public void GetPostRelatedRoute()
+      {
+         var routes = new RouteCollection();
+         RouteConfig.RegisterRoutes(routes);
+
+         routes.AssertRoute("~/blog/first-post/related", new { controller = "Blog", action = "Related", slug = "first-post" });
+      }
+
+      [TestMethod, TestCategory("UnitTest")]
       public void GetPostByTagRoute()
       {
          var routes = new RouteCollection();
