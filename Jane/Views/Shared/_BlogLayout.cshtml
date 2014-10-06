@@ -1,0 +1,35 @@
+﻿@using Jane.Infrastructure
+<!DOCTYPE html>
+<html>
+<head>
+    @{ var title = SiteConfiguration.SiteName.Value + " - " + ViewBag.Title; }
+
+    <title>@title</title>
+
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge;chrome=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    @*Styles*@
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+    <meta name="description" content="@SiteConfiguration.Description.Value" />
+
+    @*FeedController*@
+    <link id="RSS" title="@SiteConfiguration.SiteName.Value" type="application/rss+xml" rel="alternate" href="@Url.Action("Rss", "Feed")" />
+    <link id="ATOM" title="@SiteConfiguration.SiteName.Value" type="application/atom+xml" rel="alternate" href="@Url.Action("Atom", "Feed")" />
+    
+    @RenderSection("head", required: false)
+</head>
+<body itemscope itemtype="http://schema.org/Blog">
+    @RenderBody()
+    @RenderSection("aside", required: false)
+    @Scripts.Render("~/bundles/jquery")
+    @RenderSection("scripts", false)
+    <!--[if lt IE 9]>
+        <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+</body>
+</html>
