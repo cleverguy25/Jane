@@ -45,6 +45,7 @@ namespace Jane
             factory =>
                PostQueriesJsonFactory.Create(path, (post) => LocalPostContent.CreatePostContent(post, contentPath)),
             new PerContainerLifetime());
+         container.Register<ITagQueries, TagQueries>(new PerContainerLifetime());
          container.RegisterControllers();
 
          container.EnableMvc();

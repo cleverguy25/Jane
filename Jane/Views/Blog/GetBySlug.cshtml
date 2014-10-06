@@ -3,3 +3,8 @@
 <div>
     @Html.Partial("Post", Model)
 </div>
+
+@section aside
+{
+@Html.Action("TagCloud", "Tag")
+}

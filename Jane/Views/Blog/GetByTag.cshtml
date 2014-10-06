@@ -4,3 +4,8 @@
 
 <span>@ViewBag.Message</span>
 @Html.Partial("PostList", Model)
+
+@section aside
+{
+@Html.Action("TagCloud", "Tag")
+}

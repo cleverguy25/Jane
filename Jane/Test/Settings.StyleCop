@@ -1,14 +1,1 @@
-<StyleCopSettings Version="105">
-  <Analyzers>
-    <Analyzer AnalyzerId="StyleCop.CSharp.DocumentationRules">
-      <Rules>
-        <Rule Name="FileHeaderMustHaveSummary">
-          <RuleSettings>
-            <BooleanProperty Name="Enabled">True</BooleanProperty>
-          </RuleSettings>
-        </Rule>
-      </Rules>
-      <AnalyzerSettings />
-    </Analyzer>
-  </Analyzers>
-</StyleCopSettings>
+<StyleCopSettings Version="105" />

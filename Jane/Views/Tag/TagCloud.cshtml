@@ -1,0 +1,9 @@
+﻿@model IEnumerable<Tuple<string, int>>
+   
+<section class="short-list">
+    <h4>Tags</h4>
+    @foreach (var tag in Model)
+    {
+    <a style="font-size: @(.5 + tag.Item2*.2)rem" href="@Url.Action("GetByTag", "Blog", new { tag = tag.Item1 })" rel="tag">@tag.Item1 (@tag.Item2)</a>
+    }
+</section>

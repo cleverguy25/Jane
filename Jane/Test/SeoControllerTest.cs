@@ -1,10 +1,7 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
 // <copyright file="SeoControllerTest.cs" company="Jane OSS">
-//   Copyright (c) Jane Blog Contributors
+//   Copyright (c) Jane Contributors
 // </copyright>
-// <summary>
-//   Defines the SeoController test type.
-// </summary>
 // --------------------------------------------------------------------------------------------------------------------
 namespace Jane.Test
 {

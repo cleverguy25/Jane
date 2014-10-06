@@ -70,6 +70,24 @@ namespace Jane.Test
       }
 
       [TestMethod, TestCategory("UnitTest")]
+      public void GetPostByTagRoute()
+      {
+         var routes = new RouteCollection();
+         RouteConfig.RegisterRoutes(routes);
+
+         routes.AssertRoute("~/blog/tagged/foo", new { controller = "Blog", action = "GetByTag", tag = "foo" });
+      }
+
+      [TestMethod, TestCategory("UnitTest")]
+      public void TagRoute()
+      {
+         var routes = new RouteCollection();
+         RouteConfig.RegisterRoutes(routes);
+
+         routes.AssertRoute("~/tag", new { controller = "Tag", action = "TagCloud" });
+      }
+
+      [TestMethod, TestCategory("UnitTest")]
       public void RssRoute()
       {
          var routes = new RouteCollection();

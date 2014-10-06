@@ -29,6 +29,8 @@ namespace Jane
 
          RegisterBlogRoutes(routes);
 
+         routes.MapRoute("TagCloud", "tag", new { controller = "Tag", action = "TagCloud" });
+
          routes.MapRoute("Home", string.Empty, new { controller = "Blog", action = "List" });
 
          routes.MapRoute("404", "{*url}", new { controller = "Error", action = "NotFound" });

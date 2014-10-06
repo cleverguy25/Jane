@@ -146,6 +146,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Blog.feature</DependentUpon>
     </Compile>
+    <Compile Include="TagQueriesTest.cs" />
     <Compile Include="TracingTest.cs" />
     <Compile Include="RouteTest.cs" />
     <Compile Include="ErrorControllerTest.cs" />

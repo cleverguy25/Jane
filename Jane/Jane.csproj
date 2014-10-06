@@ -154,16 +154,19 @@
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\FeedController.cs" />
     <Compile Include="Controllers\SeoController.cs" />
+    <Compile Include="Controllers\TagController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Infrastructure\ErrorText.cs" />
     <Compile Include="Infrastructure\HandleAndLogErrorAttribute.cs" />
     <Compile Include="Infrastructure\Interfaces\IPostQueries.cs" />
+    <Compile Include="Infrastructure\Interfaces\ITagQueries.cs" />
     <Compile Include="Infrastructure\LocalPostContent.cs" />
     <Compile Include="Infrastructure\PostQueries.cs" />
     <Compile Include="Infrastructure\PostQueriesJsonFactory.cs" />
     <Compile Include="Infrastructure\SiteConfiguration.cs" />
+    <Compile Include="Infrastructure\TagQueries.cs" />
     <Compile Include="Infrastructure\Tracing.cs" />
     <Compile Include="Infrastructure\XmlResult.cs" />
     <Compile Include="LightInject\LightInject.cs" />
@@ -204,6 +207,7 @@
     <Content Include="Views\Shared\PostList.cshtml" />
     <Content Include="Views\Blog\GetBySlug.cshtml" />
     <Content Include="Views\Blog\GetByTag.cshtml" />
+    <Content Include="Views\Tag\TagCloud.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\Feed\" />
