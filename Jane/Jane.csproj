@@ -217,6 +217,8 @@
     <Content Include="Views\Blog\GetBySlug.cshtml" />
     <Content Include="Views\Blog\GetByTag.cshtml" />
     <Content Include="Views\Tag\TagCloud.cshtml" />
+    <Content Include="Views\Shared\PostListShort.cshtml" />
+    <Content Include="Views\Shared\PostShort.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\Feed\" />

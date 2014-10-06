@@ -55,5 +55,13 @@ namespace Jane.Controllers
          this.ViewBag.Tag = tag;
          return this.View(posts);
       }
+
+      public ActionResult Recent()
+      {
+         var posts = this.postQueries.GetRecentPosts().Take(3);
+
+         this.ViewBag.Header = "Recent";
+         return this.PartialView("PostListShort", posts);
+      }
    }
 }

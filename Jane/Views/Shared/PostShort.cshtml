@@ -1,0 +1,6 @@
+﻿@model Jane.Models.Post
+
+<div class="list-summary" data-id="@Model.Guid" itemscope itemtype="http://schema.org/BlogPosting" itemprop="blogPost">
+    <h6 itemprop="headline name"><a href="@Url.Action("GetBySlug", "Blog", new { slug = Model.Slug})" itemprop="url">@Model.Title</a></h6>
+    <time class="post-published" datetime="@Model.PublishedDate.ToString("o")" itemprop="datePublished">@Model.PublishedDate.ToString("yyyy MMMM dd")</time>
+</div>

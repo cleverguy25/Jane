@@ -1,0 +1,11 @@
+﻿@model IEnumerable<Jane.Models.Post>
+
+<section class="short-list">
+    <h4>@ViewBag.Header</h4>
+
+    <span>@ViewBag.Message</span>
+    @foreach (var post in Model)
+    {
+    @Html.Partial("PostShort", post)
+    }
+</section>
