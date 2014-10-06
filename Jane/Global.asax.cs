@@ -13,13 +13,12 @@ namespace Jane
    using System.Web.Mvc;
    using System.Web.Optimization;
    using System.Web.Routing;
-
-   using Antlr.Runtime.Misc;
-
    using Jane.Infrastructure;
    using Jane.Infrastructure.Interfaces;
-   using Jane.LightInject;
    using Jane.Models;
+
+   using SimpleInjector;
+   using SimpleInjector.Integration.Web.Mvc;
 
    public class MvcApplication : HttpApplication
    {
@@ -39,16 +38,17 @@ namespace Jane
          var contentPath = Path.Combine(rootPath, @"content\posts\");
          var path = Path.Combine(rootPath, @"app_data\posts.json");
 
-         var container = new ServiceContainer();
+         var container = new Container();
 
          container.Register<IPostQueries>(
-            factory =>
-               PostQueriesJsonFactory.Create(path, (post) => LocalPostContent.CreatePostContent(post, contentPath)),
-            new PerContainerLifetime());
-         container.Register<ITagQueries, TagQueries>(new PerContainerLifetime());
-         container.RegisterControllers();
+            () => PostQueriesJsonFactory.Create(path, (post) => LocalPostContent.CreatePostContent(post, contentPath)),
+            Lifestyle.Singleton);
+         container.Register<ITagQueries, TagQueries>(Lifestyle.Singleton);
+         container.RegisterMvcControllers();
 
-         container.EnableMvc();
+         container.Verify();
+
+         DependencyResolver.SetResolver(new SimpleInjectorDependencyResolver(container));
       }
    }
 }
