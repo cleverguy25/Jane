@@ -40,7 +40,11 @@ namespace Jane
       {
          routes.MapRoute("BlogsRss", "blog/rss", new { controller = "Feed", action = "Rss" });
 
+         routes.MapRoute("BlogsRss+Tag", "blog/rss/tagged/{tag}", new { controller = "Feed", action = "RssByTag", tag = UrlParameter.Optional });
+
          routes.MapRoute("BlogsAtom", "blog/atom", new { controller = "Feed", action = "Atom" });
+
+         routes.MapRoute("BlogsAtom+Tag", "blog/atom/tagged/{tag}", new { controller = "Feed", action = "AtomByTag", tag = UrlParameter.Optional });
 
          routes.MapRoute("Blogs", "blog", new { controller = "Blog", action = "List" });
 

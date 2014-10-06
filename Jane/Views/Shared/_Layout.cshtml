@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using Jane.Infrastructure
+<!DOCTYPE html>
 <html>
     <head>
         <meta charset="utf-8" />
@@ -9,8 +10,9 @@
         @Scripts.Render("~/bundles/modernizr")
         
         @*FeedController*@
-        <link id="RSS" title="cleveland." type="application/rss+xml" rel="alternate" href="@Url.Action("Rss", "Feed")"/> 
-        <link id="ATOM" title="cleveland." type="application/atom+xml" rel="alternate" href="@Url.Action("Atom", "Feed")"/>
+        <link id="RSS" title="@SiteConfiguration.SiteName.Value" type="application/rss+xml" rel="alternate" href="@Url.Action("Rss", "Feed")" /> 
+        <link id="ATOM" title="@SiteConfiguration.SiteName.Value" type="application/atom+xml" rel="alternate" href="@Url.Action("Atom", "Feed")" />
+        @RenderSection("head", required: false)
     </head>
     <body>
         @RenderBody()

@@ -33,9 +33,25 @@ namespace Jane.Controllers
          return new ContentResult();
       }
 
+      public ActionResult RssByTag(string tag)
+      {
+         var posts = this.postQueries.GetPostsByTag(tag);
+
+         this.GenerateFeed(posts, (feed) => new Rss20FeedFormatter(feed), "application/rss+xml");
+         return new ContentResult();
+      }
+
       public ActionResult Atom()
       {
          var posts = this.postQueries.GetAllPosts();
+
+         this.GenerateFeed(posts, (feed) => new Atom10FeedFormatter(feed), "application/atom+xml");
+         return new ContentResult();
+      }
+
+      public ActionResult AtomByTag(string tag)
+      {
+         var posts = this.postQueries.GetPostsByTag(tag);
 
          this.GenerateFeed(posts, (feed) => new Atom10FeedFormatter(feed), "application/atom+xml");
          return new ContentResult();

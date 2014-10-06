@@ -97,12 +97,30 @@ namespace Jane.Test
       }
 
       [TestMethod, TestCategory("UnitTest")]
+      public void RssByTagRoute()
+      {
+         var routes = new RouteCollection();
+         RouteConfig.RegisterRoutes(routes);
+
+         routes.AssertRoute("~/blog/rss/tagged/foo", new { controller = "Feed", action = "RssByTag", tag = "foo" });
+      }
+
+      [TestMethod, TestCategory("UnitTest")]
       public void AtomRoute()
       {
          var routes = new RouteCollection();
          RouteConfig.RegisterRoutes(routes);
 
          routes.AssertRoute("~/blog/atom", new { controller = "Feed", action = "Atom" });
+      }
+
+      [TestMethod, TestCategory("UnitTest")]
+      public void AtomByTagRoute()
+      {
+         var routes = new RouteCollection();
+         RouteConfig.RegisterRoutes(routes);
+
+         routes.AssertRoute("~/blog/atom/tagged/foo", new { controller = "Feed", action = "AtomByTag", tag = "foo" });
       }
 
       [TestMethod, TestCategory("UnitTest")]

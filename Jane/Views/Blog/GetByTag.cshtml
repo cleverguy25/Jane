@@ -1,4 +1,11 @@
-﻿@model IEnumerable<Jane.Models.Post>
+﻿@using Jane.Infrastructure
+@model IEnumerable<Jane.Models.Post>
+
+@section head
+{
+<link id="RSS" title="@SiteConfiguration.SiteName.Value" type="application/rss+xml" rel="alternate" href="@Url.Action("RssByTag", "Feed", new { tag = ViewBag.Tag })" />
+<link id="ATOM" title="@SiteConfiguration.SiteName.Value" type="application/atom+xml" rel="alternate" href="@Url.Action("AtomByTag", "Feed", new { tag = ViewBag.Tag })" />
+}
 
 <h5>Results for <em>@ViewBag.Tag</em> tag:</h5>
 

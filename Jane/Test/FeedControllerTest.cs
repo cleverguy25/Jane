@@ -48,6 +48,23 @@ namespace Jane.Test
       }
 
       [TestMethod, TestCategory("UnitTest")]
+      public void RssByTag()
+      {
+         var stringBuilder = new StringBuilder();
+         var writer = new StringWriter(stringBuilder);
+         var postQueries = new PostQueries(FakePostData.Posts);
+         var controller = new FeedController(postQueries);
+         controller.SetupControllerContext(writer, "http://localhost/blog/rss");
+
+         controller.RssByTag("foo");
+
+         controller.Response.ContentType.Should().Be("application/rss+xml");
+         var document = XDocument.Parse(stringBuilder.ToString());
+         var items = document.Descendants("item").ToList();
+         items.Count.Should().Be(2);
+      }
+
+      [TestMethod, TestCategory("UnitTest")]
       public void Atom()
       {
          var stringBuilder = new StringBuilder();
@@ -64,6 +81,25 @@ namespace Jane.Test
          XNamespace a10 = "http://www.w3.org/2005/Atom";
          var entries = document.Descendants(a10 + "entry").ToList();
          entries.Count.Should().Be(6);
+      }
+
+      [TestMethod, TestCategory("UnitTest")]
+      public void AtomByTag()
+      {
+         var stringBuilder = new StringBuilder();
+         var writer = new StringWriter(stringBuilder);
+         var postQueries = new PostQueries(FakePostData.Posts);
+         var controller = new FeedController(postQueries);
+         controller.SetupControllerContext(writer, "http://localhost/blog/atom");
+
+         controller.AtomByTag("foo");
+
+         controller.Response.ContentType.Should().Be("application/atom+xml");
+         var document = XDocument.Parse(stringBuilder.ToString());
+
+         XNamespace a10 = "http://www.w3.org/2005/Atom";
+         var entries = document.Descendants(a10 + "entry").ToList();
+         entries.Count.Should().Be(2);
       }
 
       private static void CheckItem(XElement item, Post post)
