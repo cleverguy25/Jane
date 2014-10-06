@@ -2,9 +2,6 @@
 // <copyright file="PostQueriesJsonFactory.cs" company="Jane OSS">
 //   Copyright (c) Jane Blog Contributors
 // </copyright>
-// <summary>
-//   Defines the PostQueriesJsonFactory type.
-// </summary>
 // --------------------------------------------------------------------------------------------------------------------
 namespace Jane.Infrastructure
 {

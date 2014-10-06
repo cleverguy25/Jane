@@ -2,9 +2,6 @@
 // <copyright file="Tracing.cs" company="Jane OSS">
 //   Copyright (c) Jane Blog Contributors
 // </copyright>
-// <summary>
-//   Defines the Tracing type.
-// </summary>
 // --------------------------------------------------------------------------------------------------------------------
 namespace Jane.Infrastructure
 {

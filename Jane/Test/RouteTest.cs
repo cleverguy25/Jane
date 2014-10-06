@@ -2,9 +2,6 @@
 // <copyright file="RouteTest.cs" company="Jane OSS">
 //   Copyright (c) Jane Blog Contributors
 // </copyright>
-// <summary>
-//   Defines the RouteTest type.
-// </summary>
 // --------------------------------------------------------------------------------------------------------------------
 namespace Jane.Test
 {

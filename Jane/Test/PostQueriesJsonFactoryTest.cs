@@ -2,9 +2,6 @@
 // <copyright file="PostQueriesJsonFactoryTest.cs" company="Jane OSS">
 //   Copyright (c) Jane Blog Contributors
 // </copyright>
-// <summary>
-//   Defines the PostQueryJsonFactoryTest type.
-// </summary>
 // --------------------------------------------------------------------------------------------------------------------
 namespace Jane.Test
 {

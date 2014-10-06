@@ -2,9 +2,6 @@
 // <copyright file="RouteConfig.cs" company="Jane">
 //   Copyright (c) Jane Contributors
 // </copyright>
-// <summary>
-//   Defines the RouteConfig type.
-// </summary>
 // --------------------------------------------------------------------------------------------------------------------
 namespace Jane
 {

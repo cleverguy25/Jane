@@ -2,9 +2,6 @@
 // <copyright file="HandleErrorAndLogAttributeTest.cs" company="Jane OSS">
 //   Copyright (c) Jane Blog Contributors
 // </copyright>
-// <summary>
-//   Defines the ErrorHandling type.
-// </summary>
 // --------------------------------------------------------------------------------------------------------------------
 namespace Jane.Test
 {

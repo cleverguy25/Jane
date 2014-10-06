@@ -2,9 +2,6 @@
 // <copyright file="RouteHelper.cs" company="Jane OSS">
 //   Copyright (c) Jane Blog Contributors
 // </copyright>
-// <summary>
-//   Defines the RouteHelper type.
-// </summary>
 // --------------------------------------------------------------------------------------------------------------------
 namespace Jane.Test
 {

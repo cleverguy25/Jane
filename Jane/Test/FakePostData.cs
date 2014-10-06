@@ -2,9 +2,6 @@
 // <copyright file="FakePostData.cs" company="Jane">
 //   Copyright (c) Jane Contributors
 // </copyright>
-// <summary>
-//   Defines the FakePostData type.
-// </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
 namespace Jane.Test

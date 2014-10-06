@@ -2,9 +2,6 @@
 // <copyright file="HandleAndLogErrorAttribute.cs" company="Jane OSS">
 //   Copyright (c) Jane Blog Contributors
 // </copyright>
-// <summary>
-//   Defines the HandleAndLogErrorAttribute type.
-// </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
 namespace Jane.Infrastructure

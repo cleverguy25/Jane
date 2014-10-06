@@ -2,9 +2,6 @@
 // <copyright file="BlogController.cs" company="Jane OSS">
 //   Copyright (c) Jane Blog Contributors
 // </copyright>
-// <summary>
-//   Defines the BlogController type.
-// </summary>
 // --------------------------------------------------------------------------------------------------------------------
 namespace Jane.Controllers
 {

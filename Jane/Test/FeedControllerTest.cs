@@ -2,9 +2,6 @@
 // <copyright file="FeedControllerTest.cs" company="Jane OSS">
 //   Copyright (c) Jane Blog Contributors
 // </copyright>
-// <summary>
-//    Feed controller.
-// </summary>
 // --------------------------------------------------------------------------------------------------------------------
 namespace Jane.Test
 {

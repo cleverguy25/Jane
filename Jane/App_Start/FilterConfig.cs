@@ -2,9 +2,6 @@
 // <copyright file="FilterConfig.cs" company="Jane OSS">
 //   Copyright (c) Jane Blog Contributors
 // </copyright>
-// <summary>
-//   Defines the FilterConfig type.
-// </summary>
 // --------------------------------------------------------------------------------------------------------------------
 namespace Jane
 {

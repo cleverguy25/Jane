@@ -2,9 +2,6 @@
 // <copyright file="XmlResult.cs" company="Jane">
 //   Copyright (c) Jane Blog Contributors
 // </copyright>
-// <summary>
-//   Defines the XmlResult type.
-// </summary>
 // --------------------------------------------------------------------------------------------------------------------
 namespace Jane.Infrastructure
 {

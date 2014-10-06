@@ -2,9 +2,6 @@
 // <copyright file="LocalPostContentTest.cs" company="Jane">
 //   Copyright (c) Jane Contributors   
 // </copyright>
-// <summary>
-//   Defines the LocalPostContentTest type.
-// </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
 namespace Jane.Test

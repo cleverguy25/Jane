@@ -2,9 +2,6 @@
 // <copyright file="SeoController.cs" company="Jane OSS">
 //   Copyright (c) Jane Blog Contributors
 // </copyright>
-// <summary>
-//   Defines the SeoController type.
-// </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
 namespace Jane.Controllers

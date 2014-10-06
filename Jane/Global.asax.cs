@@ -2,9 +2,6 @@
 // <copyright file="Global.asax.cs" company="Jane OSS">
 //   Copyright (c) Jane Blog Contributors
 // </copyright>
-// <summary>
-//   Defines the MvcApplication type.
-// </summary>
 // --------------------------------------------------------------------------------------------------------------------
 namespace Jane
 {

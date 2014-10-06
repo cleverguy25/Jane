@@ -2,9 +2,6 @@
 // <copyright file="SemanticLoggingHelper.cs" company="Jane OSS">
 //   Copyright (c) Jane Blog Contributors
 // </copyright>
-// <summary>
-//   Defines the SemanticLoggingHelper type.
-// </summary>
 // --------------------------------------------------------------------------------------------------------------------
 namespace Jane.Test
 {

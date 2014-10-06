@@ -2,9 +2,6 @@
 // <copyright file="PostQueries.cs" company="Jane OSS">
 //   Copyright (c) Jane Blog Contributors
 // </copyright>
-// <summary>
-//   Defines the PostQueries type.
-// </summary>
 // --------------------------------------------------------------------------------------------------------------------
 namespace Jane.Infrastructure
 {

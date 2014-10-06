@@ -2,9 +2,6 @@
 // <copyright file="AssemblyInfo.cs" company="Jane OSS">
 //   Copyright (c) Jane Blog Contributors
 // </copyright>
-// <summary>
-//   AssemblyInfo.cs
-// </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
 using System.Reflection;

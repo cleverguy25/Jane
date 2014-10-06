@@ -2,9 +2,6 @@
 // <copyright file="BundleConfig.cs" company="Jane OSS">
 //   Copyright (c) Jane Blog Contributors
 // </copyright>
-// <summary>
-//   Defines the BundleConfig type.
-// </summary>
 // --------------------------------------------------------------------------------------------------------------------
 namespace Jane
 {
