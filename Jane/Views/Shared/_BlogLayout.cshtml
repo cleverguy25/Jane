@@ -24,8 +24,14 @@
     @RenderSection("head", required: false)
 </head>
 <body itemscope itemtype="http://schema.org/Blog">
-    @RenderBody()
-    @RenderSection("aside", required: false)
+    <div class="row content-container ">
+        <main class="large-8 medium-8 columns" role="main">
+            @RenderBody()
+        </main>
+        <aside class="large-4 medium-4 columns" role="complementary">
+            @RenderSection("aside", required: false)
+        </aside>
+    </div>
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/foundation")
     <script>

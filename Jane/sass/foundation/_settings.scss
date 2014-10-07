@@ -79,15 +79,15 @@ $include-html-global-classes: $include-html-classes;
 // $include-html-grid-classes: $include-html-classes;
 // $include-xl-html-grid-classes: false;
 
-// $row-width: rem-calc(1000);
+$row-width: rem-calc(1200);
 // $total-columns: 12;
-// $column-gutter: rem-calc(30);
+$column-gutter: rem-calc(30);
 
 // c. Global
 // - - - - - - - - - - - - - - - - - - - - - - - - -
 
 // We use these to define default font stacks
-// $font-family-sans-serif: "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
+ $font-family-sans-serif: "Open Sans", Verdana, Geneva, sans-serif;
 // $font-family-serif: Georgia, Cambria, "Times New Roman", Times, serif;
 // $font-family-monospace: Consolas, "Liberation Mono", Courier, monospace;
 
@@ -96,8 +96,9 @@ $include-html-global-classes: $include-html-classes;
 // $font-weight-bold: bold !default;
 
 // We use these as default colors throughout
-// $primary-color: #008CBA;
-// $secondary-color: #e7e7e7;
+$primary-color: #49617F;
+$secondary-color: #0058CC;
+$third-color: #00377F;
 // $alert-color: #f04124;
 // $success-color: #43AC6A;
 // $warning-color: #f08a24;
@@ -151,8 +152,8 @@ $include-html-global-classes: $include-html-classes;
 // d. Media Query Ranges
 // - - - - - - - - - - - - - - - - - - - - - - - - -
 
-// $small-range: (0em, 40em);
-// $medium-range: (40.063em, 64em);
+$small-range: (0em, 42em);
+$medium-range: (42.063em, 64em);
 // $large-range: (64.063em, 90em);
 // $xlarge-range: (90.063em, 120em);
 // $xxlarge-range: (120.063em, 99999999em);
@@ -195,10 +196,10 @@ $include-html-global-classes: $include-html-classes;
 // $include-html-type-classes: $include-html-classes;
 
 // We use these to control header font styles
-// $header-font-family: $body-font-family;
+$header-font-family: Consolas, 'Liberation Mono', Courier, monospace;
 // $header-font-weight: $font-weight-normal;
 // $header-font-style: normal;
-// $header-font-color: $jet;
+$header-font-color: $third-color;
 // $header-line-height: 1.4;
 // $header-top-margin: .2rem;
 // $header-bottom-margin: .5rem;
@@ -290,17 +291,17 @@ $include-html-global-classes: $include-html-classes;
 // $acronym-underline: 1px dotted $gainsboro;
 
 // We use these to control padding and margin
-// $microformat-padding: rem-calc(10 12);
-// $microformat-margin: rem-calc(0 0 20 0);
+$microformat-padding: 0;
+$microformat-margin: 0;
 
 // We use these to control the border styles
-// $microformat-border-width: 1px;
-// $microformat-border-style: solid;
-// $microformat-border-color: $gainsboro;
+$microformat-border-width: 0;
+$microformat-border-style: solid;
+$microformat-border-color: #ddd;
 
 // We use these to control full name font styles
 // $microformat-fullname-font-weight: $font-weight-bold;
-// $microformat-fullname-font-size: rem-calc(15);
+$microformat-fullname-font-size: rem-calc(10);
 
 // We use this to control the summary font styles
 // $microformat-summary-font-weight: $font-weight-bold;
@@ -802,7 +803,7 @@ $include-html-global-classes: $include-html-classes;
 
 // $include-html-off-canvas-classes: $include-html-classes;
 
-// $tabbar-bg: $oil;
+$tabbar-bg: $primary-color;
 // $tabbar-height: rem-calc(45);
 // $tabbar-icon-width: $tabbar-height;
 // $tabbar-line-height: $tabbar-height;
@@ -1139,7 +1140,7 @@ $include-html-global-classes: $include-html-classes;
 // $side-nav-font-size: rem-calc(14);
 // $side-nav-font-weight: $font-weight-normal;
 // $side-nav-font-weight-active: $side-nav-font-weight;
-// $side-nav-font-family: $body-font-family;
+$side-nav-font-family: Consolas, 'Liberation Mono', Courier, monospace;
 // $side-nav-font-family-active: $side-nav-font-family;
 
 // We use these to control heading styles.
@@ -1202,7 +1203,7 @@ $include-html-global-classes: $include-html-classes;
 // $sub-nav-list-padding-top: rem-calc(4);
 
 // We use this to control the definition
-// $sub-nav-font-family: $body-font-family;
+$sub-nav-font-family: Consolas, 'Liberation Mono', Courier, monospace;
 // $sub-nav-font-size: rem-calc(14);
 // $sub-nav-font-color: $aluminum;
 // $sub-nav-font-weight: $font-weight-normal;
@@ -1305,7 +1306,7 @@ $include-html-global-classes: $include-html-classes;
 // $tabs-navigation-font-color: $jet;
 // $tabs-navigation-active-font-color: $tabs-navigation-font-color;
 // $tabs-navigation-font-size: rem-calc(16);
-// $tabs-navigation-font-family: $body-font-family;
+$tabs-navigation-font-family: Consolas, 'Liberation Mono', Courier, monospace;
 
 // $tabs-content-margin-bottom: rem-calc(24);
 // $tabs-content-padding: $column-gutter/2;
@@ -1361,62 +1362,61 @@ $include-html-global-classes: $include-html-classes;
 // $include-html-top-bar-classes: $include-html-classes;
 
 // Background color for the top bar
-// $topbar-bg-color: $oil;
-// $topbar-bg: $topbar-bg-color;
+$topbar-bg-color: $primary-color;
+$topbar-bg: $topbar-bg-color;
 
 // Height and margin
-// $topbar-height: 45px;
+$topbar-height: 60px;
 // $topbar-margin-bottom: 0;
 
 // Controlling the styles for the title in the top bar
-// $topbar-title-weight: $font-weight-normal;
-// $topbar-title-font-size: rem-calc(17);
+$topbar-title-weight: bold;
+$topbar-title-font-size: rem-calc(24);
 
 // Style the top bar dropdown elements
-// $topbar-dropdown-bg: $oil;
-// $topbar-dropdown-link-color: $white;
-// $topbar-dropdown-link-bg: $oil;
+$topbar-dropdown-bg: $topbar-bg-color;
+$topbar-dropdown-link-color: #fff;
+$topbar-dropdown-link-bg: $topbar-bg-color;
 // $topbar-dropdown-link-weight: $font-weight-normal;
 // $topbar-dropdown-toggle-size: 5px;
 // $topbar-dropdown-toggle-color: $white;
 // $topbar-dropdown-toggle-alpha: 0.4;
 
 // Set the link colors and styles for top-level nav
-// $topbar-link-color: $white;
-// $topbar-link-color-hover: $white;
-// $topbar-link-color-active: $white;
-// $topbar-link-color-active-hover: $white;
-// $topbar-link-weight: $font-weight-normal;
-// $topbar-link-font-size: rem-calc(13);
-// $topbar-link-hover-lightness: -10%; // Darken by 10%
-// $topbar-link-bg: $topbar-bg;
-// $topbar-link-bg-color-hover: $charcoal;
-// $topbar-link-bg-hover: #272727;
-// $topbar-link-bg-active: $primary-color;
-// $topbar-link-bg-active-hover: scale-color($primary-color, $lightness: -14%);
-// $topbar-link-font-family: $body-font-family;
-// $topbar-link-text-transform: none;
-// $topbar-link-padding: $topbar-height / 3;
+$topbar-link-color: #fff;
+$topbar-link-color-hover: #fff;
+$topbar-link-color-active: #fff;
+$topbar-link-color-active-hover: #fff;
+$topbar-link-weight: normal;
+$topbar-link-font-size: rem-calc(11);
+$topbar-link-hover-lightness: -10%; // Darken by 10%
+$topbar-link-bg: $topbar-bg;
+$topbar-link-bg-hover: scale-color($primary-color, $lightness: -14%);
+$topbar-link-bg-active: $secondary-color;
+$topbar-link-bg-active-hover: scale-color($secondary-color, $lightness: -14%);
+$topbar-link-font-family: Consolas, 'Liberation Mono', Courier, monospace;
+$topbar-link-text-transform: lowercase;
+$topbar-link-padding: rem-calc(10);
 // $topbar-back-link-size: $h5-font-size;
 // $topbar-link-dropdown-padding: 20px;
 
 // $topbar-button-font-size: 0.75rem;
 // $topbar-button-top: 7px;
 
-// $topbar-dropdown-label-color: $monsoon;
-// $topbar-dropdown-label-text-transform: uppercase;
-// $topbar-dropdown-label-font-weight: $font-weight-bold;
-// $topbar-dropdown-label-font-size: rem-calc(10);
-// $topbar-dropdown-label-bg: $oil;
+$topbar-dropdown-label-color: #777;
+$topbar-dropdown-label-text-transform: uppease;
+$topbar-dropdown-label-font-weight: bold;
+$topbar-dropdown-label-font-size: rem-calc(10);
+$topbar-dropdown-label-bg: $topbar-bg-color;
 
 // Top menu icon styles
-// $topbar-menu-link-transform: uppercase;
-// $topbar-menu-link-font-size: rem-calc(13);
-// $topbar-menu-link-weight: $font-weight-bold;
-// $topbar-menu-link-color: $white;
-// $topbar-menu-icon-color: $white;
-// $topbar-menu-link-color-toggled: $jumbo;
-// $topbar-menu-icon-color-toggled: $jumbo;
+$topbar-menu-link-transform: uppercase;
+$topbar-menu-link-font-size: rem-calc(13);
+$topbar-menu-link-weight: bold;
+$topbar-menu-link-color: #fff;
+$topbar-menu-icon-color: #fff;
+$topbar-menu-link-color-toggled: #888;
+$topbar-menu-icon-color-toggled: #888;
 
 // Transitions and breakpoint styles
 // $topbar-transition-speed: 300ms;

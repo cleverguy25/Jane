@@ -4,3 +4,97 @@
 @import "normalize";
 @import "foundation";
 @import "foundation.mvc";
+
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+body.error {
+    background-image: none;
+}
+
+.content-container {
+    background-color: white;
+    border: solid 1px;
+    border: solid 3px $primary-color;
+    border-top: 0px;
+    padding: 1.7rem 1rem;
+}
+
+.post {
+    display: block;
+}
+
+.post-summary {
+    text-align: justify;
+    margin-top: .5rem;
+}
+
+.post-title {
+    color: $third-color;
+    margin-bottom: 0;
+}
+
+.post-content {
+    margin-top: .5rem;
+    display: block;
+}
+
+.post-published {
+    font-size: rem-calc(10);
+}
+
+.post-author {
+    display: none;
+    color: slategray;
+}
+
+.post-metadata {
+    font-family: Consolas, 'Liberation Mono', Courier, monospace;
+    font-size: rem-calc(12);
+    font-weight: normal;
+
+    .published {
+        color: slategray;
+
+        &:after {
+            padding: 0 .75rem 0 1rem;
+            content: "|";
+        }
+    }
+}
+
+a[rel~="tag"] {
+    @extend .fi-price-tag;
+    color: slategray;
+    margin-right: .5rem;
+}
+
+a[rel~="tag"]::before {
+    content: "\f19d";
+    margin-right: .25rem;
+}
+
+a:hover {
+    font-weight: bold;
+}
+
+.list-summary {
+    color: black;
+    margin-bottom: .5rem;
+
+    h6 {
+        color: black;
+        line-height: 1;
+        margin-bottom: 0;
+
+        a {
+            color: black;
+        }
+    }
+}
+
+.short-list {
+    margin-bottom: 1rem;
+}

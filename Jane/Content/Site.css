@@ -13088,4 +13088,11 @@ th.hide-for-touch {
   -webkit-border-bottom-right-radius: 2px;
   border-bottom-right-radius: 2px; }
 
+.content-container {
+  background-color: white;
+  border: solid 1px;
+  border: solid 3px #008CBA;
+  border-top: 0px;
+  padding: 1.7rem 1rem; }
+
 /*# sourceMappingURL=Site.css.map */
