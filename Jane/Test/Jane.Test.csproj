@@ -184,7 +184,6 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="packages.config" />
-    <None Include="Settings.StyleCop" />
     <None Include="Blog.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>Blog.feature.cs</LastGenOutput>
