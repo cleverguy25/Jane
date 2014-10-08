@@ -23,27 +23,29 @@
     
     @RenderSection("head", required: false)
 </head>
-<body itemscope itemtype="http://schema.org/Blog">
-    <div class="row content-container ">
-        <main class="large-8 medium-8 columns" role="main">
-            @RenderBody()
-        </main>
-        <aside class="large-4 medium-4 columns" role="complementary">
-            @RenderSection("aside", required: false)
-        </aside>
-    </div>
+    <body itemscope itemtype="http://schema.org/Blog">
+        @Html.Partial("TopBar")
+
+        <div class="row content-container ">
+            <main class="large-8 medium-8 columns" role="main">
+                @RenderBody()
+            </main>
+            <aside class="large-4 medium-4 columns" role="complementary">
+                @RenderSection("aside", required: false)
+            </aside>
+        </div>
     
-    @Html.Partial("Footer")
+        @Html.Partial("Footer")
 
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/foundation")
-    <script>
-        $(document).foundation();
-    </script>
-    @RenderSection("scripts", false)
-    <!--[if lt IE 9]>
-        <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
+        @Scripts.Render("~/bundles/jquery")
+        @Scripts.Render("~/bundles/foundation")
+        <script>
+            $(document).foundation();
+        </script>
+        @RenderSection("scripts", false)
+        <!--[if lt IE 9]>
+            <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
 
-</body>
+    </body>
 </html>

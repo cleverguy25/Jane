@@ -27,6 +27,8 @@ namespace Jane
          RegisterBlogRoutes(routes);
 
          routes.MapRoute("TagCloud", "tag", new { controller = "Tag", action = "TagCloud" });
+         
+         routes.MapRoute("TopNav", "topnav", new { controller = "TopNavigation", action = "TopNavigation" });
 
          routes.MapRoute("Home", string.Empty, new { controller = "Blog", action = "List" });
 

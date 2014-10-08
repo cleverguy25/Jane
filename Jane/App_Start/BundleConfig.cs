@@ -1,9 +1,15 @@
-using System.Web;
-using System.Web.Optimization;
+// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="BundleConfig.cs" company="Jane OSS">
+//   Copyright (c) Jane Contributors
+// </copyright>
+// --------------------------------------------------------------------------------------------------------------------
 
 namespace Jane
 {
    using System.Diagnostics.Contracts;
+   using System.Web.Optimization;
+
+   using Jane.Bundles;
 
    public class BundleConfig
    {

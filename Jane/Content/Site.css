@@ -13092,7 +13092,7 @@ footer {
   position: absolute;
   left: 0;
   bottom: 0;
-  height: 4rem;
+  height: 4.5rem;
   width: 100%;
   border-top: solid 3px #49617F;
   background-color: white;
@@ -13108,7 +13108,8 @@ body.error {
   background-image: none; }
 
 body {
-  padding: 0 0 5rem;
+  background-image: url(Images/bg2.png);
+  padding: 0 0 5.5rem;
   height: auto;
   min-height: 100%; }
 
@@ -13118,6 +13119,58 @@ body {
   border: solid 3px #49617F;
   border-top: 0px;
   padding: 1.7rem 1rem; }
+
+div.avatar {
+  background: #fff;
+  border: 2px solid #fff;
+  border-radius: 8px;
+  margin: 6px 0px; }
+
+img.avatar {
+  -moz-force-broken-image-icon: 1;
+  border-radius: 8px;
+  width: 70px; }
+
+.top-bar {
+  text-transform: lowercase; }
+  .top-bar .name h1 a {
+    margin-top: 0.2em;
+    padding: 0 0.5rem; }
+  .top-bar .description {
+    font-family: Consolas, 'Liberation Mono', Courier, monospace;
+    font-size: 0.6875rem;
+    color: white;
+    padding: 0 0 0 1.25rem; }
+    @media only screen and (max-width: 42em) {
+      .top-bar .description {
+        max-width: 200px; } }
+  @media only screen and (max-width: 42em) {
+    .top-bar .title-area {
+      height: 80px; } }
+  @media only screen and (max-width: 42em) {
+    .top-bar {
+      height: 80px; } }
+
+.top-bar-section ul li {
+  padding: 0.35rem 0; }
+.top-bar-section ul li > a {
+  padding: 0.35rem 0 0.35rem 0;
+  font-family: Consolas, 'Liberation Mono', Courier, monospace;
+  font-size: 0.9rem;
+  color: white;
+  text-align: center;
+  line-height: 1.4 !important; }
+.top-bar-section div.icon {
+  display: block;
+  width: 30px;
+  margin: auto;
+  margin-bottom: 0.1rem; }
+.top-bar-section i {
+  font-size: 1rem;
+  display: inline-block;
+  border: solid 2px;
+  border-radius: 4px;
+  text-align: center; }
 
 .post {
   display: block; }

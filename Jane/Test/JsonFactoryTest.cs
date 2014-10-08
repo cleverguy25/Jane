@@ -1,6 +1,6 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="PostQueriesJsonFactoryTest.cs" company="Jane OSS">
-//   Copyright (c) Jane Blog Contributors
+// <copyright file="JsonFactoryTest.cs" company="Jane OSS">
+//   Copyright (c) Jane Contributors
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 namespace Jane.Test
@@ -22,7 +22,7 @@ namespace Jane.Test
    using Newtonsoft.Json;
 
    [TestClass]
-   public class PostQueriesJsonFactoryTest
+   public class JsonFactoryTest
    {
       public static string GetPath(string fileName)
       {
@@ -33,7 +33,7 @@ namespace Jane.Test
       }
 
       [TestMethod, TestCategory("UnitTest")]
-      public void LoadJsonFile()
+      public void LoadPostJsonFile()
       {
          var postContent = new Mock<IPostContent>();
          var path = GetPath("posts.json");
@@ -45,6 +45,21 @@ namespace Jane.Test
          // Test random properties
          posts[0].PublishedDate.ToShortDateString().Should().Be("5/14/2014");
          posts[1].Slug.Should().Be("second-post");
+      }
+
+      [TestMethod, TestCategory("UnitTest")]
+      public void LoadNavigationJsonFile()
+      {
+         var path = GetPath("topnav.json");
+         var queries = NavigationQueriesJsonFactory.Create(path);
+
+         var posts = queries.GetNavigationItems().ToList();
+         posts.Should().HaveCount(4);
+
+         // Test random properties
+         posts[0].Name.Should().Be("Home");
+         posts[1].IconClass.Should().Be("fi-social-twitter");
+         posts[3].Url.Should().Be("~/blog/rss");
       }
 
       [TestMethod, TestCategory("UnitTest")]

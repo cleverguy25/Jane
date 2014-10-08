@@ -1,0 +1,13 @@
+﻿@model IEnumerable<Jane.Models.NavigationItem>
+
+<section class="top-bar-section" role="navigation">
+    <ul class="right">
+        @foreach (var item in Model)
+        {
+            <li class="divider"></li>
+            <li>
+                <a href="@item.Url" role="link"><div class="icon"><i class="@item.IconClass hide-for-small"></i></div>@item.Name</a>
+            </li>
+        }
+    </ul>
+</section>

@@ -168,21 +168,26 @@
     <Compile Include="Controllers\FeedController.cs" />
     <Compile Include="Controllers\SeoController.cs" />
     <Compile Include="Controllers\TagController.cs" />
+    <Compile Include="Controllers\TopNavigationController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Infrastructure\ErrorText.cs" />
     <Compile Include="Infrastructure\HandleAndLogErrorAttribute.cs" />
+    <Compile Include="Infrastructure\Interfaces\INavigationQueries.cs" />
     <Compile Include="Infrastructure\Interfaces\IPostQueries.cs" />
     <Compile Include="Infrastructure\Interfaces\ITagQueries.cs" />
     <Compile Include="Infrastructure\LocalPostContent.cs" />
+    <Compile Include="Infrastructure\NavigationQueries.cs" />
     <Compile Include="Infrastructure\PostQueries.cs" />
+    <Compile Include="Infrastructure\NavigationQueriesJsonFactory.cs" />
     <Compile Include="Infrastructure\PostQueriesJsonFactory.cs" />
     <Compile Include="Infrastructure\SiteConfiguration.cs" />
     <Compile Include="Infrastructure\TagQueries.cs" />
     <Compile Include="Infrastructure\Tracing.cs" />
     <Compile Include="Infrastructure\XmlResult.cs" />
     <Compile Include="Models\IPostContent.cs" />
+    <Compile Include="Models\NavigationItem.cs" />
     <Compile Include="Models\Post.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -472,6 +477,8 @@
     <Content Include="Content\Fonts\svgs\fi-yen.svg" />
     <Content Include="Content\Fonts\svgs\fi-zoom-in.svg" />
     <Content Include="Content\Fonts\svgs\fi-zoom-out.svg" />
+    <Content Include="Content\Images\avatar.jpg" />
+    <Content Include="Content\Images\bg2.png" />
     <Content Include="Content\Images\feature.jpg" />
     <Content Include="Content\Posts\test.html" />
     <Content Include="Content\Site.css" />
@@ -481,7 +488,6 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="App_Data\posts.json" />
-    <Content Include="Gulpfile.js" />
     <Content Include="sass\Site.scss" />
     <Content Include="sass\foundation\components\_xy-center.scss" />
     <Content Include="sass\foundation\components\_visibility.scss" />
@@ -534,7 +540,7 @@
     <Content Include="Content\Fonts\foundation-icons.eot" />
     <Content Include="Content\Fonts\foundation-icons.ttf" />
     <Content Include="Content\Fonts\foundation-icons.woff" />
-    <Content Include="package.json" />
+    <Content Include="App_Data\topnav.json" />
     <Content Include="Content\Site.css.map">
       <DependentUpon>Site.css</DependentUpon>
     </Content>
@@ -586,13 +592,16 @@
     <Content Include="Views\Shared\PostListShort.cshtml" />
     <Content Include="Views\Shared\PostShort.cshtml" />
     <Content Include="Scripts\jquery-2.1.1.min.map" />
-    <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Shared\Footer.cshtml" />
+    <Content Include="Views\Shared\Brand.cshtml" />
+    <Content Include="Views\Shared\TopNavigation.cshtml" />
+    <Content Include="Views\Shared\TopBar.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="sass\Content\" />
     <Folder Include="Views\Feed\" />
     <Folder Include="Views\Seo\" />
+    <Folder Include="Views\TopNavigation\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
