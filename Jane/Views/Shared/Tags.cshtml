@@ -1,0 +1,6 @@
+﻿@model List<string>
+
+@foreach (var tag in Model)
+{
+    <a href="@Url.Action("GetByTag", "Blog", new { tag = tag })" rel="tag" itemprop="keywords url">@tag</a>
+}

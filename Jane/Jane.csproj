@@ -596,6 +596,7 @@
     <Content Include="Views\Shared\Brand.cshtml" />
     <Content Include="Views\Shared\TopNavigation.cshtml" />
     <Content Include="Views\Shared\TopBar.cshtml" />
+    <Content Include="Views\Shared\Tags.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="sass\Content\" />
