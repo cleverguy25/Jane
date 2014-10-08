@@ -5,6 +5,23 @@
 @import "foundation";
 @import "foundation.mvc";
 
+$footer-height: 4rem;
+
+footer {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: $footer-height;
+    width: 100%;
+    border-top: solid 3px $primary-color;
+    background-color: white;
+    padding: .5rem;
+
+    div {
+        margin-bottom: .5rem;
+    }
+}
+
 html {
     position: relative;
     min-height: 100%;
@@ -12,6 +29,12 @@ html {
 
 body.error {
     background-image: none;
+}
+
+body {
+    padding: 0 0 $footer-height + 1rem;
+    height: auto;
+    min-height: 100%;
 }
 
 .content-container {

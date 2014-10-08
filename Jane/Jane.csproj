@@ -481,6 +481,7 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="App_Data\posts.json" />
+    <Content Include="Gulpfile.js" />
     <Content Include="sass\Site.scss" />
     <Content Include="sass\foundation\components\_xy-center.scss" />
     <Content Include="sass\foundation\components\_visibility.scss" />
@@ -530,12 +531,13 @@
     <Content Include="sass\_normalize.scss" />
     <Content Include="sass\_foundation.scss" />
     <Content Include="sass\_foundation.mvc.scss" />
-    <Content Include="Content\Site.css.map">
-      <DependentUpon>Site.css</DependentUpon>
-    </Content>
     <Content Include="Content\Fonts\foundation-icons.eot" />
     <Content Include="Content\Fonts\foundation-icons.ttf" />
     <Content Include="Content\Fonts\foundation-icons.woff" />
+    <Content Include="package.json" />
+    <Content Include="Content\Site.css.map">
+      <DependentUpon>Site.css</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-2.1.1.intellisense.js">
       <DependentUpon>jquery-2.1.1.js</DependentUpon>
     </None>
@@ -585,6 +587,7 @@
     <Content Include="Views\Shared\PostShort.cshtml" />
     <Content Include="Scripts\jquery-2.1.1.min.map" />
     <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Shared\Footer.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="sass\Content\" />
