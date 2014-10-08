@@ -60,15 +60,17 @@ img.avatar {
 }
 
 .top-bar {
+    @extend .top-bar;
     text-transform: lowercase;
 
     .name h1 a {
         margin-top: .2em;
         padding: 0 rem-calc(8);
+        line-height: normal !important;
     }
 
     .description {
-        font-family: Consolas, 'Liberation Mono', Courier, monospace;
+        font-family: $header-font-family;
         font-size: rem-calc(11);
         color: white; 
         padding: 0 0 0 rem-calc(20);
@@ -88,17 +90,18 @@ img.avatar {
 }
 
 .top-bar-section {
+    @extend .top-bar-section;
     ul li {
-        padding: .35rem 0;
+        padding: .59rem 0;
     }
 
     ul li > a {
         padding: .35rem 0 .35rem 0;
-        font-family: Consolas, 'Liberation Mono', Courier, monospace;
+        font-family: $header-font-family;
         font-size: .9rem;
         color: white;
         text-align: center;
-        line-height: $header-line-height !important;
+        line-height: normal !important;
     }
 
     div.icon {
@@ -146,7 +149,7 @@ img.avatar {
 }
 
 .post-metadata {
-    font-family: Consolas, 'Liberation Mono', Courier, monospace;
+    font-family: $header-font-family;
     font-size: rem-calc(12);
     font-weight: normal;
 

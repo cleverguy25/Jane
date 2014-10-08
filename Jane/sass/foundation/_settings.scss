@@ -1140,7 +1140,7 @@ $tabbar-bg: $primary-color;
 // $side-nav-font-size: rem-calc(14);
 // $side-nav-font-weight: $font-weight-normal;
 // $side-nav-font-weight-active: $side-nav-font-weight;
-$side-nav-font-family: Consolas, 'Liberation Mono', Courier, monospace;
+$side-nav-font-family: $header-font-family;
 // $side-nav-font-family-active: $side-nav-font-family;
 
 // We use these to control heading styles.
@@ -1306,7 +1306,7 @@ $sub-nav-font-family: Consolas, 'Liberation Mono', Courier, monospace;
 // $tabs-navigation-font-color: $jet;
 // $tabs-navigation-active-font-color: $tabs-navigation-font-color;
 // $tabs-navigation-font-size: rem-calc(16);
-$tabs-navigation-font-family: Consolas, 'Liberation Mono', Courier, monospace;
+$tabs-navigation-font-family: $header-font-family;
 
 // $tabs-content-margin-bottom: rem-calc(24);
 // $tabs-content-padding: $column-gutter/2;
@@ -1394,7 +1394,7 @@ $topbar-link-bg: $topbar-bg;
 $topbar-link-bg-hover: scale-color($primary-color, $lightness: -14%);
 $topbar-link-bg-active: $secondary-color;
 $topbar-link-bg-active-hover: scale-color($secondary-color, $lightness: -14%);
-$topbar-link-font-family: Consolas, 'Liberation Mono', Courier, monospace;
+$topbar-link-font-family: $header-font-family;
 $topbar-link-text-transform: lowercase;
 $topbar-link-padding: 10px;
 // $topbar-back-link-size: $h5-font-size;

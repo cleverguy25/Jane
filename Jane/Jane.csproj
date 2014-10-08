@@ -599,7 +599,6 @@
     <Content Include="Views\Shared\Tags.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="sass\Content\" />
     <Folder Include="Views\Feed\" />
     <Folder Include="Views\Seo\" />
     <Folder Include="Views\TopNavigation\" />
