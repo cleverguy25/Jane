@@ -31,10 +31,8 @@ namespace Jane
          modernizr.CdnFallbackExpression = "window.Modernizr";
          bundles.Add(modernizr);
 
-         bundles.Add(new StyleBundle("~/Content/css").Include("~/Content/site.css"));
-
-         bundles.Add(Foundation.FoundationIcons());
-
+         bundles.Add(new StyleBundle("~/Content/css").Include("~/Content/site.css").IncludeFoundationIcons());
+         
          bundles.Add(Foundation.Scripts());
       }
    }

@@ -20,9 +20,9 @@ namespace Jane.Bundles
             "~/Scripts/foundation/app.js");
       }
 
-      public static Bundle FoundationIcons()
+      public static Bundle IncludeFoundationIcons(this Bundle bundle)
       {
-         return new StyleBundle("~/Content/Fonts/foundation-icons/css").Include(
+         return bundle.Include(
             "~/Content/Fonts/foundation-icons.css", 
             new CssRewriteUrlTransform());
       }
