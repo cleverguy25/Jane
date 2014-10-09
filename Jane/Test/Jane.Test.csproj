@@ -184,6 +184,9 @@
     <Content Include="Data\posts.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <None Include="Data\future.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="Data\postserror.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

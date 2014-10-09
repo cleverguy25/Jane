@@ -1,6 +1,6 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
 // <copyright file="BlogController.cs" company="Jane OSS">
-//   Copyright (c) Jane Blog Contributors
+//   Copyright (c) Jane Contributors
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 namespace Jane.Controllers
@@ -18,9 +18,12 @@ namespace Jane.Controllers
    {
       private readonly IPostQueries postQueries;
 
-      public BlogController(IPostQueries postQueries)
+      private readonly IFuturePostQueries futureQueries;
+
+      public BlogController(IPostQueries postQueries, IFuturePostQueries futureQueries)
       {
          this.postQueries = postQueries;
+         this.futureQueries = futureQueries;
       }
 
       public ActionResult List()
@@ -76,6 +79,18 @@ namespace Jane.Controllers
 
          this.ViewBag.Header = "Related";
          return this.PartialView("PostListShort", posts);
+      }
+
+      public ActionResult Future()
+      {
+         var posts = this.futureQueries.GetFuturePosts();
+
+         if (posts.Any() == true)
+         {
+            this.ViewBag.Header = "Future";
+         }
+
+         return this.PartialView(posts);
       }
    }
 }

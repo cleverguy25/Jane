@@ -6,6 +6,7 @@
 
 @section aside
 {
+@Html.Action("Future", "Blog")
 @Html.Action("TagCloud", "Tag")
 @Html.Action("Related", "Blog", new { slug = Model.Slug })
 @Html.Action("Recent", "Blog")

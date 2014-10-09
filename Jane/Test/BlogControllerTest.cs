@@ -34,7 +34,10 @@ namespace Jane.Test
       public void Intialize()
       {
          this.postQuery = new PostQueries(FakePostData.Posts);
-         this.blogController = new BlogController(this.postQuery);
+         var futureQuery =
+            new FuturePostQueries(
+               new[] { new FuturePost() { PublishDate = DateTime.Today.AddDays(1), Title = "Future" } });
+         this.blogController = new BlogController(this.postQuery, futureQuery);
       }
 
       [TestMethod, TestCategory("UnitTest")]
@@ -98,6 +101,16 @@ namespace Jane.Test
 
          var groups = posts.GroupBy(p => p.Title).ToList();
          groups.Should().HaveCount(3);
+      }
+
+      [TestMethod, TestCategory("UnitTest")]
+      public void FutureQuery()
+      {
+         var viewResult = this.blogController.Future() as PartialViewResult;
+         var posts = viewResult.Model as IEnumerable<FuturePost>;
+        
+         posts.Should().HaveCount(1);
+         posts.ToList()[0].GetExpectedWait(DateTime.Today).Should().Be("about 1 day");
       }
    }
 }

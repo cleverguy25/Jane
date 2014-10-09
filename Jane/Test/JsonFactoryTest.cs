@@ -5,6 +5,7 @@
 // --------------------------------------------------------------------------------------------------------------------
 namespace Jane.Test
 {
+   using System;
    using System.IO;
    using System.Linq;
    using System.Reflection;
@@ -45,6 +46,21 @@ namespace Jane.Test
          // Test random properties
          posts[0].PublishedDate.ToShortDateString().Should().Be("5/14/2014");
          posts[1].Slug.Should().Be("second-post");
+      }
+
+      [TestMethod, TestCategory("UnitTest")]
+      public void LoadFuturePostJsonFile()
+      {
+         var path = GetPath("future.json");
+         var postQueries = FuturePostQueriesJsonFactory.Create(path);
+
+         var posts = postQueries.GetFuturePosts().ToList();
+         posts.Should().HaveCount(2);
+
+         // Test random properties
+         posts[0].PublishDate.ToShortDateString().Should().Be("5/16/2014");
+         posts[0].GetExpectedWait(new DateTime(2014, 5, 14)).Should().Be("about 2 days");
+         posts[1].Title.Should().Be("The Future freaks me out");
       }
 
       [TestMethod, TestCategory("UnitTest")]

@@ -173,12 +173,15 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Infrastructure\ErrorText.cs" />
+    <Compile Include="Infrastructure\FuturePostQueries.cs" />
     <Compile Include="Infrastructure\HandleAndLogErrorAttribute.cs" />
+    <Compile Include="Infrastructure\Interfaces\IFuturePostQueries.cs" />
     <Compile Include="Infrastructure\Interfaces\INavigationQueries.cs" />
     <Compile Include="Infrastructure\Interfaces\IPostQueries.cs" />
     <Compile Include="Infrastructure\Interfaces\ITagQueries.cs" />
     <Compile Include="Infrastructure\LocalPostContent.cs" />
     <Compile Include="Infrastructure\NavigationQueries.cs" />
+    <Compile Include="Infrastructure\FuturePostQueriesJsonFactory.cs" />
     <Compile Include="Infrastructure\PostQueries.cs" />
     <Compile Include="Infrastructure\NavigationQueriesJsonFactory.cs" />
     <Compile Include="Infrastructure\PostQueriesJsonFactory.cs" />
@@ -186,6 +189,7 @@
     <Compile Include="Infrastructure\TagQueries.cs" />
     <Compile Include="Infrastructure\Tracing.cs" />
     <Compile Include="Infrastructure\XmlResult.cs" />
+    <Compile Include="Models\FuturePost.cs" />
     <Compile Include="Models\IPostContent.cs" />
     <Compile Include="Models\NavigationItem.cs" />
     <Compile Include="Models\Post.cs" />
@@ -544,6 +548,9 @@
     <Content Include="Content\Site.css.map">
       <DependentUpon>Site.css</DependentUpon>
     </Content>
+    <Content Include="App_Data\future.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <None Include="Scripts\jquery-2.1.1.intellisense.js">
       <DependentUpon>jquery-2.1.1.js</DependentUpon>
     </None>
@@ -597,6 +604,7 @@
     <Content Include="Views\Shared\TopNavigation.cshtml" />
     <Content Include="Views\Shared\TopBar.cshtml" />
     <Content Include="Views\Shared\Tags.cshtml" />
+    <Content Include="Views\Blog\Future.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\Feed\" />

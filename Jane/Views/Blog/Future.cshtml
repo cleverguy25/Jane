@@ -1,0 +1,17 @@
+﻿@model IEnumerable<Jane.Models.FuturePost>
+
+@if (Model.Any())
+{
+    <section class="short-list">
+        <h4>@ViewBag.Header</h4>
+
+        <span>@ViewBag.Message</span>
+        @foreach (var post in Model)
+        {
+            <div class="list-summary">
+                <h6>@post.Title</h6>
+                <time class="post-published" datetime="@post.PublishDate.ToString("o")">@post.GetExpectedWait(DateTime.Today)</time>
+            </div>
+        }
+    </section>
+}

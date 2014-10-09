@@ -1,6 +1,6 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
 // <copyright file="RouteTest.cs" company="Jane OSS">
-//   Copyright (c) Jane Blog Contributors
+//   Copyright (c) Jane Contributors
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 namespace Jane.Test
@@ -78,6 +78,18 @@ namespace Jane.Test
       public void TagRoute()
       {
          this.routes.AssertRoute("~/tag", new { controller = "Tag", action = "TagCloud" });
+      }
+
+      [TestMethod, TestCategory("UnitTest")]
+      public void BlogRecentRoute()
+      {
+         this.routes.AssertRoute("~/blog/recent", new { controller = "Blog", action = "Recent" });
+      }
+
+      [TestMethod, TestCategory("UnitTest")]
+      public void BlogFutureRoute()
+      {
+         this.routes.AssertRoute("~/blog/future", new { controller = "Blog", action = "Future" });
       }
 
       [TestMethod, TestCategory("UnitTest")]
