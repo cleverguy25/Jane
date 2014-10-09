@@ -746,6 +746,7 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="MetaWeblog\" />
     <Folder Include="Views\Feed\" />
     <Folder Include="Views\Seo\" />
     <Folder Include="Views\TopNavigation\" />

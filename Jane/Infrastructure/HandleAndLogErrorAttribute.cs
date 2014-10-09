@@ -1,6 +1,6 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
 // <copyright file="HandleAndLogErrorAttribute.cs" company="Jane OSS">
-//   Copyright (c) Jane Blog Contributors
+//   Copyright (c) Jane Contributors
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 

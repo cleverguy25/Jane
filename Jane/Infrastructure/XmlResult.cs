@@ -1,6 +1,6 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="XmlResult.cs" company="Jane">
-//   Copyright (c) Jane Blog Contributors
+// <copyright file="XmlResult.cs" company="Jane OSS">
+//   Copyright (c) Jane Contributors
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 namespace Jane.Infrastructure

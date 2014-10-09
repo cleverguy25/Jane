@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="LocalPostContentTest.cs" company="Jane">
+// <copyright file="LocalPostContentTest.cs" company="Jane OSS">
 //   Copyright (c) Jane Contributors   
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------

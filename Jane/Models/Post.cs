@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="Post.cs" company="Jane">
+// <copyright file="Post.cs" company="Jane OSS">
 //   Copyright (c) Jane Contributors
 // </copyright>
 
