@@ -34,6 +34,12 @@ namespace Jane
          bundles.Add(new StyleBundle("~/Content/css").Include("~/Content/site.css").IncludeFoundationIcons());
          
          bundles.Add(Foundation.Scripts());
+
+         bundles.Add(new StyleBundle("~/bundles/SyntaxHighlighter/css").Include("~/Content/SyntaxHighlighter/*.css"));
+         bundles.Add(new ScriptBundle("~/bundles/SyntaxHighlighter/js")
+            .Include(
+            "~/Scripts/SyntaxHighlighter/shCore.js",
+            "~/Scripts/SyntaxHighlighter/*.js"));
       }
    }
 }

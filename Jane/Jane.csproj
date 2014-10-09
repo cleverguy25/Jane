@@ -526,6 +526,9 @@
     <Content Include="Content\Site.min.css">
       <DependentUpon>Site.css</DependentUpon>
     </Content>
+    <Content Include="Content\SyntaxHighlighter\shCore.css" />
+    <Content Include="Content\SyntaxHighlighter\shCoreDefault.css" />
+    <Content Include="Content\SyntaxHighlighter\shThemeDefault.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="App_Data\posts.json" />
@@ -613,6 +616,63 @@
     <Content Include="Scripts\jquery-2.1.1.js" />
     <Content Include="Scripts\jquery-2.1.1.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\SyntaxHighlighter\shAutoloader.js" />
+    <Content Include="Scripts\SyntaxHighlighter\shBrushCpp.js" />
+    <Content Include="Scripts\SyntaxHighlighter\shBrushCpp.min.js">
+      <DependentUpon>shBrushCpp.js</DependentUpon>
+    </Content>
+    <Content Include="Scripts\SyntaxHighlighter\shBrushCSharp.js" />
+    <Content Include="Scripts\SyntaxHighlighter\shBrushCSharp.min.js">
+      <DependentUpon>shBrushCSharp.js</DependentUpon>
+    </Content>
+    <Content Include="Scripts\SyntaxHighlighter\shBrushCss.js" />
+    <Content Include="Scripts\SyntaxHighlighter\shBrushCss.min.js">
+      <DependentUpon>shBrushCss.js</DependentUpon>
+    </Content>
+    <Content Include="Scripts\SyntaxHighlighter\shBrushDiff.js" />
+    <Content Include="Scripts\SyntaxHighlighter\shBrushDiff.min.js">
+      <DependentUpon>shBrushDiff.js</DependentUpon>
+    </Content>
+    <Content Include="Scripts\SyntaxHighlighter\shBrushJScript.js" />
+    <Content Include="Scripts\SyntaxHighlighter\shBrushJScript.min.js">
+      <DependentUpon>shBrushJScript.js</DependentUpon>
+    </Content>
+    <Content Include="Scripts\SyntaxHighlighter\shBrushPlain.js" />
+    <Content Include="Scripts\SyntaxHighlighter\shBrushPlain.min.js">
+      <DependentUpon>shBrushPlain.js</DependentUpon>
+    </Content>
+    <Content Include="Scripts\SyntaxHighlighter\shBrushPowerShell.js" />
+    <Content Include="Scripts\SyntaxHighlighter\shBrushPowerShell.min.js">
+      <DependentUpon>shBrushPowerShell.js</DependentUpon>
+    </Content>
+    <Content Include="Scripts\SyntaxHighlighter\shBrushPython.js" />
+    <Content Include="Scripts\SyntaxHighlighter\shBrushPython.min.js">
+      <DependentUpon>shBrushPython.js</DependentUpon>
+    </Content>
+    <Content Include="Scripts\SyntaxHighlighter\shBrushRuby.js" />
+    <Content Include="Scripts\SyntaxHighlighter\shBrushRuby.min.js">
+      <DependentUpon>shBrushRuby.js</DependentUpon>
+    </Content>
+    <Content Include="Scripts\SyntaxHighlighter\shBrushSass.js" />
+    <Content Include="Scripts\SyntaxHighlighter\shBrushSass.min.js">
+      <DependentUpon>shBrushSass.js</DependentUpon>
+    </Content>
+    <Content Include="Scripts\SyntaxHighlighter\shBrushSql.js" />
+    <Content Include="Scripts\SyntaxHighlighter\shBrushSql.min.js">
+      <DependentUpon>shBrushSql.js</DependentUpon>
+    </Content>
+    <Content Include="Scripts\SyntaxHighlighter\shBrushXml.js" />
+    <Content Include="Scripts\SyntaxHighlighter\shBrushXml.min.js">
+      <DependentUpon>shBrushXml.js</DependentUpon>
+    </Content>
+    <Content Include="Scripts\SyntaxHighlighter\shCore.js" />
+    <Content Include="Scripts\SyntaxHighlighter\shCore.min.js">
+      <DependentUpon>shCore.js</DependentUpon>
+    </Content>
+    <Content Include="Scripts\SyntaxHighlighter\shLegacy.js" />
+    <Content Include="Scripts\SyntaxHighlighter\shLegacy.min.js">
+      <DependentUpon>shLegacy.js</DependentUpon>
+    </Content>
     <Content Include="Scripts\_references.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -642,6 +702,48 @@
     <Content Include="Views\Shared\TopBar.cshtml" />
     <Content Include="Views\Shared\Tags.cshtml" />
     <Content Include="Views\Blog\Future.cshtml" />
+    <Content Include="Scripts\SyntaxHighlighter\shBrushCpp.min.js.map">
+      <DependentUpon>shBrushCpp.min.js</DependentUpon>
+    </Content>
+    <Content Include="Scripts\SyntaxHighlighter\shBrushCSharp.min.js.map">
+      <DependentUpon>shBrushCSharp.min.js</DependentUpon>
+    </Content>
+    <Content Include="Scripts\SyntaxHighlighter\shBrushCss.min.js.map">
+      <DependentUpon>shBrushCss.min.js</DependentUpon>
+    </Content>
+    <Content Include="Scripts\SyntaxHighlighter\shBrushDiff.min.js.map">
+      <DependentUpon>shBrushDiff.min.js</DependentUpon>
+    </Content>
+    <Content Include="Scripts\SyntaxHighlighter\shBrushJScript.min.js.map">
+      <DependentUpon>shBrushJScript.min.js</DependentUpon>
+    </Content>
+    <Content Include="Scripts\SyntaxHighlighter\shBrushPlain.min.js.map">
+      <DependentUpon>shBrushPlain.min.js</DependentUpon>
+    </Content>
+    <Content Include="Scripts\SyntaxHighlighter\shBrushPowerShell.min.js.map">
+      <DependentUpon>shBrushPowerShell.min.js</DependentUpon>
+    </Content>
+    <Content Include="Scripts\SyntaxHighlighter\shBrushPython.min.js.map">
+      <DependentUpon>shBrushPython.min.js</DependentUpon>
+    </Content>
+    <Content Include="Scripts\SyntaxHighlighter\shBrushRuby.min.js.map">
+      <DependentUpon>shBrushRuby.min.js</DependentUpon>
+    </Content>
+    <Content Include="Scripts\SyntaxHighlighter\shBrushSass.min.js.map">
+      <DependentUpon>shBrushSass.min.js</DependentUpon>
+    </Content>
+    <Content Include="Scripts\SyntaxHighlighter\shBrushSql.min.js.map">
+      <DependentUpon>shBrushSql.min.js</DependentUpon>
+    </Content>
+    <Content Include="Scripts\SyntaxHighlighter\shBrushXml.min.js.map">
+      <DependentUpon>shBrushXml.min.js</DependentUpon>
+    </Content>
+    <Content Include="Scripts\SyntaxHighlighter\shCore.min.js.map">
+      <DependentUpon>shCore.min.js</DependentUpon>
+    </Content>
+    <Content Include="Scripts\SyntaxHighlighter\shLegacy.min.js.map">
+      <DependentUpon>shLegacy.min.js</DependentUpon>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\Feed\" />
