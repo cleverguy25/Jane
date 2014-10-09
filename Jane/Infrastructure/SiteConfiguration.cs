@@ -21,6 +21,23 @@ namespace Jane.Infrastructure
 
       public static readonly Lazy<string> TileColor = new Lazy<string>(() => LoadConfigurationString("jane:TileColor"));
 
+      public static readonly Lazy<bool> UseCdn = new Lazy<bool>(() => LoadConfigurationBool("jane:UseCdn", true));
+
+      private static bool LoadConfigurationBool(string key, bool defaultValue)
+      {
+         var value = LoadConfigurationString(key, false) ?? string.Empty;
+
+         switch (value.ToLowerInvariant())
+         {
+            case "true":
+               return true;
+            case "false":
+               return false;
+            default:
+               return defaultValue;
+         }
+      }
+
       private static string LoadConfigurationString(string key, bool required = false)
       {
          var value = ConfigurationManager.AppSettings.Get(key);
