@@ -1,8 +1,12 @@
 ﻿@using Jane.Infrastructure
 <!DOCTYPE html>
-<html>
-<head>
-    @{ var title = SiteConfiguration.SiteName.Value + " - " + ViewBag.Title; }
+<html lang="en">
+<head prefix="og: http://ogp.me/ns#">
+    @{
+        var siteName = @SiteConfiguration.SiteName.Value;
+        var title = siteName + " - " + ViewBag.Title;
+        var baseUrl = Request.Url.Scheme + "://" + Request.Url.Authority + Request.RawUrl;
+    }
 
     <title>@title</title>
 
@@ -18,34 +22,44 @@
     <meta name="description" content="@SiteConfiguration.Description.Value" />
 
     @*FeedController*@
-    <link id="RSS" title="@SiteConfiguration.SiteName.Value" type="application/rss+xml" rel="alternate" href="@Url.Action("Rss", "Feed")" />
-    <link id="ATOM" title="@SiteConfiguration.SiteName.Value" type="application/atom+xml" rel="alternate" href="@Url.Action("Atom", "Feed")" />
-    
+    <link id="RSS" title="@siteName" type="application/rss+xml" rel="alternate" href="@Url.Action("Rss", "Feed")" />
+    <link id="ATOM" title="@siteName" type="application/atom+xml" rel="alternate" href="@Url.Action("Atom", "Feed")" />
+
     @RenderSection("head", required: false)
-</head>
-    <body itemscope itemtype="http://schema.org/Blog">
-        @Html.Partial("TopBar")
-
-        <div class="row content-container ">
-            <main class="large-8 medium-8 columns" role="main">
-                @RenderBody()
-            </main>
-            <aside class="large-4 medium-4 columns" role="complementary">
-                @RenderSection("aside", required: false)
-            </aside>
-        </div>
     
-        @Html.Partial("Footer")
+    @*Windows App Metadata*@
+    <meta name="application-name" content="@siteName" />
+    <meta name="msapplication-TileColor" content="@SiteConfiguration.TileColor.Value" />
 
-        @Scripts.Render("~/bundles/jquery")
-        @Scripts.Render("~/bundles/foundation")
-        <script>
-            $(document).foundation();
-        </script>
-        @RenderSection("scripts", false)
-        <!--[if lt IE 9]>
-            <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-        <![endif]-->
+    @*Facebook Open Graph*@
+    <meta property="og:title" content="@title" />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="@(baseUrl + Url.Content(SiteConfiguration.Image.Value))" />
+    <meta property="og:url" content="@baseUrl" />
+</head>
+<body itemscope itemtype="http://schema.org/Blog">
+    @Html.Partial("TopBar")
 
-    </body>
+    <div class="row content-container ">
+        <main class="large-8 medium-8 columns" role="main">
+            @RenderBody()
+        </main>
+        <aside class="large-4 medium-4 columns" role="complementary">
+            @RenderSection("aside", required: false)
+        </aside>
+    </div>
+
+    @Html.Partial("Footer")
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/foundation")
+    <script>
+        $(document).foundation();
+    </script>
+    @RenderSection("scripts", false)
+    <!--[if lt IE 9]>
+        <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+</body>
 </html>

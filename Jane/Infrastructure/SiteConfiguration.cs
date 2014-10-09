@@ -17,6 +17,10 @@ namespace Jane.Infrastructure
       public static readonly Lazy<string> Description =
          new Lazy<string>(() => LoadConfigurationString("jane:Description", true));
 
+      public static readonly Lazy<string> Image = new Lazy<string>(() => LoadConfigurationString("jane:Image", true));
+
+      public static readonly Lazy<string> TileColor = new Lazy<string>(() => LoadConfigurationString("jane:TileColor"));
+
       private static string LoadConfigurationString(string key, bool required = false)
       {
          var value = ConfigurationManager.AppSettings.Get(key);
