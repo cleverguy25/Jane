@@ -38,7 +38,7 @@ namespace Jane.Test
       {
          var postContent = new Mock<IPostContent>();
          var path = GetPath("posts.json");
-         var postQueries = PostQueriesJsonFactory.Create(path, (post) => postContent.Object);
+         var postQueries = new PostQueries(new PostJsonStorage(path, (post) => postContent.Object));
 
          var posts = postQueries.GetRecentPosts().ToList();
          posts.Should().HaveCount(3);
@@ -52,7 +52,7 @@ namespace Jane.Test
       public void LoadFuturePostJsonFile()
       {
          var path = GetPath("future.json");
-         var postQueries = FuturePostQueriesJsonFactory.Create(path);
+         var postQueries = new FuturePostQueries(new JsonStorage<FuturePost>(path));
 
          var posts = postQueries.GetFuturePosts().ToList();
          posts.Should().HaveCount(2);
@@ -67,7 +67,7 @@ namespace Jane.Test
       public void LoadNavigationJsonFile()
       {
          var path = GetPath("topnav.json");
-         var queries = NavigationQueriesJsonFactory.Create(path);
+         var queries = new NavigationQueries(new JsonStorage<NavigationItem>(path));
 
          var posts = queries.GetNavigationItems().ToList();
          posts.Should().HaveCount(4);
@@ -84,7 +84,7 @@ namespace Jane.Test
          var path = GetPath("postserror.json");
          try
          {
-            PostQueriesJsonFactory.Create(path, (post) => null);
+            new PostJsonStorage(path, (post) => null).Load();
          }
          catch (JsonReaderException)
          {

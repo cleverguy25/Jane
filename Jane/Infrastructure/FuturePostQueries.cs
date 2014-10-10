@@ -15,9 +15,9 @@ namespace Jane.Infrastructure
    {
       private readonly IEnumerable<FuturePost> futurePosts;
 
-      public FuturePostQueries(IEnumerable<FuturePost> futurePosts)
+      public FuturePostQueries(IStorage<FuturePost> futurePosts)
       {
-         this.futurePosts = futurePosts;
+         this.futurePosts = futurePosts.Load();
       }
 
       public IEnumerable<FuturePost> GetFuturePosts()

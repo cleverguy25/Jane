@@ -46,16 +46,13 @@ namespace Jane
 
          var container = new Container();
 
-         container.Register<IPostQueries>(
-            () => PostQueriesJsonFactory.Create(path, (post) => LocalPostContent.CreatePostContent(post, contentPath)),
-            Lifestyle.Singleton);
-
-         container.Register<INavigationQueries>(
-            () => NavigationQueriesJsonFactory.Create(navPath),
-            Lifestyle.Singleton);
-         container.Register<IFuturePostQueries>(
-            () => FuturePostQueriesJsonFactory.Create(futurePath),
-            Lifestyle.Singleton);
+         container.Register<IStorage<Post>>(() => new PostJsonStorage(path, (post) => LocalPostContent.CreatePostContent(post, contentPath)), Lifestyle.Singleton);
+         container.Register<IStorage<FuturePost>>(() => new JsonStorage<FuturePost>(futurePath), Lifestyle.Singleton);
+         container.Register<IStorage<NavigationItem>>(() => new JsonStorage<NavigationItem>(navPath), Lifestyle.Singleton);
+         
+         container.Register<IPostQueries, PostQueries>();
+         container.Register<IFuturePostQueries, FuturePostQueries>();
+         container.Register<INavigationQueries, NavigationQueries>();
          container.Register<ITagQueries, TagQueries>(Lifestyle.Singleton);
          container.RegisterMvcControllers();
 

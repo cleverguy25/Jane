@@ -20,7 +20,7 @@ namespace Jane.Test
       [TestMethod, TestCategory("UnitTest")]
       public void GetTagCounts()
       {
-         var postQueries = new PostQueries(FakePostData.Posts);
+         var postQueries = new PostQueries(FakePostData.GetStorage());
          var tagQueries = new TagQueries(postQueries);
 
          var counts = tagQueries.GetTagsWithCounts().ToList();

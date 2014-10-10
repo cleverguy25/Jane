@@ -117,6 +117,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
     </Reference>
+    <Reference Include="CookComputing.XmlRpcV2">
+      <HintPath>..\packages\xmlrpcnet.2.5.0\lib\net20\CookComputing.XmlRpcV2.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -216,12 +219,12 @@
     <Compile Include="Infrastructure\Interfaces\INavigationQueries.cs" />
     <Compile Include="Infrastructure\Interfaces\IPostQueries.cs" />
     <Compile Include="Infrastructure\Interfaces\ITagQueries.cs" />
+    <Compile Include="Infrastructure\Interfaces\IStorage.cs" />
     <Compile Include="Infrastructure\LocalPostContent.cs" />
     <Compile Include="Infrastructure\NavigationQueries.cs" />
-    <Compile Include="Infrastructure\FuturePostQueriesJsonFactory.cs" />
     <Compile Include="Infrastructure\PostQueries.cs" />
-    <Compile Include="Infrastructure\NavigationQueriesJsonFactory.cs" />
-    <Compile Include="Infrastructure\PostQueriesJsonFactory.cs" />
+    <Compile Include="Infrastructure\JsonStorage.cs" />
+    <Compile Include="Infrastructure\PostJsonStorage.cs" />
     <Compile Include="Infrastructure\SiteConfiguration.cs" />
     <Compile Include="Infrastructure\TagQueries.cs" />
     <Compile Include="Infrastructure\Tracing.cs" />
@@ -746,7 +749,6 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="MetaWeblog\" />
     <Folder Include="Views\Feed\" />
     <Folder Include="Views\Seo\" />
     <Folder Include="Views\TopNavigation\" />

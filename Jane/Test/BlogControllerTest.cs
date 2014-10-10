@@ -21,6 +21,8 @@ namespace Jane.Test
 
    using Microsoft.VisualStudio.TestTools.UnitTesting;
 
+   using Moq;
+
    using TestStack.FluentMVCTesting;
 
    [TestClass]
@@ -33,10 +35,12 @@ namespace Jane.Test
       [TestInitialize]
       public void Intialize()
       {
-         this.postQuery = new PostQueries(FakePostData.Posts);
-         var futureQuery =
-            new FuturePostQueries(
-               new[] { new FuturePost() { PublishDate = DateTime.Today.AddDays(1), Title = "Future" } });
+         this.postQuery = new PostQueries(FakePostData.GetStorage());
+         var futurePostStorage =
+            new Mock<IStorage<FuturePost>>();
+         futurePostStorage.Setup(storage => storage.Load())
+               .Returns(new[] { new FuturePost() { PublishDate = DateTime.Today.AddDays(1), Title = "Future" } }); 
+         var futureQuery = new FuturePostQueries(futurePostStorage.Object);
          this.blogController = new BlogController(this.postQuery, futureQuery);
       }
 

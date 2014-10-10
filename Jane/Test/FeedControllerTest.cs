@@ -27,7 +27,7 @@ namespace Jane.Test
       {
          var stringBuilder = new StringBuilder();
          var writer = new StringWriter(stringBuilder);
-         var postQueries = new PostQueries(FakePostData.Posts);
+         var postQueries = new PostQueries(FakePostData.GetStorage());
          var controller = new FeedController(postQueries);
          controller.SetupControllerContext(writer, "http://localhost/blog/rss");
 
@@ -49,7 +49,7 @@ namespace Jane.Test
       {
          var stringBuilder = new StringBuilder();
          var writer = new StringWriter(stringBuilder);
-         var postQueries = new PostQueries(FakePostData.Posts);
+         var postQueries = new PostQueries(FakePostData.GetStorage());
          var controller = new FeedController(postQueries);
          controller.SetupControllerContext(writer, "http://localhost/blog/rss");
 
@@ -66,7 +66,7 @@ namespace Jane.Test
       {
          var stringBuilder = new StringBuilder();
          var writer = new StringWriter(stringBuilder);
-         var postQueries = new PostQueries(FakePostData.Posts);
+         var postQueries = new PostQueries(FakePostData.GetStorage());
          var controller = new FeedController(postQueries);
          controller.SetupControllerContext(writer, "http://localhost/blog/atom");
 
@@ -85,7 +85,7 @@ namespace Jane.Test
       {
          var stringBuilder = new StringBuilder();
          var writer = new StringWriter(stringBuilder);
-         var postQueries = new PostQueries(FakePostData.Posts);
+         var postQueries = new PostQueries(FakePostData.GetStorage());
          var controller = new FeedController(postQueries);
          controller.SetupControllerContext(writer, "http://localhost/blog/atom");
 

@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="FuturePostQueriesJsonFactory.cs" company="Jane OSS">
+// <copyright file="JsonStorage.cs" company="Jane OSS">
 //   Copyright (c) Jane Contributors
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
@@ -15,19 +15,29 @@ namespace Jane.Infrastructure
 
    using Newtonsoft.Json;
 
-   public static class FuturePostQueriesJsonFactory
+   public class JsonStorage<TModel> : IStorage<TModel>
    {
-      public static IFuturePostQueries Create(string path)
+      private readonly string path;
+
+      public JsonStorage(string path)
       {
-         Contract.Requires<ArgumentNullException>(string.IsNullOrEmpty(path) == false, "path");
+         this.path = path;
+      }
 
+      public IEnumerable<TModel> Load()
+      {
          var json = new JsonSerializer();
-         using (var stream = new StreamReader(path))
+         using (var stream = new StreamReader(this.path))
          {
-            var items = (List<FuturePost>)json.Deserialize(stream, typeof(List<FuturePost>));
+            var items = (List<TModel>)json.Deserialize(stream, typeof(List<TModel>));
 
-            return new FuturePostQueries(items);
+            return items;
          }
+      }
+
+      public void Save(IEnumerable<TModel> data)
+      {
+         throw new NotImplementedException();
       }
    }
 }

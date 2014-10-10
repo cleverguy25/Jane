@@ -26,7 +26,7 @@ namespace Jane.Test
       {
          var stringBuilder = new StringBuilder();
          var writer = new StringWriter(stringBuilder);
-         var postQueries = new PostQueries(FakePostData.Posts);
+         var postQueries = new PostQueries(FakePostData.GetStorage());
          var controller = new SeoController(postQueries);
          controller.SetupControllerContext(writer, "http://localhost/sitemap.xml");
 
@@ -47,7 +47,7 @@ namespace Jane.Test
       [TestMethod, TestCategory("UnitTest")]
       public void Robots()
       {
-         var postQueries = new PostQueries(FakePostData.Posts);
+         var postQueries = new PostQueries(FakePostData.GetStorage());
          var controller = new SeoController(postQueries);
          controller.SetupControllerContext("http://localhost/robots.txt");
 

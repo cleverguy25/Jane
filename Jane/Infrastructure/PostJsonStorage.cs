@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="PostQueriesJsonFactory.cs" company="Jane OSS">
+// <copyright file="PostJsonStorage.cs" company="Jane OSS">
 //   Copyright (c) Jane Contributors
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
@@ -15,24 +15,36 @@ namespace Jane.Infrastructure
 
    using Newtonsoft.Json;
 
-   public static class PostQueriesJsonFactory
+   public class PostJsonStorage : IStorage<Post>
    {
-      public static IPostQueries Create(string path, Func<Post, IPostContent> postContentFactory)
-      {
-         Contract.Requires<ArgumentNullException>(string.IsNullOrEmpty(path) == false, "path");
-         Contract.Requires<ArgumentNullException>(postContentFactory != null, "postContentFactory");
+      private readonly string path;
 
+      private readonly Func<Post, IPostContent> postContentFactory;
+
+      public PostJsonStorage(string path, Func<Post, IPostContent> postContentFactory)
+      {
+         this.path = path;
+         this.postContentFactory = postContentFactory;
+      }
+
+      public IEnumerable<Post> Load()
+      {
          var json = new JsonSerializer();
-         using (var stream = new StreamReader(path))
+         using (var stream = new StreamReader(this.path))
          {
             var posts = (List<Post>)json.Deserialize(stream, typeof(List<Post>));
             foreach (var post in posts)
             {
-               post.Content = postContentFactory(post);
+               post.Content = this.postContentFactory(post);
             }
 
-            return new PostQueries(posts);
+            return posts;
          }
+      }
+
+      public void Save(IEnumerable<Post> posts)
+      {
+         throw new NotImplementedException();
       }
    }
 }

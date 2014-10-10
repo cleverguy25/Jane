@@ -9,7 +9,10 @@ namespace Jane.Test
    using System;
    using System.Collections.Generic;
 
+   using Jane.Infrastructure.Interfaces;
    using Jane.Models;
+
+   using Moq;
 
    public class FakePostData
    {
@@ -82,5 +85,12 @@ namespace Jane.Test
                   Tags = new List<string>() { }
                }
          };
+
+      public static IStorage<Post> GetStorage()
+      {
+         var mock = new Mock<IStorage<Post>>();
+         mock.Setup(storage => storage.Load()).Returns(Posts);
+         return mock.Object;
+      }
    }
 }

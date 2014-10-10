@@ -16,10 +16,11 @@ namespace Jane.Infrastructure
    {
       private readonly List<NavigationItem> items;
 
-      public NavigationQueries(IEnumerable<NavigationItem> items)
+      public NavigationQueries(IStorage<NavigationItem> storage)
       {
-         Contract.Requires(items != null);
-         this.items = items.ToList();
+         Contract.Requires(storage != null);
+
+         this.items = storage.Load().ToList();
       }
 
       public IEnumerable<NavigationItem> GetNavigationItems()

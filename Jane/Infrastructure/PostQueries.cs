@@ -16,11 +16,11 @@ namespace Jane.Infrastructure
    {
       private readonly List<Post> posts;
 
-      public PostQueries(IEnumerable<Post> posts)
+      public PostQueries(IStorage<Post> storage)
       {
-         Contract.Requires(posts != null);
+         Contract.Requires(storage != null);
 
-         this.posts = posts.OrderByDescending(post => post.PublishedDate).ToList();
+         this.posts = storage.Load().OrderByDescending(post => post.PublishedDate).ToList();
       }
 
       public IEnumerable<Post> GetAllPosts()
