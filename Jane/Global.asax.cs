@@ -46,9 +46,12 @@ namespace Jane
 
          var container = new Container();
 
-         container.Register<IStorage<Post>>(() => new PostJsonStorage(path, (post) => LocalPostContent.CreatePostContent(post, contentPath)), Lifestyle.Singleton);
-         container.Register<IStorage<FuturePost>>(() => new JsonStorage<FuturePost>(futurePath), Lifestyle.Singleton);
-         container.Register<IStorage<NavigationItem>>(() => new JsonStorage<NavigationItem>(navPath), Lifestyle.Singleton);
+         var storage = new PostJsonStorage(path, (post) => LocalPostContent.CreatePostContent(post, contentPath));
+         container.Register<ILoadStorage<Post>>(() => storage, Lifestyle.Singleton);
+         container.Register<ISaveStorage<Post>>(() => storage, Lifestyle.Singleton);
+
+         container.Register<ILoadStorage<FuturePost>>(() => new JsonStorage<FuturePost>(futurePath, (id, item) => item.Title == id), Lifestyle.Singleton);
+         container.Register<ILoadStorage<NavigationItem>>(() => new JsonStorage<NavigationItem>(navPath, (id, item) => item.Name == id), Lifestyle.Singleton);
          
          container.Register<IPostQueries, PostQueries>();
          container.Register<IFuturePostQueries, FuturePostQueries>();
@@ -58,6 +61,9 @@ namespace Jane
 
          container.Verify();
 
+         PostJsonStorage.DefaultLoad = container.GetInstance<ILoadStorage<Post>>();
+         PostJsonStorage.DefaultSave = container.GetInstance<ISaveStorage<Post>>();
+         MetaWeblog.MetaWeblog.ContentPath = contentPath;
          DependencyResolver.SetResolver(new SimpleInjectorDependencyResolver(container));
       }
    }

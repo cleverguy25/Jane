@@ -218,8 +218,9 @@
     <Compile Include="Infrastructure\Interfaces\IFuturePostQueries.cs" />
     <Compile Include="Infrastructure\Interfaces\INavigationQueries.cs" />
     <Compile Include="Infrastructure\Interfaces\IPostQueries.cs" />
+    <Compile Include="Infrastructure\Interfaces\ISaveStorage.cs" />
     <Compile Include="Infrastructure\Interfaces\ITagQueries.cs" />
-    <Compile Include="Infrastructure\Interfaces\IStorage.cs" />
+    <Compile Include="Infrastructure\Interfaces\ILoadStorage.cs" />
     <Compile Include="Infrastructure\LocalPostContent.cs" />
     <Compile Include="Infrastructure\NavigationQueries.cs" />
     <Compile Include="Infrastructure\PostQueries.cs" />
@@ -229,6 +230,19 @@
     <Compile Include="Infrastructure\TagQueries.cs" />
     <Compile Include="Infrastructure\Tracing.cs" />
     <Compile Include="Infrastructure\XmlResult.cs" />
+    <Compile Include="MetaWeblog\IMetaWeblog.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MetaWeblog\MediaObject.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MetaWeblog\MetaWeblog.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MetaWeblog\MetaWeblogRouteHandler.cs" />
+    <Compile Include="MetaWeblog\Post.cs">
+      <ExcludeFromStyleCop>True</ExcludeFromStyleCop>
+    </Compile>
     <Compile Include="Models\FuturePost.cs" />
     <Compile Include="Models\IPostContent.cs" />
     <Compile Include="Models\NavigationItem.cs" />
@@ -594,6 +608,7 @@
     <Content Include="App_Data\future.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="wlwmanifest.xml" />
     <None Include="Scripts\jquery-2.1.1.intellisense.js">
       <DependentUpon>jquery-2.1.1.js</DependentUpon>
     </None>

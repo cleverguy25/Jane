@@ -36,8 +36,7 @@ namespace Jane.Test
       public void Intialize()
       {
          this.postQuery = new PostQueries(FakePostData.GetStorage());
-         var futurePostStorage =
-            new Mock<IStorage<FuturePost>>();
+         var futurePostStorage = new Mock<ILoadStorage<FuturePost>>();
          futurePostStorage.Setup(storage => storage.Load())
                .Returns(new[] { new FuturePost() { PublishDate = DateTime.Today.AddDays(1), Title = "Future" } }); 
          var futureQuery = new FuturePostQueries(futurePostStorage.Object);

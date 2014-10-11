@@ -16,7 +16,7 @@ namespace Jane.Infrastructure
    {
       private readonly List<Post> posts;
 
-      public PostQueries(IStorage<Post> storage)
+      public PostQueries(ILoadStorage<Post> storage)
       {
          Contract.Requires(storage != null);
 

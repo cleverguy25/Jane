@@ -9,19 +9,23 @@ namespace Jane.Infrastructure
    using System.Collections.Generic;
    using System.Diagnostics.Contracts;
    using System.IO;
+   using System.Linq;
 
    using Jane.Infrastructure.Interfaces;
    using Jane.Models;
 
    using Newtonsoft.Json;
 
-   public class JsonStorage<TModel> : IStorage<TModel>
+   public class JsonStorage<TModel> : ILoadStorage<TModel> where TModel : class 
    {
       private readonly string path;
 
-      public JsonStorage(string path)
+      private readonly Func<string, TModel, bool> findItem;
+
+      public JsonStorage(string path, Func<string, TModel, bool> findItem)
       {
          this.path = path;
+         this.findItem = findItem;
       }
 
       public IEnumerable<TModel> Load()
@@ -35,9 +39,14 @@ namespace Jane.Infrastructure
          }
       }
 
-      public void Save(IEnumerable<TModel> data)
+      public TModel Load(string id)
       {
-         throw new NotImplementedException();
+         if (this.findItem == null)
+         {
+            return (TModel)null;
+         }
+
+         return this.Load().FirstOrDefault(item => this.findItem(id, item));
       }
    }
 }

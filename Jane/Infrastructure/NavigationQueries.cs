@@ -16,7 +16,7 @@ namespace Jane.Infrastructure
    {
       private readonly List<NavigationItem> items;
 
-      public NavigationQueries(IStorage<NavigationItem> storage)
+      public NavigationQueries(ILoadStorage<NavigationItem> storage)
       {
          Contract.Requires(storage != null);
 

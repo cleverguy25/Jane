@@ -5,8 +5,11 @@
 // --------------------------------------------------------------------------------------------------------------------
 namespace Jane
 {
+   using System.Diagnostics.Contracts;
    using System.Web.Mvc;
    using System.Web.Routing;
+
+   using Jane.MetaWeblog;
 
    using Microsoft.Ajax.Utilities;
 
@@ -14,7 +17,11 @@ namespace Jane
    {
       public static void RegisterRoutes(RouteCollection routes)
       {
+         Contract.Requires(routes != null);
+
          routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
+
+         routes.MapRoute("RSD", "rsd", new { controller = "Feed", action = "Rsd" });
 
          routes.MapRoute("NotFound", "NotFound", new { controller = "Error", action = "NotFound" });
 
@@ -31,6 +38,8 @@ namespace Jane
          routes.MapRoute("TopNav", "topnav", new { controller = "TopNavigation", action = "TopNavigation" });
 
          routes.MapRoute("Home", string.Empty, new { controller = "Blog", action = "List" });
+
+         routes.Add(new Route("metaweblogapi", null, null, new MetaWeblogRouteHandler()));
 
          routes.MapRoute("404", "{*url}", new { controller = "Error", action = "NotFound" });
       }

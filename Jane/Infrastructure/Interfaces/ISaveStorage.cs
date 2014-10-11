@@ -1,17 +1,17 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="IPostContent.cs" company="Jane OSS">
+// <copyright file="ISaveStorage.cs" company="Jane OSS">
 //   Copyright (c) Jane Contributors
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Jane.Models
+namespace Jane.Infrastructure.Interfaces
 {
-   public interface IPostContent
+   public interface ISaveStorage<in T>
    {
-      string GetContent();
+      void Add(T item);
 
-      void SetContent(string content);
+      void Update(T item);
 
-      void Save(string fileName);
+      void Delete(string id);
    }
 }

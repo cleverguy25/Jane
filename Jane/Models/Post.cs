@@ -24,6 +24,8 @@ namespace Jane.Models
 
       public DateTime UpdatedDate { get; set; }
 
+      public bool IsPublished { get; set; }
+
       public List<string> Tags { get; set; }
 
       public string Summary { get; set; }

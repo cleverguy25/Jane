@@ -86,9 +86,9 @@ namespace Jane.Test
                }
          };
 
-      public static IStorage<Post> GetStorage()
+      public static ILoadStorage<Post> GetStorage()
       {
-         var mock = new Mock<IStorage<Post>>();
+         var mock = new Mock<ILoadStorage<Post>>();
          mock.Setup(storage => storage.Load()).Returns(Posts);
          return mock.Object;
       }

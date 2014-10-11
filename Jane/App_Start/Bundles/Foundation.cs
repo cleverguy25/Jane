@@ -6,6 +6,7 @@
 
 namespace Jane.Bundles
 {
+   using System.Diagnostics.Contracts;
    using System.Web.Optimization;
 
    public static class Foundation
@@ -22,6 +23,8 @@ namespace Jane.Bundles
 
       public static Bundle IncludeFoundationIcons(this Bundle bundle)
       {
+         Contract.Requires(bundle != null);
+
          return bundle.Include(
             "~/Content/Fonts/foundation-icons.css", 
             new CssRewriteUrlTransform());

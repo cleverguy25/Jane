@@ -11,6 +11,7 @@ namespace Jane.Controllers
    using System.ServiceModel.Syndication;
    using System.Web.Mvc;
    using System.Xml;
+   using System.Xml.Linq;
 
    using Jane.Infrastructure;
    using Jane.Infrastructure.Interfaces;
@@ -23,6 +24,29 @@ namespace Jane.Controllers
       public FeedController(IPostQueries postQueries)
       {
          this.postQueries = postQueries;
+      }
+
+      public ActionResult Rsd()
+      {
+         var ns = XNamespace.Get("http://archipelago.phrasewise.com/rsd");
+         var uri = new Uri(this.Url.Action("List", "Blog", null, this.Request.Url.Scheme));
+         var apiUri = new Uri(this.Request.Url.Scheme + "://" + this.Request.Url.Authority + "/metaweblogapi");
+         return
+            new XmlResult(
+               new XDocument(
+                  new XElement(
+                     ns + "service",
+                     new XElement(ns + "engineName", "Jane"),
+                     new XElement(ns + "homePageLink", uri.ToString()),
+                     new XElement(
+                        ns + "apis",
+                        new XElement(
+                           ns + "api",
+                           new XAttribute("name", "MetaWeblog"),
+                           new XAttribute("preferred", "true"),
+                           new XAttribute("blogID", "1"),
+                           new XAttribute("apiLink", apiUri.ToString()))))),
+               "{24A16C89-1865-4F40-802B-C717DEE14306}");
       }
 
       public ActionResult Rss()

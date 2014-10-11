@@ -7,6 +7,7 @@
 namespace Jane.Infrastructure
 {
    using System.Collections.Generic;
+   using System.Diagnostics.Contracts;
 
    using Jane.Infrastructure.Interfaces;
    using Jane.Models;
@@ -15,8 +16,10 @@ namespace Jane.Infrastructure
    {
       private readonly IEnumerable<FuturePost> futurePosts;
 
-      public FuturePostQueries(IStorage<FuturePost> futurePosts)
+      public FuturePostQueries(ILoadStorage<FuturePost> futurePosts)
       {
+         Contract.Requires(futurePosts != null);
+
          this.futurePosts = futurePosts.Load();
       }
 

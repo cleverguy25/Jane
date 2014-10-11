@@ -52,7 +52,7 @@ namespace Jane.Test
       public void LoadFuturePostJsonFile()
       {
          var path = GetPath("future.json");
-         var postQueries = new FuturePostQueries(new JsonStorage<FuturePost>(path));
+         var postQueries = new FuturePostQueries(new JsonStorage<FuturePost>(path, null));
 
          var posts = postQueries.GetFuturePosts().ToList();
          posts.Should().HaveCount(2);
@@ -67,7 +67,7 @@ namespace Jane.Test
       public void LoadNavigationJsonFile()
       {
          var path = GetPath("topnav.json");
-         var queries = new NavigationQueries(new JsonStorage<NavigationItem>(path));
+         var queries = new NavigationQueries(new JsonStorage<NavigationItem>(path, null));
 
          var posts = queries.GetNavigationItems().ToList();
          posts.Should().HaveCount(4);

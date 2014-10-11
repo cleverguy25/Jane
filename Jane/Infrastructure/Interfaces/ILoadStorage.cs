@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="IStorage.cs" company="Jane OSS">
+// <copyright file="ILoadStorage.cs" company="Jane OSS">
 //   Copyright (c) Jane Contributors
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
@@ -13,10 +13,10 @@ namespace Jane.Infrastructure.Interfaces
 
    using Jane.Models;
 
-   public interface IStorage<T>
+   public interface ILoadStorage<out T>
    {
       IEnumerable<T> Load();
 
-      void Save(IEnumerable<T> data);
+      T Load(string id);
    }
 }

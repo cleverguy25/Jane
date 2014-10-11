@@ -38,5 +38,16 @@ namespace Jane.Infrastructure
 
          return this.content;
       }
+
+      public void SetContent(string newContent)
+      {
+         this.content = newContent;
+      }
+
+      public void Save(string fileName)
+      {
+         var postPath = Path.Combine(this.contentPath, fileName);
+         File.WriteAllText(postPath, this.content);
+      }
    }
 }

@@ -93,6 +93,12 @@ namespace Jane.Test
       }
 
       [TestMethod, TestCategory("UnitTest")]
+      public void RsdRoute()
+      {
+         this.routes.AssertRoute("~/rsd", new { controller = "Feed", action = "Rsd" });
+      }
+
+      [TestMethod, TestCategory("UnitTest")]
       public void RssRoute()
       {
          this.routes.AssertRoute("~/blog/rss", new { controller = "Feed", action = "Rss" });
