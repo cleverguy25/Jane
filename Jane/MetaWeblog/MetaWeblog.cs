@@ -8,7 +8,13 @@ namespace Jane.MetaWeblog
 {
    using System;
    using System.Collections.Generic;
+   using System.Diagnostics.Contracts;
+   using System.IO;
    using System.Linq;
+   using System.Runtime.Remoting.Channels;
+   using System.Security.Policy;
+   using System.Web;
+   using System.Web.Hosting;
 
    using CookComputing.XmlRpc;
 
@@ -34,6 +40,11 @@ namespace Jane.MetaWeblog
          if (string.IsNullOrEmpty(newPost.wp_slug))
          {
             throw new XmlRpcFaultException(0, "Slug cannot be empty.");
+         }
+
+         if (this.loadStorage.Load().Any(p => p.Slug == newPost.wp_slug))
+         {
+            throw new XmlRpcFaultException(0, "That slug has already been used, please pick a new one.");
          }
 
          var post = new Models.Post
@@ -127,7 +138,22 @@ namespace Jane.MetaWeblog
 
       object IMetaWeblog.NewMediaObject(string blogid, string username, string password, MediaObject media)
       {
-         return null;
+         var extension = Path.GetExtension(media.name);
+         if (extension == null)
+         {
+            throw new XmlRpcFaultException(0, "Cannot determine image extension.");
+         }
+
+         var relativePath = "~/content/posts/images/" + Guid.NewGuid() + "." + extension.Trim('.');
+         var path = HostingEnvironment.MapPath(relativePath);
+         if (path == null)
+         {
+            throw new XmlRpcFaultException(0, "Error saving file.");
+         }
+
+         File.WriteAllBytes(path, media.bits);
+         var absolutePath = this.Context.Request.Url.Scheme + "://" + this.Context.Request.Url.Authority + relativePath.Trim('~');
+         return new { url = absolutePath };
       }
 
       object[] IMetaWeblog.GetUsersBlogs(string key, string username, string password)

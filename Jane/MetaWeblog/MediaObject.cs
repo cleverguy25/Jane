@@ -11,13 +11,10 @@ namespace Jane.MetaWeblog
    [XmlRpcMissingMapping(MappingAction.Ignore)]
    public struct MediaObject
    {
-      [XmlRpcMember("bits")]
-      public byte[] Bits;
+      public byte[] bits;
 
-      [XmlRpcMember("name")]
-      public string Name;
+      public string name;
 
-      [XmlRpcMember("type")]
-      public string Type;
+      public string type;
    }
 }
