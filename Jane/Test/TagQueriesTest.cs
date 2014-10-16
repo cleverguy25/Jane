@@ -7,6 +7,7 @@
 namespace Jane.Test
 {
    using System.Linq;
+   using System.Threading.Tasks;
 
    using FluentAssertions;
 
@@ -18,12 +19,13 @@ namespace Jane.Test
    public class TagQueriesTest
    {
       [TestMethod, TestCategory("UnitTest")]
-      public void GetTagCounts()
+      public async Task GetTagCounts()
       {
          var postQueries = new PostQueries(FakePostData.GetStorage());
          var tagQueries = new TagQueries(postQueries);
 
-         var counts = tagQueries.GetTagsWithCounts().ToList();
+         var tags = await tagQueries.GetTagsWithCountsAsync();
+         var counts = tags.ToList();
 
          counts.Should().HaveCount(3);
          counts[0].Item2.Should().Be(3);

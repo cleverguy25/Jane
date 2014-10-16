@@ -8,9 +8,10 @@ namespace Jane.Infrastructure.Interfaces
 {
    using System;
    using System.Collections.Generic;
+   using System.Threading.Tasks;
 
    public interface ITagQueries
    {
-      IEnumerable<Tuple<string, int>> GetTagsWithCounts();
+      Task<IEnumerable<Tuple<string, int>>> GetTagsWithCountsAsync();
    }
 }

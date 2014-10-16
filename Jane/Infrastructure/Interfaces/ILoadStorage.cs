@@ -10,13 +10,14 @@ namespace Jane.Infrastructure.Interfaces
    using System.Collections;
    using System.Collections.Generic;
    using System.Data.Objects;
+   using System.Threading.Tasks;
 
    using Jane.Models;
 
-   public interface ILoadStorage<out T>
+   public interface ILoadStorage<T, in TKey>
    {
-      IEnumerable<T> Load();
+      Task<IEnumerable<T>> LoadAsync();
 
-      T Load(string id);
+      Task<T> LoadAsync(TKey id);
    }
 }

@@ -6,19 +6,20 @@
 namespace Jane.Infrastructure.Interfaces
 {
    using System.Collections.Generic;
+   using System.Threading.Tasks;
 
    using Jane.Models;
 
    public interface IPostQueries
    {
-      IEnumerable<Post> GetAllPosts();
+      Task<IEnumerable<Post>> GetAllPostsAsync();
 
-      IEnumerable<Post> GetRecentPosts();
+      Task<IEnumerable<Post>> GetRecentPostsAsync();
 
-      IEnumerable<Post> GetRelatedPosts(Post post);
+      Task<IEnumerable<Post>> GetRelatedPostsAsync(Post post);
 
-      Post GetPostBySlug(string slug);
+      Task<Post> GetPostBySlugAsync(string slug);
 
-      IEnumerable<Post> GetPostsByTag(string tag);
+      Task<IEnumerable<Post>> GetPostsByTagAsync(string tag);
    }
 }

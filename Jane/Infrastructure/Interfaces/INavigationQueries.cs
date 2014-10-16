@@ -7,11 +7,12 @@
 namespace Jane.Infrastructure.Interfaces
 {
    using System.Collections.Generic;
+   using System.Threading.Tasks;
 
    using Jane.Models;
 
    public interface INavigationQueries
    {
-      IEnumerable<NavigationItem> GetNavigationItems();
+      Task<IEnumerable<NavigationItem>> GetNavigationItemsAsync();
    }
 }

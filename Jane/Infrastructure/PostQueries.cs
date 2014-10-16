@@ -5,53 +5,74 @@
 // --------------------------------------------------------------------------------------------------------------------
 namespace Jane.Infrastructure
 {
+   using System;
    using System.Collections.Generic;
    using System.Diagnostics.Contracts;
    using System.Linq;
+   using System.Runtime.Caching;
+   using System.Threading.Tasks;
 
    using Jane.Infrastructure.Interfaces;
    using Jane.Models;
 
    public class PostQueries : IPostQueries
    {
-      private readonly List<Post> posts;
+      private readonly ILoadStorage<Post, Guid> storage;
+      
+      private readonly MemoryCache cache = new MemoryCache("PostCache");
 
-      public PostQueries(ILoadStorage<Post> storage)
+      public PostQueries(ILoadStorage<Post, Guid> storage)
       {
          Contract.Requires(storage != null);
-
-         this.posts = storage.Load().OrderByDescending(post => post.PublishedDate).ToList();
+         this.storage = storage;
       }
 
-      public IEnumerable<Post> GetAllPosts()
+      public async Task<IEnumerable<Post>> GetAllPostsAsync()
       {
-         return this.posts;
+         return await this.GetPosts();
       }
 
-      public IEnumerable<Post> GetRecentPosts()
+      public async Task<IEnumerable<Post>> GetRecentPostsAsync()
       {
-         return this.posts.Take(5);
+         var posts = await this.GetPosts();
+         return posts.Take(5);
       }
 
-      public Post GetPostBySlug(string slug)
+      public async Task<Post> GetPostBySlugAsync(string slug)
       {
-         return this.posts.FirstOrDefault(post => post.Slug.ToLowerInvariant() == slug.ToLowerInvariant());
+         var posts = await this.GetPosts();
+         return posts.FirstOrDefault(post => post.Slug.ToLowerInvariant() == slug.ToLowerInvariant());
       }
 
-      public IEnumerable<Post> GetPostsByTag(string tag)
+      public async Task<IEnumerable<Post>> GetPostsByTagAsync(string tag)
       {
-         return this.posts.Where(post => post.Tags.Contains(tag));
+         var posts = await this.GetPosts();
+         return posts.Where(post => post.Tags.Contains(tag));
       }
 
-      public IEnumerable<Post> GetRelatedPosts(Post post)
+      public async Task<IEnumerable<Post>> GetRelatedPostsAsync(Post post)
       {
-         var postsQuery = from relatedPost in this.posts
+         var posts = await this.GetPosts();
+         var postsQuery = from relatedPost in posts
                           let count = post.Tags.Intersect(relatedPost.Tags).Count()
                           where count > 0
                           orderby count
                           select relatedPost;
 
          return postsQuery;
+      }
+
+      private async Task<IList<Post>> GetPosts()
+      {
+         const string KeyName = "Posts";
+         var posts = this.cache.Get(KeyName) as IEnumerable<Post>;
+         if (posts == null)
+         {
+            posts = await this.storage.LoadAsync();
+            this.cache.Set(KeyName, posts, new CacheItemPolicy());
+         }
+
+         return posts.OrderByDescending(post => post.PublishedDate).ToList();
       }
    }
 }

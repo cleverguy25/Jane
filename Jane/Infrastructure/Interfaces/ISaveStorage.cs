@@ -6,12 +6,14 @@
 
 namespace Jane.Infrastructure.Interfaces
 {
-   public interface ISaveStorage<in T>
+   using System.Threading.Tasks;
+
+   public interface ISaveStorage<T, TKey>
    {
-      void Add(T item);
+      Task<TKey> AddAsync(T item);
 
-      void Update(T item);
+      Task UpdateAsync(T item);
 
-      void Delete(string id);
+      Task DeleteAsync(TKey id);
    }
 }

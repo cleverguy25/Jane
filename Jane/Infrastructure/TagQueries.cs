@@ -10,30 +10,41 @@ namespace Jane.Infrastructure
    using System.Collections.Generic;
    using System.Diagnostics.Contracts;
    using System.Linq;
+   using System.Runtime.Caching;
+   using System.Threading.Tasks;
 
    using Jane.Infrastructure.Interfaces;
    using Jane.Models;
 
    public class TagQueries : ITagQueries
    {
-      private readonly List<Tuple<string, int>> tagCounts;
+      private readonly IPostQueries postQueries;
+
+      private readonly MemoryCache cache = new MemoryCache("TagCounts");
 
       public TagQueries(IPostQueries postQueries)
       {
          Contract.Requires(postQueries != null);
-
-         var tagQuery = from post in postQueries.GetAllPosts()
-                        from tag in post.Tags
-                        group tag by tag
-                        into tagGroup
-                        select new Tuple<string, int>(tagGroup.Key, tagGroup.Count());
-
-         this.tagCounts = tagQuery.ToList();
+         this.postQueries = postQueries;
       }
 
-      public IEnumerable<Tuple<string, int>> GetTagsWithCounts()
+      public async Task<IEnumerable<Tuple<string, int>>> GetTagsWithCountsAsync()
       {
-         return this.tagCounts;
+         const string KeyName = "TagCounts";
+         var tagCounts = this.cache.Get(KeyName) as IEnumerable<Tuple<string, int>>;
+         if (tagCounts == null)
+         {
+            var tagQuery = from post in await this.postQueries.GetAllPostsAsync()
+                           from tag in post.Tags
+                           group tag by tag
+                              into tagGroup
+                              select new Tuple<string, int>(tagGroup.Key, tagGroup.Count());
+
+            tagCounts = tagQuery.ToList();
+            this.cache.Set(KeyName, tagCounts, new CacheItemPolicy());
+         }
+
+         return tagCounts;
       }
    }
 }

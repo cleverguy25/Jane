@@ -6,11 +6,12 @@
 
 namespace Jane.Controllers
 {
+   using System.Threading.Tasks;
    using System.Web.Mvc;
 
    using Jane.Infrastructure.Interfaces;
 
-   public class TopNavigationController : Controller
+   public class TopNavigationController : AsyncController
    {
       private readonly INavigationQueries navigationQueries;
 
@@ -19,9 +20,9 @@ namespace Jane.Controllers
          this.navigationQueries = navigationQueries;
       }
 
-      public ActionResult TopNavigation()
+      public async Task<ActionResult> TopNavigation()
       {
-         var items = this.navigationQueries.GetNavigationItems();
+         var items = await this.navigationQueries.GetNavigationItemsAsync();
          return this.PartialView(items);
       }
    }

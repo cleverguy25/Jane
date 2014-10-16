@@ -7,6 +7,7 @@
 namespace Jane.Controllers
 {
    using System.Collections.Generic;
+   using System.Threading.Tasks;
    using System.Web.Mvc;
    using System.Xml.Linq;
 
@@ -38,9 +39,9 @@ sitemap: ",
           "/sitemap.xml"));
       }
 
-      public ActionResult SiteMap()
+      public async Task<ActionResult> SiteMap()
       {
-         var posts = this.postQueries.GetAllPosts();
+         var posts = await this.postQueries.GetAllPostsAsync();
          this.Response.ContentType = "text/xml";
 
          XNamespace documentNamespace = "http://www.sitemaps.org/schemas/sitemap/0.9";

@@ -8,6 +8,7 @@ namespace Jane.Test
    using System.IO;
    using System.Linq;
    using System.Text;
+   using System.Threading.Tasks;
    using System.Web.Mvc;
    using System.Xml.Linq;
 
@@ -22,7 +23,7 @@ namespace Jane.Test
    public class SeoControllerTest
    {
       [TestMethod, TestCategory("UnitTest")]
-      public void SiteMap()
+      public async Task SiteMap()
       {
          var stringBuilder = new StringBuilder();
          var writer = new StringWriter(stringBuilder);
@@ -30,7 +31,8 @@ namespace Jane.Test
          var controller = new SeoController(postQueries);
          controller.SetupControllerContext(writer, "http://localhost/sitemap.xml");
 
-         controller.SiteMap().ExecuteResult(controller.ControllerContext);
+         var result = await controller.SiteMap();
+         result.ExecuteResult(controller.ControllerContext);
 
          controller.Response.ContentType.Should().Be("text/xml");
          var document = XDocument.Parse(stringBuilder.ToString());

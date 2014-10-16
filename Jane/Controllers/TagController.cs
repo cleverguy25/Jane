@@ -6,6 +6,7 @@
 
 namespace Jane.Controllers
 {
+   using System.Threading.Tasks;
    using System.Web.Mvc;
 
    using Jane.Infrastructure;
@@ -21,9 +22,9 @@ namespace Jane.Controllers
          this.tagQueries = tagQueries;
       }
 
-      public ActionResult TagCloud()
+      public async Task<ActionResult> TagCloud()
       {
-         var counts = this.tagQueries.GetTagsWithCounts();
+         var counts = await this.tagQueries.GetTagsWithCountsAsync();
 
          return this.PartialView(counts);
       }

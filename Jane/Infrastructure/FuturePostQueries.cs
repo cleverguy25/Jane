@@ -6,25 +6,34 @@
 
 namespace Jane.Infrastructure
 {
+   using System;
    using System.Collections.Generic;
    using System.Diagnostics.Contracts;
+   using System.Threading.Tasks;
 
    using Jane.Infrastructure.Interfaces;
    using Jane.Models;
 
    public class FuturePostQueries : IFuturePostQueries
    {
-      private readonly IEnumerable<FuturePost> futurePosts;
+      private readonly ILoadStorage<FuturePost, string> futurePostsStorage;
 
-      public FuturePostQueries(ILoadStorage<FuturePost> futurePosts)
+      private IEnumerable<FuturePost> futurePosts;
+
+      public FuturePostQueries(ILoadStorage<FuturePost, string> futurePostsStorage)
       {
-         Contract.Requires(futurePosts != null);
+         Contract.Requires(futurePostsStorage != null);
 
-         this.futurePosts = futurePosts.Load();
+         this.futurePostsStorage = futurePostsStorage;
       }
 
-      public IEnumerable<FuturePost> GetFuturePosts()
+      public async Task<IEnumerable<FuturePost>> GetFuturePostsAsync()
       {
+         if (this.futurePosts == null)
+         {
+            this.futurePosts = await this.futurePostsStorage.LoadAsync();
+         }
+
          return this.futurePosts;
       }
    }

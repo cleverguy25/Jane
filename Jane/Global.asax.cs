@@ -47,11 +47,11 @@ namespace Jane
          var container = new Container();
 
          var storage = new PostJsonStorage(path, (post) => LocalPostContent.CreatePostContent(post, contentPath));
-         container.Register<ILoadStorage<Post>>(() => storage, Lifestyle.Singleton);
-         container.Register<ISaveStorage<Post>>(() => storage, Lifestyle.Singleton);
+         container.Register<ILoadStorage<Post, Guid>>(() => storage, Lifestyle.Singleton);
+         container.Register<ISaveStorage<Post, Guid>>(() => storage, Lifestyle.Singleton);
 
-         container.Register<ILoadStorage<FuturePost>>(() => new JsonStorage<FuturePost>(futurePath, (id, item) => item.Title == id), Lifestyle.Singleton);
-         container.Register<ILoadStorage<NavigationItem>>(() => new JsonStorage<NavigationItem>(navPath, (id, item) => item.Name == id), Lifestyle.Singleton);
+         container.Register<ILoadStorage<FuturePost, string>>(() => new JsonStorage<FuturePost, string>(futurePath, (id, item) => item.Title == id), Lifestyle.Singleton);
+         container.Register<ILoadStorage<NavigationItem, string>>(() => new JsonStorage<NavigationItem, string>(navPath, (id, item) => item.Name == id), Lifestyle.Singleton);
          
          container.Register<IPostQueries, PostQueries>();
          container.Register<IFuturePostQueries, FuturePostQueries>();
@@ -61,8 +61,8 @@ namespace Jane
 
          container.Verify();
 
-         PostJsonStorage.DefaultLoad = container.GetInstance<ILoadStorage<Post>>();
-         PostJsonStorage.DefaultSave = container.GetInstance<ISaveStorage<Post>>();
+         PostJsonStorage.DefaultLoad = container.GetInstance<ILoadStorage<Post, Guid>>();
+         PostJsonStorage.DefaultSave = container.GetInstance<ISaveStorage<Post, Guid>>();
          MetaWeblog.MetaWeblog.ContentPath = contentPath;
          DependencyResolver.SetResolver(new SimpleInjectorDependencyResolver(container));
       }

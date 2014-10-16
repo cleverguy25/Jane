@@ -9,6 +9,7 @@ namespace Jane.Test
    using System;
    using System.Collections.Generic;
    using System.Linq;
+   using System.Threading.Tasks;
    using System.Web;
    using System.Web.Mvc;
 
@@ -36,27 +37,27 @@ namespace Jane.Test
       public void Intialize()
       {
          this.postQuery = new PostQueries(FakePostData.GetStorage());
-         var futurePostStorage = new Mock<ILoadStorage<FuturePost>>();
-         futurePostStorage.Setup(storage => storage.Load())
-               .Returns(new[] { new FuturePost() { PublishDate = DateTime.Today.AddDays(1), Title = "Future" } }); 
+         var futurePostStorage = new Mock<ILoadStorage<FuturePost, string>>();
+         futurePostStorage.Setup(storage => storage.LoadAsync())
+               .Returns(Task.FromResult(new[] { new FuturePost() { PublishDate = DateTime.Today.AddDays(1), Title = "Future" } }.AsEnumerable())); 
          var futureQuery = new FuturePostQueries(futurePostStorage.Object);
          this.blogController = new BlogController(this.postQuery, futureQuery);
       }
 
       [TestMethod, TestCategory("UnitTest")]
-      public void GetPostBySlug()
+      public async Task GetPostBySlug()
       {
-         var result = this.blogController.GetBySlug("post2") as ViewResult;
+         var result = await this.blogController.GetBySlug("post2") as ViewResult;
          var post = (Post)result.Model;
          post.Title.Should().Be("Post 2");
       }
 
       [TestMethod, TestCategory("UnitTest")]
-      public void GetPostBySlugNotFound()
+      public async Task GetPostBySlugNotFound()
       {
          try
          {
-            this.blogController.GetBySlug("foo");
+            await this.blogController.GetBySlug("foo");
          }
          catch (HttpException error)
          {
@@ -65,9 +66,9 @@ namespace Jane.Test
       }
 
       [TestMethod, TestCategory("UnitTest")]
-      public void GetPostByTag()
+      public async Task GetPostByTag()
       {
-         var result = this.blogController.GetByTag("foo") as ViewResult;
+         var result = await this.blogController.GetByTag("foo") as ViewResult;
          var posts = ((IEnumerable<Post>)result.Model).ToList();
          posts.Count.Should().Be(2);
          posts[0].Slug.Should().Be("post2");
@@ -75,9 +76,9 @@ namespace Jane.Test
       }
 
       [TestMethod, TestCategory("UnitTest")]
-      public void List()
+      public async Task List()
       {
-         var viewResult = this.blogController.List() as ViewResult;
+         var viewResult = await this.blogController.List() as ViewResult;
          var results = viewResult.Model as IEnumerable<Post>;
          var posts = results.ToList();
          posts[0].Title.Should().Be("Post 6");
@@ -88,18 +89,18 @@ namespace Jane.Test
       }
 
       [TestMethod, TestCategory("UnitTest")]
-      public void GetRelatedBlogPostsOneMatchTag()
+      public async Task GetRelatedBlogPostsOneMatchTag()
       {
-         var viewResult = this.blogController.Related("post4") as PartialViewResult;
+         var viewResult = await this.blogController.Related("post4") as PartialViewResult;
          var posts = viewResult.Model as IEnumerable<Post>;
 
          posts.Should().HaveCount(1);
       }
 
       [TestMethod, TestCategory("UnitTest")]
-      public void GetRelatedBlogPostsMoreThanOneMatchTag()
+      public async Task GetRelatedBlogPostsMoreThanOneMatchTag()
       {
-         var viewResult = this.blogController.Related("post3") as PartialViewResult;
+         var viewResult = await this.blogController.Related("post3") as PartialViewResult;
          var posts = viewResult.Model as IEnumerable<Post>;
 
          var groups = posts.GroupBy(p => p.Title).ToList();
@@ -107,11 +108,11 @@ namespace Jane.Test
       }
 
       [TestMethod, TestCategory("UnitTest")]
-      public void FutureQuery()
+      public async Task FutureQuery()
       {
-         var viewResult = this.blogController.Future() as PartialViewResult;
+         var viewResult = await this.blogController.Future() as PartialViewResult;
          var posts = viewResult.Model as IEnumerable<FuturePost>;
-        
+
          posts.Should().HaveCount(1);
          posts.ToList()[0].GetExpectedWait(DateTime.Today).Should().Be("about 1 day");
       }

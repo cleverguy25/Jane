@@ -9,6 +9,7 @@ namespace Jane.Test
    using System.IO;
    using System.Linq;
    using System.Text;
+   using System.Threading.Tasks;
    using System.Xml.Linq;
 
    using FluentAssertions;
@@ -23,7 +24,7 @@ namespace Jane.Test
    public class FeedControllerTest
    {
       [TestMethod, TestCategory("UnitTest")]
-      public void Rss()
+      public async Task Rss()
       {
          var stringBuilder = new StringBuilder();
          var writer = new StringWriter(stringBuilder);
@@ -31,7 +32,7 @@ namespace Jane.Test
          var controller = new FeedController(postQueries);
          controller.SetupControllerContext(writer, "http://localhost/blog/rss");
 
-         controller.Rss();
+         await controller.Rss();
 
          controller.Response.ContentType.Should().Be("application/rss+xml");
          var document = XDocument.Parse(stringBuilder.ToString());
@@ -45,7 +46,7 @@ namespace Jane.Test
       }
 
       [TestMethod, TestCategory("UnitTest")]
-      public void RssByTag()
+      public async Task RssByTag()
       {
          var stringBuilder = new StringBuilder();
          var writer = new StringWriter(stringBuilder);
@@ -53,7 +54,7 @@ namespace Jane.Test
          var controller = new FeedController(postQueries);
          controller.SetupControllerContext(writer, "http://localhost/blog/rss");
 
-         controller.RssByTag("foo");
+         await controller.RssByTag("foo");
 
          controller.Response.ContentType.Should().Be("application/rss+xml");
          var document = XDocument.Parse(stringBuilder.ToString());
@@ -62,7 +63,7 @@ namespace Jane.Test
       }
 
       [TestMethod, TestCategory("UnitTest")]
-      public void Atom()
+      public async Task Atom()
       {
          var stringBuilder = new StringBuilder();
          var writer = new StringWriter(stringBuilder);
@@ -70,7 +71,7 @@ namespace Jane.Test
          var controller = new FeedController(postQueries);
          controller.SetupControllerContext(writer, "http://localhost/blog/atom");
 
-         controller.Atom();
+         await controller.Atom();
 
          controller.Response.ContentType.Should().Be("application/atom+xml");
          var document = XDocument.Parse(stringBuilder.ToString());
@@ -81,7 +82,7 @@ namespace Jane.Test
       }
 
       [TestMethod, TestCategory("UnitTest")]
-      public void AtomByTag()
+      public async Task AtomByTag()
       {
          var stringBuilder = new StringBuilder();
          var writer = new StringWriter(stringBuilder);
@@ -89,7 +90,7 @@ namespace Jane.Test
          var controller = new FeedController(postQueries);
          controller.SetupControllerContext(writer, "http://localhost/blog/atom");
 
-         controller.AtomByTag("foo");
+         await controller.AtomByTag("foo");
 
          controller.Response.ContentType.Should().Be("application/atom+xml");
          var document = XDocument.Parse(stringBuilder.ToString());
@@ -105,7 +106,7 @@ namespace Jane.Test
       }
 
       private static void CheckItem(
-         XElement item,
+         XContainer item,
          string title,
          string description,
          string link,

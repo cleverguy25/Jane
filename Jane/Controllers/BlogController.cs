@@ -8,13 +8,14 @@ namespace Jane.Controllers
    using System.Collections.Generic;
    using System.Linq;
    using System.Net;
+   using System.Threading.Tasks;
    using System.Web;
    using System.Web.Mvc;
 
    using Jane.Infrastructure.Interfaces;
    using Jane.Models;
 
-   public class BlogController : Controller
+   public class BlogController : AsyncController
    {
       private readonly IPostQueries postQueries;
 
@@ -26,15 +27,15 @@ namespace Jane.Controllers
          this.futureQueries = futureQueries;
       }
 
-      public ActionResult List()
+      public async Task<ActionResult> List()
       {
-         var posts = this.postQueries.GetRecentPosts();
+         var posts = await this.postQueries.GetRecentPostsAsync();
          return this.View(posts);
       }
 
-      public ActionResult GetBySlug(string slug)
+      public async Task<ActionResult> GetBySlug(string slug)
       {
-         var post = this.postQueries.GetPostBySlug(slug);
+         var post = await this.postQueries.GetPostBySlugAsync(slug);
          if (post == null)
          {
             throw new HttpException((int)HttpStatusCode.NotFound, "Slug not found.");
@@ -44,11 +45,11 @@ namespace Jane.Controllers
          return this.View(post);
       }
 
-      public ActionResult GetByTag(string tag)
+      public async Task<ActionResult> GetByTag(string tag)
       {
-         var posts = this.postQueries.GetPostsByTag(tag).ToList();
+         var posts = await this.postQueries.GetPostsByTagAsync(tag);
 
-         if (posts.Count == 0)
+         if (posts.Any())
          {
             this.ViewBag.Message = "No results found.";
          }
@@ -58,19 +59,21 @@ namespace Jane.Controllers
          return this.View(posts);
       }
 
-      public ActionResult Recent()
+      public async Task<ActionResult> Recent()
       {
-         var posts = this.postQueries.GetRecentPosts().Take(3);
+         var posts = await this.postQueries.GetRecentPostsAsync();
+
+         posts = posts.Take(3);
 
          this.ViewBag.Header = "Recent";
          return this.PartialView("PostListShort", posts);
       }
 
-      public ActionResult Related(string slug)
+      public async Task<ActionResult> Related(string slug)
       {
-         var post = this.postQueries.GetPostBySlug(slug);
+         var post = await this.postQueries.GetPostBySlugAsync(slug);
 
-         var posts = post == null ? new List<Post>() : this.postQueries.GetRelatedPosts(post).ToList();
+         var posts = post == null ? new List<Post>() : await this.postQueries.GetRelatedPostsAsync(post);
 
          if (posts.Any() == false)
          {
@@ -81,11 +84,11 @@ namespace Jane.Controllers
          return this.PartialView("PostListShort", posts);
       }
 
-      public ActionResult Future()
+      public async Task<ActionResult> Future()
       {
-         var posts = this.futureQueries.GetFuturePosts();
+         var posts = await this.futureQueries.GetFuturePostsAsync();
 
-         if (posts.Any() == true)
+         if (posts.Any())
          {
             this.ViewBag.Header = "Future";
          }

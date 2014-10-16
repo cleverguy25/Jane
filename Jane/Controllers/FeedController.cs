@@ -9,6 +9,7 @@ namespace Jane.Controllers
    using System;
    using System.Collections.Generic;
    using System.ServiceModel.Syndication;
+   using System.Threading.Tasks;
    using System.Web.Mvc;
    using System.Xml;
    using System.Xml.Linq;
@@ -17,7 +18,7 @@ namespace Jane.Controllers
    using Jane.Infrastructure.Interfaces;
    using Jane.Models;
 
-   public class FeedController : Controller
+   public class FeedController : AsyncController
    {
       private readonly IPostQueries postQueries;
       
@@ -49,33 +50,33 @@ namespace Jane.Controllers
                "{24A16C89-1865-4F40-802B-C717DEE14306}");
       }
 
-      public ActionResult Rss()
+      public async Task<ActionResult> Rss()
       {
-         var posts = this.postQueries.GetAllPosts();
+         var posts = await this.postQueries.GetAllPostsAsync();
 
          this.GenerateFeed(posts, (feed) => new Rss20FeedFormatter(feed), "application/rss+xml");
          return new ContentResult();
       }
 
-      public ActionResult RssByTag(string tag)
+      public async Task<ActionResult> RssByTag(string tag)
       {
-         var posts = this.postQueries.GetPostsByTag(tag);
+         var posts = await this.postQueries.GetPostsByTagAsync(tag);
 
          this.GenerateFeed(posts, (feed) => new Rss20FeedFormatter(feed), "application/rss+xml");
          return new ContentResult();
       }
 
-      public ActionResult Atom()
+      public async Task<ActionResult> Atom()
       {
-         var posts = this.postQueries.GetAllPosts();
+         var posts = await this.postQueries.GetAllPostsAsync();
 
          this.GenerateFeed(posts, (feed) => new Atom10FeedFormatter(feed), "application/atom+xml");
          return new ContentResult();
       }
 
-      public ActionResult AtomByTag(string tag)
+      public async Task<ActionResult> AtomByTag(string tag)
       {
-         var posts = this.postQueries.GetPostsByTag(tag);
+         var posts = await this.postQueries.GetPostsByTagAsync(tag);
 
          this.GenerateFeed(posts, (feed) => new Atom10FeedFormatter(feed), "application/atom+xml");
          return new ContentResult();

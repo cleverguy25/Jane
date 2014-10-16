@@ -11,13 +11,14 @@ namespace Jane.Infrastructure
    using System.Dynamic;
    using System.IO;
    using System.Linq;
+   using System.Threading.Tasks;
 
    using Jane.Infrastructure.Interfaces;
    using Jane.Models;
 
    using Newtonsoft.Json;
 
-   public class PostJsonStorage : ILoadStorage<Post>, ISaveStorage<Post>
+   public class PostJsonStorage : ILoadStorage<Post, Guid>, ISaveStorage<Post, Guid>
    {
       private readonly string path;
 
@@ -29,11 +30,11 @@ namespace Jane.Infrastructure
          this.postContentFactory = postContentFactory;
       }
 
-      public static ILoadStorage<Post> DefaultLoad { get; set; }
+      public static ILoadStorage<Post, Guid> DefaultLoad { get; set; }
 
-      public static ISaveStorage<Post> DefaultSave { get; set; }
+      public static ISaveStorage<Post, Guid> DefaultSave { get; set; }
 
-      public IEnumerable<Post> Load()
+      public Task<IEnumerable<Post>> LoadAsync()
       {
          var json = new JsonSerializer();
          using (var stream = new StreamReader(this.path))
@@ -44,50 +45,42 @@ namespace Jane.Infrastructure
                post.Content = this.postContentFactory(post);
             }
 
-            return posts;
+            return Task.FromResult(posts.AsEnumerable());
          }
       }
 
-      public Post Load(string id)
+      public async Task<Post> LoadAsync(Guid id)
       {
-         var postGuid = ConvertPostIdToGuid(id);
-         return this.Load().FirstOrDefault(post => post.Guid == postGuid);
+         var items = await this.LoadAsync();
+         return items.FirstOrDefault(post => post.Guid == id);
       }
-      
-      public void Add(Post item)
+
+      public async Task<Guid> AddAsync(Post item)
       {
-         var posts = this.Load().ToList();
+         var items = await this.LoadAsync();
+         var posts = items.ToList();
          posts.Add(item);
          SaveContent(item);
          this.Save(posts);
+         return item.Guid;
       }
 
-      public void Update(Post item)
+      public async Task UpdateAsync(Post item)
       {
-         var posts = this.Load().ToList();
+         var items = await this.LoadAsync();
+         var posts = items.ToList();
          var index = posts.FindIndex(post => post.Guid == item.Guid);
          posts[index] = item;
          SaveContent(item);
          this.Save(posts);
       }
 
-      public void Delete(string id)
+      public async Task DeleteAsync(Guid id)
       {
-         var postGuid = ConvertPostIdToGuid(id);
-         var posts = this.Load().ToList();
-         posts.RemoveAll(post => post.Guid == postGuid);
+         var items = await this.LoadAsync();
+         var posts = items.ToList();
+         posts.RemoveAll(post => post.Guid == id);
          this.Save(posts);
-      }
-
-      private static Guid ConvertPostIdToGuid(string postid)
-      {
-         Guid postGuid;
-         if (Guid.TryParse(postid, out postGuid) == false)
-         {
-            throw new ArgumentException("postid should be a guid.", "postid");
-         }
-
-         return postGuid;
       }
 
       private static void SaveContent(Post post)

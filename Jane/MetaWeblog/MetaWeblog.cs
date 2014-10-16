@@ -21,13 +21,15 @@ namespace Jane.MetaWeblog
    using Jane.Infrastructure;
    using Jane.Infrastructure.Interfaces;
 
+   using Microsoft.Ajax.Utilities;
+
    public class MetaWeblog : XmlRpcService, IMetaWeblog
    {
-      private readonly ILoadStorage<Models.Post> loadStorage;
+      private readonly ILoadStorage<Models.Post, Guid> loadStorage;
 
-      private readonly ISaveStorage<Models.Post> saveStorage;
+      private readonly ISaveStorage<Models.Post, Guid> saveStorage;
 
-      public MetaWeblog(ILoadStorage<Models.Post> loadStorage, ISaveStorage<Models.Post> saveStorage)
+      public MetaWeblog(ILoadStorage<Models.Post, Guid> loadStorage, ISaveStorage<Models.Post, Guid> saveStorage)
       {
          this.loadStorage = loadStorage;
          this.saveStorage = saveStorage;
@@ -42,7 +44,10 @@ namespace Jane.MetaWeblog
             throw new XmlRpcFaultException(0, "Slug cannot be empty.");
          }
 
-         if (this.loadStorage.Load().Any(p => p.Slug == newPost.wp_slug))
+         var task = this.loadStorage.LoadAsync();
+         task.Wait();
+         var posts = task.Result;
+         if (posts.Any(p => p.Slug == newPost.wp_slug))
          {
             throw new XmlRpcFaultException(0, "That slug has already been used, please pick a new one.");
          }
@@ -62,7 +67,8 @@ namespace Jane.MetaWeblog
          post.Content = new LocalPostContent(post, ContentPath);
          post.Content.SetContent(newPost.description);
 
-         this.saveStorage.Add(post);
+         var addTask = this.saveStorage.AddAsync(post);
+         addTask.Wait();
          return post.Guid.ToString();
       }
 
@@ -73,8 +79,10 @@ namespace Jane.MetaWeblog
             throw new XmlRpcFaultException(0, "Slug cannot be empty.");
          }
 
-         VerifyGuid(postid);
-         var post = this.loadStorage.Load(postid);
+         var postGuid = VerifyGuid(postid);
+         var task = this.loadStorage.LoadAsync(postGuid);
+         task.Wait();
+         var post = task.Result;
 
          if (post == null)
          {
@@ -89,22 +97,26 @@ namespace Jane.MetaWeblog
          post.PublishedDate = updatedPost.dateCreated.GetValueOrDefault(DateTime.Today);
          post.UpdatedDate = DateTime.Today;
          post.Content.SetContent(updatedPost.description);
-         this.saveStorage.Update(post);
+         var updateTask = this.saveStorage.UpdateAsync(post);
+         updateTask.Wait();
 
          return true;
       }
 
       bool IMetaWeblog.DeletePost(string key, string postid, string username, string password, bool publish)
       {
-         VerifyGuid(key);
-         this.saveStorage.Delete(key);
+         var postGuid = VerifyGuid(key);
+         var task = this.saveStorage.DeleteAsync(postGuid);
+         task.Wait();
          return true;
       }
 
       Post IMetaWeblog.GetPost(string postid, string username, string password)
       {
-         VerifyGuid(postid);
-         var post = this.loadStorage.Load(postid);
+         var postGuid = VerifyGuid(postid);
+         var task = this.loadStorage.LoadAsync(postGuid);
+         task.Wait();
+         var post = task.Result;
 
          if (post == null)
          {
@@ -116,7 +128,9 @@ namespace Jane.MetaWeblog
 
       Post[] IMetaWeblog.GetRecentPosts(string blogid, string username, string password, int numberOfPosts)
       {
-         var posts = from post in this.loadStorage.Load()
+         var task = this.loadStorage.LoadAsync();
+         task.Wait();
+         var posts = from post in task.Result
                      orderby post.PublishedDate descending
                      select MapPostToRpcObject(post);
 
@@ -126,7 +140,9 @@ namespace Jane.MetaWeblog
       object[] IMetaWeblog.GetCategories(string blogid, string username, string password)
       {
          var list = new List<object>();
-         var categories = this.loadStorage.Load().SelectMany(p => p.Tags);
+         var task = this.loadStorage.LoadAsync();
+         task.Wait();
+         var categories = task.Result.SelectMany(p => p.Tags);
 
          foreach (var category in categories.Distinct())
          {
@@ -169,13 +185,15 @@ namespace Jane.MetaWeblog
                    };
       }
 
-      private static void VerifyGuid(string postid)
+      private static Guid VerifyGuid(string postid)
       {
          Guid postGuid;
          if (Guid.TryParse(postid, out postGuid) == false)
          {
             throw new XmlRpcFaultException(0, "Post ID should be a Guid.");
          }
+
+         return postGuid;
       }
 
       private static Post MapPostToRpcObject(Models.Post post)

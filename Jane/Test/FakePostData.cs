@@ -8,6 +8,8 @@ namespace Jane.Test
 {
    using System;
    using System.Collections.Generic;
+   using System.Linq;
+   using System.Threading.Tasks;
 
    using Jane.Infrastructure.Interfaces;
    using Jane.Models;
@@ -86,10 +88,10 @@ namespace Jane.Test
                }
          };
 
-      public static ILoadStorage<Post> GetStorage()
+      public static ILoadStorage<Post, Guid> GetStorage()
       {
-         var mock = new Mock<ILoadStorage<Post>>();
-         mock.Setup(storage => storage.Load()).Returns(Posts);
+         var mock = new Mock<ILoadStorage<Post, Guid>>();
+         mock.Setup(storage => storage.LoadAsync()).Returns(Task.FromResult(Posts.AsEnumerable()));
          return mock.Object;
       }
    }

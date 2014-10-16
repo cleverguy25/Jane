@@ -9,7 +9,9 @@ namespace Jane.Test
    using System.IO;
    using System.Linq;
    using System.Reflection;
+   using System.Runtime.InteropServices;
    using System.Runtime.Remoting.Messaging;
+   using System.Threading.Tasks;
 
    using FluentAssertions;
 
@@ -34,13 +36,14 @@ namespace Jane.Test
       }
 
       [TestMethod, TestCategory("UnitTest")]
-      public void LoadPostJsonFile()
+      public async Task LoadPostJsonFile()
       {
          var postContent = new Mock<IPostContent>();
          var path = GetPath("posts.json");
          var postQueries = new PostQueries(new PostJsonStorage(path, (post) => postContent.Object));
 
-         var posts = postQueries.GetRecentPosts().ToList();
+         var items = await postQueries.GetRecentPostsAsync();
+         var posts = items.ToList();
          posts.Should().HaveCount(3);
 
          // Test random properties
@@ -49,12 +52,13 @@ namespace Jane.Test
       }
 
       [TestMethod, TestCategory("UnitTest")]
-      public void LoadFuturePostJsonFile()
+      public async Task LoadFuturePostJsonFile()
       {
          var path = GetPath("future.json");
-         var postQueries = new FuturePostQueries(new JsonStorage<FuturePost>(path, null));
+         var postQueries = new FuturePostQueries(new JsonStorage<FuturePost, string>(path, null));
 
-         var posts = postQueries.GetFuturePosts().ToList();
+         var items = await postQueries.GetFuturePostsAsync();
+         var posts = items.ToList();
          posts.Should().HaveCount(2);
 
          // Test random properties
@@ -64,12 +68,14 @@ namespace Jane.Test
       }
 
       [TestMethod, TestCategory("UnitTest")]
-      public void LoadNavigationJsonFile()
+      public async Task LoadNavigationJsonFile()
       {
          var path = GetPath("topnav.json");
-         var queries = new NavigationQueries(new JsonStorage<NavigationItem>(path, null));
+         var queries = new NavigationQueries(new JsonStorage<NavigationItem, string>(path, null));
 
-         var posts = queries.GetNavigationItems().ToList();
+         var items = await queries.GetNavigationItemsAsync();
+         var posts = items.ToList();
+
          posts.Should().HaveCount(4);
 
          // Test random properties
@@ -79,12 +85,12 @@ namespace Jane.Test
       }
 
       [TestMethod, TestCategory("UnitTest")]
-      public void DisposesStreamReaderCorrectlyAfterException()
+      public async Task DisposesStreamReaderCorrectlyAfterException()
       {
          var path = GetPath("postserror.json");
          try
          {
-            new PostJsonStorage(path, (post) => null).Load();
+            await new PostJsonStorage(path, (post) => null).LoadAsync();
          }
          catch (JsonReaderException)
          {
