@@ -13,15 +13,20 @@ namespace Jane.MetaWeblog
    using System.Linq;
    using System.Runtime.Remoting.Channels;
    using System.Security.Policy;
+   using System.ServiceModel.Security;
    using System.Web;
    using System.Web.Hosting;
 
    using CookComputing.XmlRpc;
 
+   using Jane.Identity;
    using Jane.Infrastructure;
    using Jane.Infrastructure.Interfaces;
 
    using Microsoft.Ajax.Utilities;
+   using Microsoft.AspNet.Identity;
+   using Microsoft.AspNet.Identity.Owin;
+   using Microsoft.Owin.Security;
 
    public class MetaWeblog : XmlRpcService, IMetaWeblog
    {
@@ -34,12 +39,23 @@ namespace Jane.MetaWeblog
 
       public static string ContentPath { get; set; }
 
+      public JaneSignInManager SignInManager
+      {
+         get
+         {
+            var context = new HttpContextWrapper(HttpContext.Current);
+            return context.GetOwinContext().Get<JaneSignInManager>();
+         }
+      }
+      
       string IMetaWeblog.AddPost(string blogid, string username, string password, Post newPost, bool publish)
       {
          if (string.IsNullOrEmpty(newPost.wp_slug))
          {
             throw new XmlRpcFaultException(0, "Slug cannot be empty.");
          }
+
+         this.ValidateSignIn(username, password);
 
          var task = this.storage.LoadAsync();
          task.Wait();
@@ -76,6 +92,8 @@ namespace Jane.MetaWeblog
             throw new XmlRpcFaultException(0, "Slug cannot be empty.");
          }
 
+         this.ValidateSignIn(username, password);
+
          var postGuid = VerifyGuid(postid);
          var task = this.storage.LoadAsync(postGuid);
          task.Wait();
@@ -102,6 +120,8 @@ namespace Jane.MetaWeblog
 
       bool IMetaWeblog.DeletePost(string key, string postid, string username, string password, bool publish)
       {
+         this.ValidateSignIn(username, password);
+
          var postGuid = VerifyGuid(key);
          var task = this.storage.DeleteAsync(postGuid);
          task.Wait();
@@ -110,6 +130,8 @@ namespace Jane.MetaWeblog
 
       Post IMetaWeblog.GetPost(string postid, string username, string password)
       {
+         this.ValidateSignIn(username, password);
+
          var postGuid = VerifyGuid(postid);
          var task = this.storage.LoadAsync(postGuid);
          task.Wait();
@@ -125,6 +147,8 @@ namespace Jane.MetaWeblog
 
       Post[] IMetaWeblog.GetRecentPosts(string blogid, string username, string password, int numberOfPosts)
       {
+         this.ValidateSignIn(username, password);
+
          var task = this.storage.LoadAsync();
          task.Wait();
          var posts = from post in task.Result
@@ -136,6 +160,8 @@ namespace Jane.MetaWeblog
 
       object[] IMetaWeblog.GetCategories(string blogid, string username, string password)
       {
+         this.ValidateSignIn(username, password);
+
          var list = new List<object>();
          var task = this.storage.LoadAsync();
          task.Wait();
@@ -151,6 +177,8 @@ namespace Jane.MetaWeblog
 
       object IMetaWeblog.NewMediaObject(string blogid, string username, string password, MediaObject media)
       {
+         this.ValidateSignIn(username, password);
+
          var extension = Path.GetExtension(media.name);
          if (extension == null)
          {
@@ -171,6 +199,8 @@ namespace Jane.MetaWeblog
 
       object[] IMetaWeblog.GetUsersBlogs(string key, string username, string password)
       {
+         this.ValidateSignIn(username, password);
+
          return new object[]
                    {
                       new
@@ -204,6 +234,21 @@ namespace Jane.MetaWeblog
                       postid = post.Guid.ToString(), 
                       categories = post.Tags.ToArray()
                    };
+      }
+
+      private void ValidateSignIn(string userName, string password)
+      {
+         if (HttpContext.Current.Request.IsSecureConnection == false)
+         {
+            throw new SecurityAccessDeniedException("Requires HTTPS.");
+         }
+
+         var task = this.SignInManager.PasswordSignInAsync(userName, password, false, shouldLockout: false);
+         task.Wait();
+         if (task.Result != SignInStatus.Success)
+         {
+            throw new SecurityAccessDeniedException("Invalid UserName and/or Password");
+         }
       }
    }
 }
