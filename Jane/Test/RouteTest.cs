@@ -135,5 +135,47 @@ namespace Jane.Test
       {
          this.routes.AssertRoute("~/robots.txt", new { controller = "Seo", action = "Robots" });
       }
+
+      [TestMethod, TestCategory("UnitTest")]
+      public void AccountLoginRoute()
+      {
+         this.routes.AssertRoute("~/account/login", new { controller = "Account", action = "Login" });
+      }
+
+      [TestMethod, TestCategory("UnitTest")]
+      public void AccountLogoffRoute()
+      {
+         this.routes.AssertRoute("~/account/logoff", new { controller = "Account", action = "Logoff" });
+      }
+
+      [TestMethod, TestCategory("UnitTest")]
+      public void AccountRegisterRoute()
+      {
+         this.routes.AssertRoute("~/account/register", new { controller = "Account", action = "Register" });
+      }
+
+      [TestMethod, TestCategory("UnitTest")]
+      public void AccountExternalLoginRoute()
+      {
+         this.routes.AssertRoute("~/account/externallogin", new { controller = "Account", action = "ExternalLogin" });
+      }
+
+      [TestMethod, TestCategory("UnitTest")]
+      public void AccountExternalLoginCallbackRoute()
+      {
+         this.routes.AssertRoute("~/account/externallogincallback", new { controller = "Account", action = "ExternalLoginCallback" });
+      }
+
+      [TestMethod, TestCategory("UnitTest")]
+      public void AccountExternalLoginConfirmationRoute()
+      {
+         this.routes.AssertRoute("~/account/externalloginconfirmation", new { controller = "Account", action = "ExternalLoginConfirmation" });
+      }
+
+      [TestMethod, TestCategory("UnitTest")]
+      public void AccountExternalLoginFailureRoute()
+      {
+         this.routes.AssertRoute("~/account/externalloginfailure", new { controller = "Account", action = "ExternalLoginFailure" });
+      }
    }
 }

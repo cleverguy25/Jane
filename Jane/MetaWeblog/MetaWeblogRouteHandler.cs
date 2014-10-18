@@ -6,16 +6,19 @@
 
 namespace Jane.MetaWeblog
 {
+   using System;
    using System.Web;
    using System.Web.Routing;
 
    using Jane.Infrastructure;
+   using Jane.Infrastructure.Interfaces;
 
    public class MetaWeblogRouteHandler : IRouteHandler
    {
       public IHttpHandler GetHttpHandler(RequestContext requestContext)
       {
-         return new MetaWeblog(PostJsonStorage.DefaultLoad, PostJsonStorage.DefaultSave);
+         var storage = JaneDependencies.Container.GetInstance<IStorage<Models.Post, Guid>>();
+         return new MetaWeblog(storage);
       }
    }
 }

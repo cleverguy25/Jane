@@ -1,11 +1,12 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="JsonFactoryTest.cs" company="Jane OSS">
+// <copyright file="JsonStorageTest.cs" company="Jane OSS">
 //   Copyright (c) Jane Contributors
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 namespace Jane.Test
 {
    using System;
+   using System.CodeDom;
    using System.IO;
    using System.Linq;
    using System.Reflection;
@@ -15,6 +16,7 @@ namespace Jane.Test
 
    using FluentAssertions;
 
+   using Jane.Identity.Models;
    using Jane.Infrastructure;
    using Jane.Models;
 
@@ -25,7 +27,7 @@ namespace Jane.Test
    using Newtonsoft.Json;
 
    [TestClass]
-   public class JsonFactoryTest
+   public class JsonStorageTest
    {
       public static string GetPath(string fileName)
       {
@@ -82,6 +84,31 @@ namespace Jane.Test
          posts[0].Name.Should().Be("Home");
          posts[1].IconClass.Should().Be("fi-social-twitter");
          posts[3].Url.Should().Be("~/blog/rss");
+      }
+
+      [TestMethod, TestCategory("UnitTest")]
+      public async Task JsonStorageAddThenUpdateThenDelete()
+      {
+         var path = GetPath("data.json");
+         var storage = new JsonStorage<User, Guid>(path, (user) => user.Id);
+
+         var id = Guid.NewGuid();
+         const string Email = "asdf@asdf.com";
+         await storage.AddAsync(new User() { Id = id, Email = Email });
+         var item = await storage.LoadAsync(id);
+
+         item.Email.Should().Be(Email);
+
+         const string Email2 = "test@test.com";
+         item.Email = Email2;
+         await storage.UpdateAsync(item);
+         var item2 = await storage.LoadAsync(id);
+         item2.Email.Should().Be(Email2);
+
+         await storage.DeleteAsync(id);
+
+         var item3 = await storage.LoadAsync(id);
+         item3.Should().BeNull();
       }
 
       [TestMethod, TestCategory("UnitTest")]

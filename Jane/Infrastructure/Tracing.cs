@@ -31,5 +31,13 @@ namespace Jane.Infrastructure
       {
          this.WriteEvent(1, correlationId, controllerName, action, exceptionMessage, fullError);
       }
+
+      [Event(2, Message = "Load Social Providers Error", Level = EventLevel.Error)]
+      public void LoadSocialProvidersError(
+         string exceptionMessage,
+         string fullError)
+      {
+         this.WriteEvent(2, exceptionMessage, fullError);
+      }
    }
 }

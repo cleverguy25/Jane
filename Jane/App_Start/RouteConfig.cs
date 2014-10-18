@@ -39,9 +39,37 @@ namespace Jane
 
          routes.MapRoute("Home", string.Empty, new { controller = "Blog", action = "List" });
 
+         RegisterAccountRoutes(routes);
+
          routes.Add(new Route("metaweblogapi", null, null, new MetaWeblogRouteHandler()));
 
          routes.MapRoute("404", "{*url}", new { controller = "Error", action = "NotFound" });
+      }
+
+      private static void RegisterAccountRoutes(RouteCollection routes)
+      {
+         routes.MapRoute("Login", "Account/Login", new { controller = "Account", action = "Login" });
+
+         routes.MapRoute("Register", "Account/Register", new { controller = "Account", action = "Register" });
+
+         routes.MapRoute("LogOff", "Account/LogOff", new { controller = "Account", action = "LogOff" });
+
+         routes.MapRoute("ExternalLogin", "Account/ExternalLogin", new { controller = "Account", action = "ExternalLogin" });
+
+         routes.MapRoute(
+            "ExternalLoginCallback",
+            "Account/ExternalLoginCallback",
+            new { controller = "Account", action = "ExternalLoginCallback" });
+
+         routes.MapRoute(
+            "ExternalLoginConfirmation",
+            "Account/ExternalLoginConfirmation",
+            new { controller = "Account", action = "ExternalLoginConfirmation" });
+
+         routes.MapRoute(
+            "ExternalLoginFailure",
+            "Account/ExternalLoginFailure",
+            new { controller = "Account", action = "ExternalLoginFailure" });
       }
 
       private static void RegisterBlogRoutes(RouteCollection routes)

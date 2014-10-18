@@ -1,0 +1,41 @@
+﻿@model Jane.Identity.ViewModels.ExternalLoginListViewModel
+@using Microsoft.Owin.Security
+
+@if (Model.AuthenticationTypes.Any())
+{
+    <h4>Social log in.</h4>
+    <hr />
+}
+
+@using (Html.BeginForm("ExternalLogin", "Account", new { Model.ReturnUrl }))
+{
+    @Html.AntiForgeryToken()
+    <div class="row">
+    @foreach (var type in Model.AuthenticationTypes)
+    {
+        <div class="medium-6 columns">
+            <button type="submit" class="button small social" id="@type.AuthenticationType" name="provider" value="@type.AuthenticationType" title="Log in using your @type.Caption account"><div class="icon"><i class="@GetLoginIcon(type.AuthenticationType) hide-for-small"></i></div>@type.AuthenticationType.ToLowerInvariant()</button>    
+        </div>
+    }
+    </div>
+}
+
+@functions
+{
+    public string GetLoginIcon(string provider)
+    {
+        switch (provider.ToLowerInvariant())
+        {
+            case "google":
+                return "fi-social-google-plus";
+            case "facebook":
+                return "fi-social-facebook";
+            case "twitter":
+                return "fi-social-twitter";
+            case "microsoft":
+                return "fi-social-windows";
+            default:
+                return string.Empty;
+        }
+    }
+}

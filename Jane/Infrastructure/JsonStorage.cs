@@ -17,16 +17,18 @@ namespace Jane.Infrastructure
 
    using Newtonsoft.Json;
 
-   public class JsonStorage<TModel, TKey> : ILoadStorage<TModel, TKey> where TModel : class 
+   public class JsonStorage<TModel, TKey> : IStorage<TModel, TKey> where TModel : class 
    {
       private readonly string path;
 
-      private readonly Func<TKey, TModel, bool> findItem;
+      private readonly Func<TModel, TKey> getKey;
 
-      public JsonStorage(string path, Func<TKey, TModel, bool> findItem)
+      public JsonStorage(string path, Func<TModel, TKey> getKey)
       {
+         Contract.Requires(getKey != null);
+
          this.path = path;
-         this.findItem = findItem;
+         this.getKey = getKey;
       }
 
       public Task<IEnumerable<TModel>> LoadAsync()
@@ -42,13 +44,65 @@ namespace Jane.Infrastructure
 
       public async Task<TModel> LoadAsync(TKey id)
       {
-         if (this.findItem == null)
+         if (this.getKey == null)
          {
             return (TModel)null;
          }
 
          var items = await this.LoadAsync();
-         return items.FirstOrDefault(item => this.findItem(id, item));
+         return items.FirstOrDefault(item => this.getKey(item).Equals(id));
+      }
+
+      public async Task<TKey> AddAsync(TModel item)
+      {
+         await this.AddOrUpdate(item);
+         return this.getKey(item);
+      }
+
+      public async Task UpdateAsync(TModel item)
+      {
+         await this.AddOrUpdate(item);
+      }
+
+      public async Task DeleteAsync(TKey id)
+      {
+         var result = await this.LoadAsync();
+         var items = result.ToList();
+         items.RemoveAll(i => this.getKey(i).Equals(id));
+         this.Save(items);
+      }
+
+      private async Task AddOrUpdate(TModel item)
+      {
+         var items = await this.GetItems();
+         var id = this.getKey(item);
+         var index = items.FindIndex(i => this.getKey(i).Equals(id));
+         if (index >= 0)
+         {
+            items[index] = item;
+         }
+         else
+         {
+            items.Add(item);
+         }
+
+         this.Save(items);
+      }
+
+      private void Save(IEnumerable<TModel> items)
+      {
+         var json = new JsonSerializer();
+         using (var stream = new StreamWriter(this.path))
+         {
+            json.Serialize(stream, items);
+         }
+      }
+
+      private async Task<List<TModel>> GetItems()
+      {
+         var result = await this.LoadAsync();
+         var items = result.ToList();
+         return items;
       }
    }
 }

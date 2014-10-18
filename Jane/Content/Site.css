@@ -13092,7 +13092,7 @@ footer {
   position: absolute;
   left: 0;
   bottom: 0;
-  height: 4.5rem;
+  height: 5rem;
   width: 100%;
   border-top: solid 3px #49617F;
   background-color: white;
@@ -13109,7 +13109,7 @@ body.error {
 
 body {
   background-image: url(Images/bg2.png);
-  padding: 0 0 5.5rem;
+  padding: 0 0 6rem;
   height: auto;
   min-height: 100%; }
 
@@ -13172,6 +13172,14 @@ img.avatar {
   border: solid 2px;
   border-radius: 4px;
   text-align: center; }
+
+button.social div.icon {
+  display: block;
+  width: 30px;
+  margin: auto;
+  margin-bottom: 0.1rem; }
+button.social i {
+  font-size: 1.5rem; }
 
 .post {
   display: block; }

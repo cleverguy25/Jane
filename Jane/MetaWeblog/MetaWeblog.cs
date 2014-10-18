@@ -25,14 +25,11 @@ namespace Jane.MetaWeblog
 
    public class MetaWeblog : XmlRpcService, IMetaWeblog
    {
-      private readonly ILoadStorage<Models.Post, Guid> loadStorage;
+      private readonly IStorage<Models.Post, Guid> storage;
 
-      private readonly ISaveStorage<Models.Post, Guid> saveStorage;
-
-      public MetaWeblog(ILoadStorage<Models.Post, Guid> loadStorage, ISaveStorage<Models.Post, Guid> saveStorage)
+      public MetaWeblog(IStorage<Models.Post, Guid> storage)
       {
-         this.loadStorage = loadStorage;
-         this.saveStorage = saveStorage;
+         this.storage = storage;
       }
 
       public static string ContentPath { get; set; }
@@ -44,7 +41,7 @@ namespace Jane.MetaWeblog
             throw new XmlRpcFaultException(0, "Slug cannot be empty.");
          }
 
-         var task = this.loadStorage.LoadAsync();
+         var task = this.storage.LoadAsync();
          task.Wait();
          var posts = task.Result;
          if (posts.Any(p => p.Slug == newPost.wp_slug))
@@ -67,7 +64,7 @@ namespace Jane.MetaWeblog
          post.Content = new LocalPostContent(post, ContentPath);
          post.Content.SetContent(newPost.description);
 
-         var addTask = this.saveStorage.AddAsync(post);
+         var addTask = this.storage.AddAsync(post);
          addTask.Wait();
          return post.Guid.ToString();
       }
@@ -80,7 +77,7 @@ namespace Jane.MetaWeblog
          }
 
          var postGuid = VerifyGuid(postid);
-         var task = this.loadStorage.LoadAsync(postGuid);
+         var task = this.storage.LoadAsync(postGuid);
          task.Wait();
          var post = task.Result;
 
@@ -97,7 +94,7 @@ namespace Jane.MetaWeblog
          post.PublishedDate = updatedPost.dateCreated.GetValueOrDefault(DateTime.Today);
          post.UpdatedDate = DateTime.Today;
          post.Content.SetContent(updatedPost.description);
-         var updateTask = this.saveStorage.UpdateAsync(post);
+         var updateTask = this.storage.UpdateAsync(post);
          updateTask.Wait();
 
          return true;
@@ -106,7 +103,7 @@ namespace Jane.MetaWeblog
       bool IMetaWeblog.DeletePost(string key, string postid, string username, string password, bool publish)
       {
          var postGuid = VerifyGuid(key);
-         var task = this.saveStorage.DeleteAsync(postGuid);
+         var task = this.storage.DeleteAsync(postGuid);
          task.Wait();
          return true;
       }
@@ -114,7 +111,7 @@ namespace Jane.MetaWeblog
       Post IMetaWeblog.GetPost(string postid, string username, string password)
       {
          var postGuid = VerifyGuid(postid);
-         var task = this.loadStorage.LoadAsync(postGuid);
+         var task = this.storage.LoadAsync(postGuid);
          task.Wait();
          var post = task.Result;
 
@@ -128,7 +125,7 @@ namespace Jane.MetaWeblog
 
       Post[] IMetaWeblog.GetRecentPosts(string blogid, string username, string password, int numberOfPosts)
       {
-         var task = this.loadStorage.LoadAsync();
+         var task = this.storage.LoadAsync();
          task.Wait();
          var posts = from post in task.Result
                      orderby post.PublishedDate descending
@@ -140,7 +137,7 @@ namespace Jane.MetaWeblog
       object[] IMetaWeblog.GetCategories(string blogid, string username, string password)
       {
          var list = new List<object>();
-         var task = this.loadStorage.LoadAsync();
+         var task = this.storage.LoadAsync();
          task.Wait();
          var categories = task.Result.SelectMany(p => p.Tags);
 

@@ -27,6 +27,14 @@ namespace Jane
          jquery.CdnFallbackExpression = "window.jQuery";
          bundles.Add(jquery);
 
+         var jqueryValidate =
+            new ScriptBundle(
+               "~/bundles/jqueryval",
+               "//ajax.aspnetcdn.com/ajax/jquery.validate/1.13.0/jquery.validate.min.js").Include(
+                  "~/Scripts/jquery.validate*");
+         jqueryValidate.CdnFallbackExpression = "$().validate";
+         bundles.Add(jqueryValidate);
+
          var modernizr = new ScriptBundle("~/bundles/modernizr", "http://ajax.aspnetcdn.com/ajax/modernizr/modernizr-2.6.2.js").Include("~/Scripts/modernizr-*");
          modernizr.CdnFallbackExpression = "window.Modernizr";
          bundles.Add(modernizr);

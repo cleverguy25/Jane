@@ -18,7 +18,7 @@ namespace Jane.Infrastructure
 
    using Newtonsoft.Json;
 
-   public class PostJsonStorage : ILoadStorage<Post, Guid>, ISaveStorage<Post, Guid>
+   public class PostJsonStorage : IStorage<Post, Guid>
    {
       private readonly string path;
 
@@ -29,10 +29,6 @@ namespace Jane.Infrastructure
          this.path = path;
          this.postContentFactory = postContentFactory;
       }
-
-      public static ILoadStorage<Post, Guid> DefaultLoad { get; set; }
-
-      public static ISaveStorage<Post, Guid> DefaultSave { get; set; }
 
       public Task<IEnumerable<Post>> LoadAsync()
       {
