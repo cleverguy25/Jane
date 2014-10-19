@@ -1,0 +1,40 @@
+﻿@model Jane.Identity.ViewModels.ManageLoginsViewModel
+
+<div class="row">
+    @if (Model.CurrentLogins.Any())
+    {
+        <div class="medium-6 columns">
+            <h4>Registered Logins</h4>
+            @foreach (var account in Model.CurrentLogins)
+            {
+                if (ViewBag.ShowRemoveButton)
+                {
+                    using (Html.BeginForm("RemoveLogin", "Account"))
+                    {
+                        @Html.AntiForgeryToken()
+                        <div>
+                            @Html.Hidden("loginProvider", account.LoginProvider)
+                            @Html.Hidden("providerKey", account.ProviderKey)
+                            <input type="submit" class="button small" value="Remove @account.LoginProvider" title="Remove this @account.LoginProvider login from your account" />
+                        </div>
+                    }
+                }
+                else
+                {
+                    <div>@account.LoginProvider</div>
+                }
+            }
+        </div>
+    }
+    @if (Model.OtherLogins.Any())
+    {
+        <div class="medium-6 columns">
+            <h4>Add another log in</h4>
+            @using (Html.BeginForm("LinkLogin", "Account"))
+            {
+                @Html.AntiForgeryToken()
+                @Html.Partial("ExternalLoginsList", Model.OtherLogins)
+            }
+        </div>
+    }
+</div>

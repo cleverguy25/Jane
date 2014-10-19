@@ -50,26 +50,29 @@ namespace Jane
       {
          routes.MapRoute("Login", "Account/Login", new { controller = "Account", action = "Login" });
 
+         routes.MapRoute("LogOff", "Account/LogOff", new { controller = "Account", action = "LogOff" });
+
          routes.MapRoute("Register", "Account/Register", new { controller = "Account", action = "Register" });
 
-         routes.MapRoute("LogOff", "Account/LogOff", new { controller = "Account", action = "LogOff" });
+         routes.MapRoute("Manage", "Account/Manage", new { controller = "Account", action = "Manage" });
+
+         routes.MapRoute("ManageLogins", "Account/ManageLogins", new { controller = "Account", action = "ManageLogins" });
+
+         routes.MapRoute("SetPassword", "Account/SetPassword", new { controller = "Account", action = "SetPassword" });
+
+         routes.MapRoute("LinkLogin", "Account/LinkLogin", new { controller = "Account", action = "LinkLogin" });
+
+         routes.MapRoute("LinkLoginCallback", "Account/LinkLoginCallback", new { controller = "Account", action = "LinkLoginCallback" });
+
+         routes.MapRoute("RemoveLogin", "Account/RemoveLogin", new { controller = "Account", action = "RemoveLogin" });
 
          routes.MapRoute("ExternalLogin", "Account/ExternalLogin", new { controller = "Account", action = "ExternalLogin" });
 
-         routes.MapRoute(
-            "ExternalLoginCallback",
-            "Account/ExternalLoginCallback",
-            new { controller = "Account", action = "ExternalLoginCallback" });
+         routes.MapRoute("ExternalLoginCallback", "Account/ExternalLoginCallback", new { controller = "Account", action = "ExternalLoginCallback" });
 
-         routes.MapRoute(
-            "ExternalLoginConfirmation",
-            "Account/ExternalLoginConfirmation",
-            new { controller = "Account", action = "ExternalLoginConfirmation" });
+         routes.MapRoute("ExternalLoginConfirmation", "Account/ExternalLoginConfirmation", new { controller = "Account", action = "ExternalLoginConfirmation" });
 
-         routes.MapRoute(
-            "ExternalLoginFailure",
-            "Account/ExternalLoginFailure",
-            new { controller = "Account", action = "ExternalLoginFailure" });
+         routes.MapRoute("ExternalLoginFailure", "Account/ExternalLoginFailure", new { controller = "Account", action = "ExternalLoginFailure" });
       }
 
       private static void RegisterBlogRoutes(RouteCollection routes)

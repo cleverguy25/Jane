@@ -1,0 +1,13 @@
+﻿@model Jane.Identity.ViewModels.ExternalLoginListViewModel
+
+@if (Model.AuthenticationTypes.Any())
+{
+    <h4>Social log in.</h4>
+    <hr />
+
+    using (Html.BeginForm("ExternalLogin", "Account", new { Model.ReturnUrl }))
+    {
+        @Html.AntiForgeryToken()
+        @Html.Partial("ExternalLoginsList", Model.AuthenticationTypes)
+    }
+}

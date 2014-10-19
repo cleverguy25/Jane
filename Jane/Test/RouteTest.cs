@@ -153,6 +153,42 @@ namespace Jane.Test
       {
          this.routes.AssertRoute("~/account/register", new { controller = "Account", action = "Register" });
       }
+      
+      [TestMethod, TestCategory("UnitTest")]
+      public void AccountManageRoute()
+      {
+         this.routes.AssertRoute("~/account/manage", new { controller = "Account", action = "Manage" });
+      }
+
+      [TestMethod, TestCategory("UnitTest")]
+      public void AccountManageLoginsRoute()
+      {
+         this.routes.AssertRoute("~/account/managelogins", new { controller = "Account", action = "ManageLogins" });
+      }
+
+      [TestMethod, TestCategory("UnitTest")]
+      public void AccountSetPasswordRoute()
+      {
+         this.routes.AssertRoute("~/account/setpassword", new { controller = "Account", action = "SetPassword" });
+      }
+
+      [TestMethod, TestCategory("UnitTest")]
+      public void AccountLinkLoginRoute()
+      {
+         this.routes.AssertRoute("~/account/linklogin", new { controller = "Account", action = "LinkLogin" });
+      }
+      
+      [TestMethod, TestCategory("UnitTest")]
+      public void AccountLinkLoginCallbackRoute()
+      {
+         this.routes.AssertRoute("~/account/linklogincallback", new { controller = "Account", action = "LinkLoginCallback" });
+      }
+
+      [TestMethod, TestCategory("UnitTest")]
+      public void AccountRemoveLoginRoute()
+      {
+         this.routes.AssertRoute("~/account/removelogin", new { controller = "Account", action = "RemoveLogin" });
+      }
 
       [TestMethod, TestCategory("UnitTest")]
       public void AccountExternalLoginRoute()

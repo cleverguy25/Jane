@@ -12,6 +12,9 @@ footer {
     left: 0;
     bottom: 0;
     height: $footer-height;
+    @media #{$small-only} {
+            height: 2*$footer-height;
+        }
     width: 100%;
     border-top: solid 3px $primary-color;
     background-color: white;
@@ -34,6 +37,9 @@ body.error {
 body {
     background-image: url("../Content/Images/bg2.png");
     padding: 0 0 $footer-height + 1rem;
+    @media #{$small-only} {
+        padding: 0 0 2*$footer-height + 1rem;
+    }
     height: auto;
     min-height: 100%;
 }

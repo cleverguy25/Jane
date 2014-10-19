@@ -255,7 +255,10 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Identity\JaneSignInManager.cs" />
+    <Compile Include="Identity\ViewModels\ChangePasswordViewModel.cs" />
+    <Compile Include="Identity\ViewModels\ManageViewModel.cs" />
     <Compile Include="Identity\ViewModels\ExternalLoginListViewModel.cs" />
+    <Compile Include="Identity\ViewModels\ManageLoginsViewModel.cs" />
     <Compile Include="Identity\ViewModels\RegisterViewModel.cs" />
     <Compile Include="Identity\Models\User.cs">
       <SubType>Code</SubType>
@@ -836,9 +839,13 @@
     <Content Include="Views\Account\ExternalLoginFailure.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Account\Register.cshtml" />
-    <Content Include="Views\Account\ExternalLoginsList.cshtml" />
+    <Content Include="Views\Account\ExternalLogins.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\Account\SetPassword.cshtml" />
+    <Content Include="Views\Account\Manage.cshtml" />
+    <Content Include="Views\Account\ManageLogins.cshtml" />
+    <Content Include="Views\Account\ExternalLoginsList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\Feed\" />

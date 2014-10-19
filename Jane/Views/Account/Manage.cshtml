@@ -1,0 +1,21 @@
+﻿@model Jane.Identity.ViewModels.ManageViewModel
+
+<h2>Manage account.</h2>
+
+@if (TempData.ContainsKey("Message"))
+{
+    <p class="label success">@TempData["Message"]</p>
+}
+
+@if (TempData.ContainsKey("Error"))
+{
+    <p class="alert alert-box">@Html.Raw(TempData["Error"])</p>
+}
+
+<div class="row">
+    <div class="medium-12 columns">
+    <h4>Password</h4>
+        @Html.ActionLink(Model.HasPassword ? "Change your password" : "Set password", "SetPassword")
+    </div>
+</div>
+@Html.Action("ManageLogins", "Account")

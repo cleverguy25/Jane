@@ -5,7 +5,7 @@
     {
         @Html.AntiForgeryToken()
         <div>
-            @("Hello " + User.Identity.GetUserName())
+            @Html.ActionLink(User.Identity.GetUserName(), "Manage", "Account")
         </div>
         <div>
             <a href="javascript:document.getElementById('logoutForm').submit()">Log off</a>

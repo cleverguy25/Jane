@@ -13097,6 +13097,9 @@ footer {
   border-top: solid 3px #49617F;
   background-color: white;
   padding: 0.5rem; }
+  @media only screen and (max-width: 42em) {
+    footer {
+      height: 10rem; } }
   footer div {
     margin-bottom: 0.5rem; }
 
@@ -13112,6 +13115,9 @@ body {
   padding: 0 0 6rem;
   height: auto;
   min-height: 100%; }
+  @media only screen and (max-width: 42em) {
+    body {
+      padding: 0 0 11rem; } }
 
 .content-container {
   background-color: white;
