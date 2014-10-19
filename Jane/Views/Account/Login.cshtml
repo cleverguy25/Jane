@@ -10,7 +10,7 @@
                 @Html.AntiForgeryToken()
                 <h4>Use a local account to log in.</h4>
                 <hr />
-                @Html.ValidationSummary(true, string.Empty)
+                @Html.ValidationSummary(true)
                 <div>
                     @Html.LabelFor(m => m.Email)
                     @Html.TextBoxFor(m => m.Email)

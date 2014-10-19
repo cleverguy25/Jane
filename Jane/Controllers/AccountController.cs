@@ -17,6 +17,7 @@ namespace Jane.Controllers
    using Jane.Identity;
    using Jane.Identity.Models;
    using Jane.Identity.ViewModels;
+   using Jane.Infrastructure;
 
    using Microsoft.Ajax.Utilities;
    using Microsoft.AspNet.Identity;
@@ -219,7 +220,7 @@ namespace Jane.Controllers
 
       public async Task<ActionResult> SetPassword()
       {
-         var userId = this.ParseUserId();
+         var userId = User.Identity.GetUserGuid();
          var model = new ChangePasswordViewModel() { HasPassword = await this.UserManager.HasPasswordAsync(userId) };
          ViewBag.Title = model.HasPassword ? "Change Password" : "Set Password";
          return this.View(model);
@@ -234,7 +235,7 @@ namespace Jane.Controllers
             return this.View(model);
          }
 
-         var userId = this.ParseUserId();
+         var userId = User.Identity.GetUserGuid();
          var result = await this.ChangeOrAddPassword(model, userId);
 
          if (result.Succeeded)
@@ -255,7 +256,7 @@ namespace Jane.Controllers
 
       public async Task<ActionResult> Manage()
       {
-         var userId = this.ParseUserId();
+         var userId = User.Identity.GetUserGuid();
          var model = new ManageViewModel
          {
             HasPassword = await this.UserManager.HasPasswordAsync(userId),
@@ -267,7 +268,7 @@ namespace Jane.Controllers
       
       public async Task<ActionResult> ManageLogins()
       {
-         var userId = this.ParseUserId();
+         var userId = User.Identity.GetUserGuid();
          var user = await this.UserManager.FindByIdAsync(userId);
          if (user == null)
          {
@@ -322,7 +323,7 @@ namespace Jane.Controllers
       [ValidateAntiForgeryToken]
       public async Task<ActionResult> RemoveLogin(string loginProvider, string providerKey)
       {
-         var userId = this.ParseUserId();
+         var userId = User.Identity.GetUserGuid();
          var result = await this.UserManager.RemoveLoginAsync(userId, new UserLoginInfo(loginProvider, providerKey));
          if (result.Succeeded)
          {
@@ -351,12 +352,7 @@ namespace Jane.Controllers
 
          return ModelState.IsValid;
       }
-
-      private Guid ParseUserId()
-      {
-         return Guid.Parse(this.User.Identity.GetUserId());
-      }
-
+      
       private async Task<IdentityResult> ChangeOrAddPassword(ChangePasswordViewModel model, Guid userId)
       {
          IdentityResult result;

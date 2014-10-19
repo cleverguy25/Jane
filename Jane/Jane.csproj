@@ -248,6 +248,7 @@
     <Compile Include="Controllers\BlogController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\FeedController.cs" />
+    <Compile Include="Controllers\PostCommentsController.cs" />
     <Compile Include="Controllers\SeoController.cs" />
     <Compile Include="Controllers\TagController.cs" />
     <Compile Include="Controllers\TopNavigationController.cs" />
@@ -276,6 +277,7 @@
     <Compile Include="Infrastructure\ErrorText.cs" />
     <Compile Include="Infrastructure\FuturePostQueries.cs" />
     <Compile Include="Infrastructure\HandleAndLogErrorAttribute.cs" />
+    <Compile Include="Infrastructure\IdentityExtensions.cs" />
     <Compile Include="Infrastructure\Interfaces\IFuturePostQueries.cs" />
     <Compile Include="Infrastructure\Interfaces\INavigationQueries.cs" />
     <Compile Include="Infrastructure\Interfaces\IPostQueries.cs" />
@@ -285,6 +287,7 @@
     <Compile Include="Infrastructure\Interfaces\ILoadStorage.cs" />
     <Compile Include="Infrastructure\LocalPostContent.cs" />
     <Compile Include="Infrastructure\NavigationQueries.cs" />
+    <Compile Include="Infrastructure\CommentsStorage.cs" />
     <Compile Include="Infrastructure\PostQueries.cs" />
     <Compile Include="Infrastructure\JsonStorage.cs" />
     <Compile Include="Infrastructure\PostJsonStorage.cs" />
@@ -306,6 +309,7 @@
     <Compile Include="MetaWeblog\Post.cs">
       <ExcludeFromStyleCop>True</ExcludeFromStyleCop>
     </Compile>
+    <Compile Include="Models\Comment.cs" />
     <Compile Include="Models\FuturePost.cs" />
     <Compile Include="Models\IPostContent.cs" />
     <Compile Include="Models\NavigationItem.cs" />
@@ -846,6 +850,7 @@
     <Content Include="Views\Account\Manage.cshtml" />
     <Content Include="Views\Account\ManageLogins.cshtml" />
     <Content Include="Views\Account\ExternalLoginsList.cshtml" />
+    <Content Include="Views\PostComments\AddComment.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\Feed\" />
