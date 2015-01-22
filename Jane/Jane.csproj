@@ -281,6 +281,7 @@
     <Compile Include="Infrastructure\Interfaces\IFuturePostQueries.cs" />
     <Compile Include="Infrastructure\Interfaces\INavigationQueries.cs" />
     <Compile Include="Infrastructure\Interfaces\IPostQueries.cs" />
+    <Compile Include="Infrastructure\Interfaces\ICommentStorage.cs" />
     <Compile Include="Infrastructure\Interfaces\ISaveStorage.cs" />
     <Compile Include="Infrastructure\Interfaces\IStorage.cs" />
     <Compile Include="Infrastructure\Interfaces\ITagQueries.cs" />
@@ -292,6 +293,7 @@
     <Compile Include="Infrastructure\JsonStorage.cs" />
     <Compile Include="Infrastructure\PostJsonStorage.cs" />
     <Compile Include="Infrastructure\SiteConfiguration.cs" />
+    <Compile Include="Infrastructure\StringExtensions.cs" />
     <Compile Include="Infrastructure\TagQueries.cs" />
     <Compile Include="Infrastructure\Tracing.cs" />
     <Compile Include="Infrastructure\XmlResult.cs" />
@@ -315,6 +317,7 @@
     <Compile Include="Models\NavigationItem.cs" />
     <Compile Include="Models\Post.cs" />
     <Compile Include="Models\SocialLoginProvider.cs" />
+    <Compile Include="Models\ThreadedComment.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -851,6 +854,9 @@
     <Content Include="Views\Account\ManageLogins.cshtml" />
     <Content Include="Views\Account\ExternalLoginsList.cshtml" />
     <Content Include="Views\PostComments\AddComment.cshtml" />
+    <Content Include="Views\Shared\CommentLoader.cshtml" />
+    <Content Include="Views\PostComments\Comments.cshtml" />
+    <Content Include="Views\PostComments\_Comments.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\Feed\" />

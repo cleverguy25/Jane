@@ -71,6 +71,11 @@ namespace Jane.Infrastructure
          this.Save(posts);
       }
 
+      public Task DeleteAsync(Post item)
+      {
+         return this.DeleteAsync(item.Guid);
+      }
+
       public async Task DeleteAsync(Guid id)
       {
          var items = await this.LoadAsync();

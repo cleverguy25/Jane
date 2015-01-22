@@ -109,6 +109,11 @@ namespace Jane.Test
          return Task.FromResult(0);
       }
 
+      public Task DeleteAsync(User item)
+      {
+         return this.DeleteAsync(item.Id);
+      }
+
       public Task DeleteAsync(Guid id)
       {
          var index = this.userData.FindIndex(user => user.Id == id);

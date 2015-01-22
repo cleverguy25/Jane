@@ -1,21 +1,19 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="ISaveStorage.cs" company="Jane OSS">
+// <copyright file="ICommentStorage.cs" company="Jane OSS">
 //   Copyright (c) Jane Contributors
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
 namespace Jane.Infrastructure.Interfaces
 {
+   using System;
+   using System.Collections.Generic;
    using System.Threading.Tasks;
 
-   public interface ISaveStorage<in T, TKey>
+   using Jane.Models;
+
+   public interface ICommentStorage : IStorage<Comment, Guid>
    {
-      Task<TKey> AddAsync(T item);
-
-      Task UpdateAsync(T item);
-
-      Task DeleteAsync(T item);
-
-      Task DeleteAsync(TKey id);
+      Task<IEnumerable<Comment>> LoadByPostId(Guid postId);
    }
 }

@@ -47,6 +47,7 @@ namespace Jane
          }
 
          var contentPath = Path.Combine(rootPath, @"content\posts\");
+         var basePath = Path.Combine(rootPath, @"app_data\");
          var path = Path.Combine(rootPath, @"app_data\posts.json");
          var navPath = Path.Combine(rootPath, @"app_data\topNav.json");
          var futurePath = Path.Combine(rootPath, @"app_data\future.json");
@@ -71,6 +72,7 @@ namespace Jane
          container.Register<ILoadStorage<Role, Guid>>(
             () => new JsonStorage<Role, Guid>(rolePath, item => item.Id), 
             Lifestyle.Singleton);
+         container.Register<ICommentStorage>(() => new CommentsStorage(basePath), Lifestyle.Singleton);
 
          container.Register<IPostQueries, PostQueries>();
          container.Register<IFuturePostQueries, FuturePostQueries>();

@@ -64,6 +64,11 @@ namespace Jane.Infrastructure
          await this.AddOrUpdate(item);
       }
 
+      public Task DeleteAsync(TModel item)
+      {
+         return this.DeleteAsync(this.getKey(item));
+      }
+
       public async Task DeleteAsync(TKey id)
       {
          var result = await this.LoadAsync();

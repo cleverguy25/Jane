@@ -1,8 +1,13 @@
 ﻿@model Jane.Models.Post
 
+@if (TempData.ContainsKey("Message"))
+{
+    <div class="label info">@TempData["Message"]</div>
+}
 <div>
     @Html.Partial("Post", Model)
 </div>
+@Html.Partial("CommentLoader", Model.Guid)
 
 @section aside
 {

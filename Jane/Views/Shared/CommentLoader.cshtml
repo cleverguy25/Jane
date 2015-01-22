@@ -1,0 +1,18 @@
+﻿@model Guid
+<div id="comments"></div>
+
+<script type="text/javascript">
+    var JaneComments = {};
+    (function (comments) {
+        window.onload = function () {
+            $('#comments').load('@Url.Action("Comments", "PostComments", new { postId = Model })');
+        };
+
+        comments.reply = function (postId, commentId) {
+            var url = '@Html.Raw(Url.Action("AddComment", "PostComments", new { postId = "postIdReplace", replyCommentId = "commentIdReplace" }))';
+            url = url.replace('postIdReplace', postId);
+            url = url.replace('commentIdReplace', commentId);
+            $('#reply-' + commentId).load(url);
+        };
+    })(JaneComments);
+</script>

@@ -1,0 +1,31 @@
+﻿@model List<Jane.Models.ThreadedComment>
+
+@foreach (var item in Model)
+{
+    <article itemscope itemtype="http://schema.org/Comment">
+        <hr />
+        <div>
+            <div class="comment-avatar">
+                <img src="@item.GravatarUrl" alt="@item.Comment.Name">
+            </div>
+            <div class="comment">
+                <header>
+                    <address itemscope itemtype="http://schema.org/Person" itemprop="author">
+                        <a href="@item.Comment.Url" target="_blank" itemprop="name">@item.Comment.Name</a>
+                    </address>
+                    <span>-</span>
+                    <time datetime="@item.Comment.CreatedAt.ToString("o")" itemprop="datecreated">@item.Comment.CreatedAt.ToString("yyyy MMMM dd")</time>
+                </header>
+                <section itemprop="articleBody">
+                    <div itemprop="text">@item.Comment.Body</div>
+                </section>
+                <a onclick="JaneComments.reply('@ViewBag.PostId', '@item.Comment.Id')">Reply</a>
+                <div id="reply-@item.Comment.Id"></div>
+                @if (item.ChildComments != null && item.ChildComments.Any())
+                {
+                    @Html.Partial("_Comments", item.ChildComments)
+                }
+            </div>
+        </div>
+    </article>
+}

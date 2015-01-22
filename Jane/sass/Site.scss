@@ -223,3 +223,23 @@ a:hover {
 .short-list {
     margin-bottom: 1rem;
 }
+
+.comment-avatar {
+    float: left;
+    margin-right: .75rem;
+}
+
+.comment {
+    overflow: hidden;
+    header {
+        font-size: rem-calc(13);
+    }
+
+    a {
+        font-size: rem-calc(13);
+    }
+}
+
+address {
+    display: inline;
+}

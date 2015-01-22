@@ -117,6 +117,12 @@ namespace Jane.Test
       }
 
       [TestMethod, TestCategory("UnitTest")]
+      public void AddCommentRoute()
+      {
+         this.routes.AssertRoute("~/blog/addcomment", new { controller = "PostComments", action = "AddComment" });
+      }
+
+      [TestMethod, TestCategory("UnitTest")]
       public void AtomByTagRoute()
       {
          this.routes.AssertRoute(

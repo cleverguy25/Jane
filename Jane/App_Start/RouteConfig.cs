@@ -31,6 +31,10 @@ namespace Jane
 
          routes.MapRoute("SiteMap.xml", "sitemap.xml", new { controller = "Seo", action = "SiteMap" });
 
+         routes.MapRoute("AddComment", "blog/addcomment", new { controller = "PostComments", action = "AddComment" });
+
+         routes.MapRoute("Comments", "blog/Comments", new { controller = "PostComments", action = "Comments" });
+
          RegisterBlogRoutes(routes);
 
          routes.MapRoute("TagCloud", "tag", new { controller = "Tag", action = "TagCloud" });

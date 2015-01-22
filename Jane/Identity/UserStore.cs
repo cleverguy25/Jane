@@ -63,7 +63,7 @@ namespace Jane.Identity
       {
          ValidateUser(user);
 
-         return this.userStorage.DeleteAsync(user.Id);
+         return this.userStorage.DeleteAsync(user);
       }
 
       public Task<User> FindByIdAsync(Guid userId)
