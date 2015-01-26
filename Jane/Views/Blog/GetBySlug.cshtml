@@ -1,18 +1,33 @@
-﻿@model Jane.Models.Post
+﻿@model Jane.Models.PostView
 
 @if (TempData.ContainsKey("Message"))
 {
     <div class="label info">@TempData["Message"]</div>
 }
 <div>
-    @Html.Partial("Post", Model)
+    @Html.Partial("Post", Model.Post)
 </div>
-@Html.Partial("CommentLoader", Model.Guid)
+<div class="row">
+    @if (Model.PreviousPost != null)
+    {
+        <div class="columns small-5">
+            <label class="previous-post"><a href="@Url.Action("GetBySlug", "Blog", new { slug = Model.PreviousPost.Slug })">@Model.PreviousPost.Title</a></label>
+        </div>
+    }
+    
+    @if (Model.NextPost != null)
+    {
+        <div class="columns small-offset-2 small-5 right">
+            <label class="next-post right"><a href="@Url.Action("GetBySlug", "Blog", new { slug = Model.NextPost.Slug })">@Model.NextPost.Title</a></label>
+        </div>
+    }
+</div>
+@Html.Partial("CommentLoader", Model.Post.Guid)
 
 @section aside
 {
 @Html.Action("Future", "Blog")
 @Html.Action("TagCloud", "Tag")
-@Html.Action("Related", "Blog", new { slug = Model.Slug })
+@Html.Action("Related", "Blog", new { slug = Model.Post.Slug })
 @Html.Action("Recent", "Blog")
 }

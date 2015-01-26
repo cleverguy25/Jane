@@ -38,10 +38,33 @@ namespace Jane.Infrastructure
          return posts.Take(5);
       }
 
-      public async Task<Post> GetPostBySlugAsync(string slug)
+      public async Task<PostView> GetPostBySlugAsync(string slug)
       {
          var posts = await this.GetPosts();
-         return posts.FirstOrDefault(post => post.Slug.ToLowerInvariant() == slug.ToLowerInvariant());
+         posts = posts.OrderBy(post => post.PublishedDate).ToList();
+         for (var i = 0; i < posts.Count; i++)
+         {
+            var post = posts[i];
+            if (post.Slug.ToLowerInvariant() != slug.ToLowerInvariant())
+            {
+               continue;
+            }
+
+            var result = new PostView() { Post = post };
+            if (i > 0)
+            {
+               result.PreviousPost = posts[i - 1];
+            }
+
+            if (i < posts.Count - 1)
+            {
+               result.NextPost = posts[i + 1];
+            }
+
+            return result;
+         }
+
+         return null;
       }
 
       public async Task<IEnumerable<Post>> GetPostsByTagAsync(string tag)

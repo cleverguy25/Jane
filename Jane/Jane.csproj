@@ -318,6 +318,7 @@
     <Compile Include="Models\IPostContent.cs" />
     <Compile Include="Models\NavigationItem.cs" />
     <Compile Include="Models\Post.cs" />
+    <Compile Include="Models\PostView.cs" />
     <Compile Include="Models\SocialLoginProvider.cs" />
     <Compile Include="Models\ThreadedComment.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -794,7 +795,9 @@
     <Content Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
-    <Content Include="Views\Web.config" />
+    <Content Include="Views\Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_BlogLayout.cshtml" />

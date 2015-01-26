@@ -41,7 +41,7 @@ namespace Jane.Controllers
             throw new HttpException((int)HttpStatusCode.NotFound, "Slug not found.");
          }
 
-         ViewBag.Title = post.Title;
+         ViewBag.Title = post.Post.Title;
          return this.View(post);
       }
 
@@ -73,7 +73,7 @@ namespace Jane.Controllers
       {
          var post = await this.postQueries.GetPostBySlugAsync(slug);
 
-         var posts = post == null ? new List<Post>() : await this.postQueries.GetRelatedPostsAsync(post);
+         var posts = post == null ? new List<Post>() : await this.postQueries.GetRelatedPostsAsync(post.Post);
 
          if (posts.Any() == false)
          {

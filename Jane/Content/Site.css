@@ -14195,6 +14195,27 @@ a[rel~="tag"]::before {
   content: "\f19d" !important;
   margin-right: 0.25rem !important; }
 
+.previous-post a, .next-post a {
+  font-family: "foundation-icons";
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  display: inline-block;
+  text-decoration: inherit;
+  color: slategray;
+  margin-right: 0.5rem; }
+
+.previous-post a::before {
+  content: "\f10a" !important;
+  margin-right: 0.25rem !important; }
+
+.next-post a::after {
+  content: "\f10b" !important;
+  margin-left: 0.25rem !important; }
+
 a:hover {
   font-weight: bold; }
 

@@ -18,7 +18,7 @@ namespace Jane.Infrastructure.Interfaces
 
       Task<IEnumerable<Post>> GetRelatedPostsAsync(Post post);
 
-      Task<Post> GetPostBySlugAsync(string slug);
+      Task<PostView> GetPostBySlugAsync(string slug);
 
       Task<IEnumerable<Post>> GetPostsByTagAsync(string tag);
    }
