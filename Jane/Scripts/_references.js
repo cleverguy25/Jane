@@ -37,3 +37,4 @@
 /// <reference path="syntaxhighlighter/shbrushxml.js" />
 /// <reference path="syntaxhighlighter/shcore.js" />
 /// <reference path="syntaxhighlighter/shlegacy.js" />
+/// <reference path="addcomment.js" />

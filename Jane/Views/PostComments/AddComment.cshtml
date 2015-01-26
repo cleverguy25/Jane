@@ -1,4 +1,5 @@
-﻿@model Jane.Models.Comment
+﻿@using Jane.Infrastructure
+@model Jane.Models.Comment
 @{
     Layout = null;
 }
@@ -8,64 +9,61 @@
 }
 else
 {
-    <hr/>
+    <hr />
     <div>
         <div id="summary"></div>
         <h4>@(Model.ReplyCommentId.HasValue ? "Please be nice..." : "Thoughts? Musings? Ponderances?")</h4>
         <div>
-    @using (Html.BeginForm("AddComment", "PostComments", FormMethod.Post, new { id = "AddCommentForm" }))
+            @using (Html.BeginForm("AddComment", "PostComments", FormMethod.Post, new { id = "AddCommentForm" }))
             {
-        @Html.AntiForgeryToken()
-        @Html.HiddenFor(model => model.PostId)
-        @Html.HiddenFor(model => model.ReplyCommentId)
-        @Html.HiddenFor(model => model.CommenterId)
-        <div class="row">
-            <div class="small-2 columns">
-                @Html.LabelFor(model => model.Name, new {@class = "inline right"})
-            </div>
-            <div class="small-10 columns">
-                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @placeholder = "What should we call you?" } })
-                @Html.ValidationMessageFor(model => model.Name)
-            </div>
-        </div>
-        <div class="row">
-            <div class="small-2 columns">
-                @Html.LabelFor(model => model.Email, new { @class = "inline right" })
-            </div>
-            <div class="small-10 columns">
-                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @placeholder = "Email address" } })
-                @Html.ValidationMessageFor(model => model.Email)
-            </div>
-        </div>
-        <div class="row">
-            <div class="small-2 columns">
-                @Html.LabelFor(model => model.Url, new { @class = "inline right" })
-            </div>
-            <div class="small-10 columns">
-                @Html.EditorFor(model => model.Url, new { htmlAttributes = new { @placeholder = "URL" } })
-                @Html.ValidationMessageFor(model => model.Url)
-            </div>
-        </div>
-        <div class="row">
-            <div class="small-2 columns">
-                @Html.LabelFor(model => model.Body, new { @class = "inline right" })
-            </div>
-            <div class="small-10 columns">
-                @Html.TextAreaFor(model => model.Body, 6, 50, new { @placeholder = "Your insightful comment here..."})
-                @Html.ValidationMessageFor(model => model.Body)
-            </div>
-        </div>
-
-        @*if (Model.CommenterId.HasValue)
-            {
-                <div class="form_item">
-                    <label>
-                        <p>While robots are fun, they do not post great comments. Prove your human!</p>
-                        @Html.GenerateCaptcha()
-                        @Html.ValidationMessage("CaptchaNotValid")
-                    </label>
+                @Html.AntiForgeryToken()
+                @Html.HiddenFor(model => model.PostId)
+                @Html.HiddenFor(model => model.ReplyCommentId)
+                @Html.HiddenFor(model => model.CommenterId)
+                <div class="row">
+                    <div class="small-2 columns">
+                        @Html.LabelFor(model => model.Name, new { @class = "inline right" })
+                    </div>
+                    <div class="small-10 columns">
+                        @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @placeholder = "What should we call you?" } })
+                        @Html.ValidationMessageFor(model => model.Name)
+                    </div>
                 </div>
-            }*@
+                <div class="row">
+                    <div class="small-2 columns">
+                        @Html.LabelFor(model => model.Email, new { @class = "inline right" })
+                    </div>
+                    <div class="small-10 columns">
+                        @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @placeholder = "Email address" } })
+                        @Html.ValidationMessageFor(model => model.Email)
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="small-2 columns">
+                        @Html.LabelFor(model => model.Url, new { @class = "inline right" })
+                    </div>
+                    <div class="small-10 columns">
+                        @Html.EditorFor(model => model.Url, new { htmlAttributes = new { @placeholder = "URL" } })
+                        @Html.ValidationMessageFor(model => model.Url)
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="small-2 columns">
+                        @Html.LabelFor(model => model.Body, new { @class = "inline right" })
+                    </div>
+                    <div class="small-10 columns">
+                        @Html.TextAreaFor(model => model.Body, 6, 50, new { @placeholder = "Your insightful comment here..." })
+                        @Html.ValidationMessageFor(model => model.Body)
+                    </div>
+                </div>
+
+                <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+
+                <div class="row">
+                    <div class="small-offset-2 small-10 columns">
+                        <div class="g-recaptcha" data-sitekey="@SiteConfiguration.RecaptchaPublicKey.Value"></div>
+                    </div>
+                </div>
 
                 <div class="row">
                     <div class="small-offset-2 small-10 columns">
@@ -73,55 +71,10 @@ else
                         <div id="AddCommentSummary"></div>
                     </div>
                 </div>
-                }
-            </div>
+            }
         </div>
-        <script>
-            $("#AddCommentForm").submit(function (event) {
-                event.preventDefault();
-                var $form = $(this),
-                    actionUrl = $form.attr("action");
-
-                var postId = $form.find("input[name='PostId']").val();
-                var replyCommentId = $form.find("input[name='ReplyCommentId']").val();
-                var commenterId = $form.find("input[name='CommenterId']").val();
-                var name = $form.find("input[name='Name']").val();
-                var email = $form.find("input[name='Email']").val();
-                var url = $form.find("input[name='Url']").val();
-                var body = $form.find("textarea[name='Body']").val();
-                var antiForgery = $form.find("input[name='__RequestVerificationToken']").val();
-                var button = $form.find("input[type='submit']");
-                button.attr("disabled", "true");
-                
-                var posting = $.post(actionUrl,
-                    {
-                        PostId: postId,
-                        ReplyCommentId: replyCommentId,
-                        CommenterId: commenterId,
-                        Name: name,
-                        Email: email,
-                        Url: url,
-                        Body: body,
-                        __RequestVerificationToken: antiForgery
-                    });
-
-                posting.error(function (data) {
-                    var summary = $form.find('#AddCommentSummary');
-                    summary.empty();
-                    var errors = data.responseJSON.Errors;
-                    var errorList = summary.append('<ul></ul>');
-                    for (var i = 0; i < errors.length; i++) {
-                        errorList.append('<li class="label alert">' + errors[i].ErrorMessage + '</li>');
-                    }
-
-                    button.attr("disabled", "false");
-                });
-
-                posting.done(function (data) {
-                    $form.find('#AddCommentSummary').empty().append('<div class="label info">' + data.Message + '</div>');
-                });
-            });
-        </script>
+    </div>
+    <script src="~/Scripts/AddComment.js"></script>
 }
 
 @Scripts.Render("~/bundles/jqueryval")

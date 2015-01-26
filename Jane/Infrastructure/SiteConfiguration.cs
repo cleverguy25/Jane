@@ -21,6 +21,10 @@ namespace Jane.Infrastructure
 
       public static readonly Lazy<string> TileColor = new Lazy<string>(() => LoadConfigurationString("jane:TileColor"));
 
+      public static readonly Lazy<string> RecaptchaPublicKey = new Lazy<string>(() => LoadConfigurationString("google:recaptchaPublicKey"));
+
+      public static readonly Lazy<string> RecaptchaPrivateKey = new Lazy<string>(() => LoadConfigurationString("google:recaptchaPrivateKey"));
+
       public static readonly Lazy<bool> UseCdn = new Lazy<bool>(() => LoadConfigurationBool("jane:UseCdn", true));
 
       private static bool LoadConfigurationBool(string key, bool defaultValue)

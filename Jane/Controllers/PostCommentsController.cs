@@ -9,8 +9,11 @@ namespace Jane.Controllers
    using System;
    using System.Collections.Generic;
    using System.Diagnostics;
+   using System.Dynamic;
+   using System.IO;
    using System.Linq;
    using System.Net;
+   using System.Text;
    using System.Threading;
    using System.Threading.Tasks;
    using System.Web.Mvc;
@@ -19,6 +22,8 @@ namespace Jane.Controllers
    using Jane.Infrastructure;
    using Jane.Infrastructure.Interfaces;
    using Jane.Models;
+
+   using Newtonsoft.Json;
 
    public class PostCommentsController : AsyncController
    {
@@ -56,7 +61,6 @@ namespace Jane.Controllers
          }
 
          return this.View(rootComments);
-
       }
 
       public async Task<ActionResult> AddComment(Guid postId, Guid? replyCommentId)
@@ -69,11 +73,17 @@ namespace Jane.Controllers
 
       [HttpPost]
       [ValidateAntiForgeryToken]
-      public async Task<ActionResult> AddComment(Comment comment)
+      public async Task<ActionResult> AddComment(Comment comment, string captcha)
       {
+         if (await VerifyRecaptcha(captcha) == false)
+         {
+            this.Response.StatusCode = (int)HttpStatusCode.BadRequest;
+            return this.Json(new { Errors = new string[1] { "Recaptcha not valid." } });
+         }
+
          if (ModelState.IsValid == false)
          {
-            var errors = ModelState.Values.SelectMany(modelState => modelState.Errors);
+            var errors = ModelState.Values.SelectMany(modelState => modelState.Errors).Select(error => error.ErrorMessage);
             this.Response.StatusCode = (int)HttpStatusCode.BadRequest;
             return this.Json(new { Errors = errors });
          }
@@ -85,6 +95,33 @@ namespace Jane.Controllers
          comment.UserHostAddress = Request.UserHostAddress;
          await this.commentStorage.AddAsync(comment);
          return this.Json(new { Message = "Thanks for your comment.  It will be posted soon." });
+      }
+
+      private static async Task<bool> VerifyRecaptcha(string captcha)
+      {
+         var builder = new StringBuilder("https://www.google.com/recaptcha/api/siteverify?secret={secret}&response={response}");
+         builder.Replace("{secret}", SiteConfiguration.RecaptchaPrivateKey.Value);
+         builder.Replace("{response}", captcha);
+         var request = WebRequest.Create(builder.ToString());
+         var response = await request.GetResponseAsync();
+         if (response == null)
+         {
+            return false;
+         }
+
+         var stream = response.GetResponseStream();
+         if (stream == null)
+         {
+            return false;
+         }
+
+         using (var streamReader = new StreamReader(stream))
+         using (var jsonTextReader = new JsonTextReader(streamReader))
+         {
+            var serializer = new JsonSerializer();
+            var result = (IDictionary<string, object>)serializer.Deserialize<ExpandoObject>(jsonTextReader);
+            return result.ContainsKey("success") && (bool)result["success"];
+         }
       }
 
       private async Task FillInLoggedInUserDetails(Comment comment)
