@@ -1,7 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="PostView.cs" company="Jane OSS">
+//   Copyright (c) Jane Contributors
+// </copyright>
+// --------------------------------------------------------------------------------------------------------------------
 
 namespace Jane.Models
 {
