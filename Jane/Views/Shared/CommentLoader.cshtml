@@ -1,11 +1,34 @@
 ﻿@model Guid
 <div id="comments"></div>
-
+<script src="~/Scripts/moment.min.js"></script>
 <script type="text/javascript">
     var JaneComments = {};
     (function (comments) {
         window.onload = function () {
-            $('#comments').load('@Url.Action("Comments", "PostComments", new { postId = Model })');
+            $('#comments').load("@Url.Action("Comments", "PostComments", new { postId = Model })",
+                function () {
+                    var now = moment();
+
+                    moment.locale('en', {
+                        calendar: {
+                            lastDay: '[Yesterday at] LT',
+                            sameDay: '[Today at] LT',
+                            nextDay: '[Tomorrow at] LT',
+                            lastWeek: '[last] dddd [at] LT',
+                            nextWeek: 'dddd [at] LT',
+                            sameElse: 'LLL'
+                        }
+                    });
+
+                    $("#comments time").each(function (i, e) {
+                        var time = moment($(e).attr('datetime'));
+                        if (now.diff(time, 'hours') >= 12) {
+                            $(e).html('<span>' + time.calendar() + '</span>');
+                        } else {
+                            $(e).html('<span>' + time.fromNow() + '</span>');
+                        }
+                    });
+                });
         };
 
         comments.reply = function (postId, commentId) {

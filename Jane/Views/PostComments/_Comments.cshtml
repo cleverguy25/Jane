@@ -3,7 +3,7 @@
 @foreach (var item in Model)
 {
     <article itemscope itemtype="http://schema.org/Comment">
-        <hr />
+        <hr/>
         <div>
             <div class="comment-avatar">
                 <img src="@item.GravatarUrl" alt="@item.Comment.Name">
@@ -14,7 +14,7 @@
                         <a href="@item.Comment.Url" target="_blank" itemprop="name">@item.Comment.Name</a>
                     </address>
                     <span>-</span>
-                    <time datetime="@item.Comment.CreatedAt.ToString("o")" itemprop="datecreated">@item.Comment.CreatedAt.ToString("yyyy MMMM dd")</time>
+                    <time datetime="@item.Comment.CreatedAt.ToString("o")" itemprop="datecreated"></time>
                 </header>
                 <section itemprop="articleBody">
                     <div itemprop="text">@item.Comment.Body</div>
@@ -29,3 +29,5 @@
         </div>
     </article>
 }
+
+

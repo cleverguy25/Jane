@@ -2,6 +2,7 @@
 @{
     Layout = null;
 }
+
 @Html.Partial("_Comments", Model)
 
 @Html.Action("AddComment", "PostComments", new { postId = ViewBag.PostId })

@@ -38,3 +38,5 @@
 /// <reference path="syntaxhighlighter/shcore.js" />
 /// <reference path="syntaxhighlighter/shlegacy.js" />
 /// <reference path="addcomment.js" />
+/// <reference path="moment-with-locales.min.js" />
+/// <reference path="moment.min.js" />
