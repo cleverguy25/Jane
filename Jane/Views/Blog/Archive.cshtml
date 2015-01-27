@@ -1,0 +1,25 @@
+﻿@using Jane.Infrastructure
+@model IEnumerable<Jane.Models.Post>
+
+@if (ViewData.ContainsKey("Month"))
+{
+    string year = ViewBag.Year.ToString();
+    string monthDisplay = ViewBag.MonthDisplay;
+    <h5>Archives / @Html.ActionLink(year, "ArchiveByYear", new { year = ViewBag.Year }) / @Html.ActionLink(monthDisplay, "ArchiveByYearMonth", new { year = ViewBag.Year, month = ViewBag.Month })</h5>
+}
+else
+{
+    string year = ViewBag.Year.ToString();
+    <h5>Archives / @Html.ActionLink(year, "ArchiveByYear", new { year = ViewBag.Year })</h5>
+}
+
+<span>@ViewBag.Message</span>
+@Html.Partial("PostList", Model)
+
+@section aside
+{
+    @Html.Action("Future", "Blog")
+    @Html.Action("TagCloud", "Tag")
+    @Html.Action("Recent", "Blog")
+    @Html.Action("ArchiveList", "Blog")
+}

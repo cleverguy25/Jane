@@ -48,8 +48,10 @@ namespace Jane.Test
       public async Task GetPostBySlug()
       {
          var result = await this.blogController.GetBySlug("post2") as ViewResult;
-         var post = (Post)result.Model;
-         post.Title.Should().Be("Post 2");
+         var post = (PostView)result.Model;
+         post.Post.Title.Should().Be("Post 2");
+         post.NextPost.Title.Should().Be("Post 1");
+         post.PreviousPost.Title.Should().Be("Post 3");
       }
 
       [TestMethod, TestCategory("UnitTest")]
@@ -71,8 +73,8 @@ namespace Jane.Test
          var result = await this.blogController.GetByTag("foo") as ViewResult;
          var posts = ((IEnumerable<Post>)result.Model).ToList();
          posts.Count.Should().Be(2);
-         posts[0].Slug.Should().Be("post2");
-         posts[1].Slug.Should().Be("post1");
+         posts[0].Slug.Should().Be("post1");
+         posts[1].Slug.Should().Be("post2");
       }
 
       [TestMethod, TestCategory("UnitTest")]
@@ -81,11 +83,11 @@ namespace Jane.Test
          var viewResult = await this.blogController.List() as ViewResult;
          var results = viewResult.Model as IEnumerable<Post>;
          var posts = results.ToList();
-         posts[0].Title.Should().Be("Post 6");
-         posts[1].Title.Should().Be("Post 3");
-         posts[2].Title.Should().Be("Post 2");
-         posts[3].Title.Should().Be("Post 1");
-         posts[4].Title.Should().Be("Post 5");
+         posts[0].Title.Should().Be("Post 1");
+         posts[1].Title.Should().Be("Post 2");
+         posts[2].Title.Should().Be("Post 3");
+         posts[3].Title.Should().Be("Post 5");
+         posts[4].Title.Should().Be("Post 4");
       }
 
       [TestMethod, TestCategory("UnitTest")]
@@ -115,6 +117,34 @@ namespace Jane.Test
 
          posts.Should().HaveCount(1);
          posts.ToList()[0].GetExpectedWait(DateTime.Today).Should().Be("about 1 day");
+      }
+
+      [TestMethod, TestCategory("UnitTest")]
+      public async Task ArchiveByYear()
+      {
+         var viewResult = await this.blogController.ArchiveByYear(2015) as ViewResult;
+         var posts = viewResult.Model as IEnumerable<Post>;
+
+         posts.Should().HaveCount(2);
+      }
+
+      [TestMethod, TestCategory("UnitTest")]
+      public async Task ArchiveByYearMonth()
+      {
+         var viewResult = await this.blogController.ArchiveByYearMonth(2014, 4) as ViewResult;
+         var posts = viewResult.Model as IEnumerable<Post>;
+
+         posts.Should().HaveCount(1);
+      }
+
+      [TestMethod, TestCategory("UnitTest")]
+      public async Task ArchiveList()
+      {
+         var viewResult = await this.blogController.ArchiveList() as PartialViewResult;
+         var summaries = viewResult.Model as IEnumerable<ArchiveSummary>;
+
+         summaries.Should().HaveCount(4);
+         summaries.ToList()[2].Count.Should().Be(3);
       }
    }
 }

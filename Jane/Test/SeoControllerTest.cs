@@ -42,8 +42,8 @@ namespace Jane.Test
          var urls = urlset.Elements(siteMap + "url").ToList();
          urls.Count.Should().Be(6);
          var url = urls[4];
-         url.Element(siteMap + "loc").Value.Should().Be("http://localhost/blog/post5");
-         url.Element(siteMap + "lastmod").Value.Should().Be("2014-05-05T01:02:03.0000000Z");
+         url.Element(siteMap + "loc").Value.Should().Be("http://localhost/blog/post4");
+         url.Element(siteMap + "lastmod").Value.Should().Be("2014-05-03T01:02:03.0000000Z");
       }
 
       [TestMethod, TestCategory("UnitTest")]

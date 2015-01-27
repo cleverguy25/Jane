@@ -313,6 +313,7 @@
     <Compile Include="MetaWeblog\Post.cs">
       <ExcludeFromStyleCop>True</ExcludeFromStyleCop>
     </Compile>
+    <Compile Include="Models\ArchiveSummary.cs" />
     <Compile Include="Models\Comment.cs" />
     <Compile Include="Models\FuturePost.cs" />
     <Compile Include="Models\IPostContent.cs" />
@@ -875,6 +876,8 @@
     <Content Include="Views\Shared\CommentLoader.cshtml" />
     <Content Include="Views\PostComments\Comments.cshtml" />
     <Content Include="Views\PostComments\_Comments.cshtml" />
+    <Content Include="Views\Blog\ArchiveList.cshtml" />
+    <Content Include="Views\Blog\Archive.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\Feed\" />

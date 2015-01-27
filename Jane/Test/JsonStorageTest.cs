@@ -57,7 +57,7 @@ namespace Jane.Test
       public async Task LoadFuturePostJsonFile()
       {
          var path = GetPath("future.json");
-         var postQueries = new FuturePostQueries(new JsonStorage<FuturePost, string>(path, null));
+         var postQueries = new FuturePostQueries(new JsonStorage<FuturePost, string>(path, (future) => future.Title));
 
          var items = await postQueries.GetFuturePostsAsync();
          var posts = items.ToList();
@@ -73,7 +73,7 @@ namespace Jane.Test
       public async Task LoadNavigationJsonFile()
       {
          var path = GetPath("topnav.json");
-         var queries = new NavigationQueries(new JsonStorage<NavigationItem, string>(path, null));
+         var queries = new NavigationQueries(new JsonStorage<NavigationItem, string>(path, (item) => item.Url));
 
          var items = await queries.GetNavigationItemsAsync();
          var posts = items.ToList();

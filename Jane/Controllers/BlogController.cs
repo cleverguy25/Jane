@@ -5,6 +5,7 @@
 // --------------------------------------------------------------------------------------------------------------------
 namespace Jane.Controllers
 {
+   using System;
    using System.Collections.Generic;
    using System.Linq;
    using System.Net;
@@ -31,6 +32,28 @@ namespace Jane.Controllers
       {
          var posts = await this.postQueries.GetRecentPostsAsync();
          return this.View(posts);
+      }
+
+      public async Task<ActionResult> ArchiveList()
+      {
+         var archiveSummary = await this.postQueries.GetArchiveSummaryGroupedByYearAndMonth();
+         return this.PartialView(archiveSummary);
+      }
+
+      public async Task<ActionResult> ArchiveByYearMonth(int year, int month)
+      {
+         this.ViewBag.Year = year;
+         this.ViewBag.Month = month;
+         this.ViewBag.MonthDisplay = new DateTime(year, month, 1).ToString("MMMM");
+         var archiveSummary = await this.postQueries.GetPostsByYearAndMonth(year, month);
+         return this.View("Archive", archiveSummary);
+      }
+
+      public async Task<ActionResult> ArchiveByYear(int year)
+      {
+         this.ViewBag.Year = year;
+         var archiveSummary = await this.postQueries.GetPostsByYear(year);
+         return this.View("Archive", archiveSummary);
       }
 
       public async Task<ActionResult> GetBySlug(string slug)

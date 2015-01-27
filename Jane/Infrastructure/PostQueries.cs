@@ -38,6 +38,42 @@ namespace Jane.Infrastructure
          return posts.Take(5);
       }
 
+      public async Task<IEnumerable<ArchiveSummary>> GetArchiveSummaryGroupedByYearAndMonth()
+      {
+         var posts = await this.GetPosts();
+         var result = from post in posts
+                      group post by new { post.PublishedDate.Year, post.PublishedDate.Month, MonthDisplay = post.PublishedDate.ToString("MMMM") }
+                      into g
+                      orderby g.Key.Year descending, g.Key.Month descending 
+                      select new ArchiveSummary()
+                                {
+                                   Year = g.Key.Year,
+                                   Month = g.Key.Month,
+                                   MonthDisplay = g.Key.MonthDisplay,
+                                   Count = g.Count()
+                                };
+
+         return result.ToList();
+      }
+
+      public async Task<IEnumerable<Post>> GetPostsByYearAndMonth(int year, int month)
+      {
+         var posts = await this.GetPosts();
+         return from post in posts
+                where post.PublishedDate.Year == year && post.PublishedDate.Month == month
+                orderby post.PublishedDate descending
+                select post;
+      }
+
+      public async Task<IEnumerable<Post>> GetPostsByYear(int year)
+      {
+         var posts = await this.GetPosts();
+         return from post in posts
+                where post.PublishedDate.Year == year
+                orderby post.PublishedDate descending
+                select post;
+      }
+
       public async Task<PostView> GetPostBySlugAsync(string slug)
       {
          var posts = await this.GetPosts();

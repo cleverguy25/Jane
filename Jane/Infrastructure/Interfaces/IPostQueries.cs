@@ -21,5 +21,11 @@ namespace Jane.Infrastructure.Interfaces
       Task<PostView> GetPostBySlugAsync(string slug);
 
       Task<IEnumerable<Post>> GetPostsByTagAsync(string tag);
+
+      Task<IEnumerable<ArchiveSummary>> GetArchiveSummaryGroupedByYearAndMonth();
+
+      Task<IEnumerable<Post>> GetPostsByYearAndMonth(int year, int month);
+
+      Task<IEnumerable<Post>> GetPostsByYear(int year);
    }
 }

@@ -47,6 +47,22 @@ namespace Jane.Test
       }
 
       [TestMethod, TestCategory("UnitTest")]
+      public void GetArchiveByYearRoute()
+      {
+         this.routes.AssertRoute(
+            "~/blog/archive/2014",
+            new { controller = "Blog", action = "ArchiveByYear", year = 2014 });
+      }
+
+      [TestMethod, TestCategory("UnitTest")]
+      public void GetArchiveByYearMonthRoute()
+      {
+         this.routes.AssertRoute(
+            "~/blog/archive/2014/5",
+            new { controller = "Blog", action = "ArchiveByYearMonth", year = 2014, month = 5 });
+      }
+
+      [TestMethod, TestCategory("UnitTest")]
       public void BlogListRoute()
       {
          this.routes.AssertRoute("~/blog", new { controller = "Blog", action = "List" });

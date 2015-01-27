@@ -1,0 +1,14 @@
+﻿@model IEnumerable<Jane.Models.ArchiveSummary>
+@{
+    Layout = null;
+}
+
+<section class="short-list">
+    <h4>Blog Archives</h4>
+    <div class="list-summary">
+        @foreach (var summary in Model)
+        {
+            <h6>@Html.ActionLink(summary.MonthDisplay + " " + summary.Year + " (" + summary.Count + ")", "ArchiveByYearMonth", new { year = summary.Year, month = summary.Month })</h6>
+        }
+    </div>
+</section>

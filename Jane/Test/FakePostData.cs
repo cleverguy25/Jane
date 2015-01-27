@@ -24,7 +24,7 @@ namespace Jane.Test
                {
                   Slug = "post1", 
                   Title = "Post 1", 
-                  PublishedDate = new DateTime(2014, 5, 12),
+                  PublishedDate = new DateTime(2015, 6, 12),
                   UpdatedDate = new DateTime(2014, 5, 12, 1, 2, 3, DateTimeKind.Utc),
                   Author = "author",
                   Guid = Guid.NewGuid(),
@@ -35,7 +35,7 @@ namespace Jane.Test
                {
                   Slug = "post2", 
                   Title = "Post 2", 
-                  PublishedDate = new DateTime(2014, 5, 15),
+                  PublishedDate = new DateTime(2015, 5, 15),
                   UpdatedDate = new DateTime(2014, 5, 15, 1, 2, 3, DateTimeKind.Utc),
                   Author = "author",
                   Guid = Guid.NewGuid(),
@@ -79,7 +79,7 @@ namespace Jane.Test
                {
                   Slug = "post6", 
                   Title = "Post 6", 
-                  PublishedDate = new DateTime(2014, 5, 21),
+                  PublishedDate = new DateTime(2014, 4, 21),
                   UpdatedDate = new DateTime(2014, 5, 21, 1, 2, 3, DateTimeKind.Utc),
                   Author = "author",
                   Guid = Guid.NewGuid(),

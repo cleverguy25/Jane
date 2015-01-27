@@ -41,7 +41,7 @@ namespace Jane.Test
          CheckItem(channel, "My Blog", "My Blog Description", "http://localhost/blog");
 
          var items = document.Descendants("item").ToList();
-         CheckItem(items[3], FakePostData.Posts[0]);
+         CheckItem(items[3], FakePostData.Posts[4]);
          items.Count.Should().Be(6);
       }
 

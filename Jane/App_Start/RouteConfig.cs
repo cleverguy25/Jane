@@ -100,6 +100,10 @@ namespace Jane
          routes.MapRoute("BlogBySlug", "blog/{slug}", new { controller = "Blog", action = "GetBySlug", slug = UrlParameter.Optional });
 
          routes.MapRoute("BlogRelated", "blog/{slug}/related", new { controller = "Blog", action = "Related", slug = UrlParameter.Optional });
+
+         routes.MapRoute("BlogArchiveByYear", "blog/archive/{year}", new { controller = "Blog", action = "ArchiveByYear", year = UrlParameter.Optional });
+
+         routes.MapRoute("BlogArchiveByYearMonth", "blog/archive/{year}/{month}", new { controller = "Blog", action = "ArchiveByYearMonth", year = UrlParameter.Optional, month = UrlParameter.Optional });
       }
    }
 }

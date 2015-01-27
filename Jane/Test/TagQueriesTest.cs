@@ -28,8 +28,8 @@ namespace Jane.Test
          var counts = tags.ToList();
 
          counts.Should().HaveCount(3);
-         counts[0].Item2.Should().Be(3);
-         counts[1].Item2.Should().Be(2);
+         counts[1].Item2.Should().Be(3);
+         counts[0].Item2.Should().Be(2);
       }
    }
 }
